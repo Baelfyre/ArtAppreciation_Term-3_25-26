@@ -2,18 +2,44 @@ import React from "react";
 import { Compass } from "lucide-react";
 
 export const Navbar = () => {
+  const navItems = [
+    { href: "#", label: "Home" },
+    { href: "#featured", label: "Featured" },
+    { href: "#globe", label: "Globe", accent: true },
+    { href: "#about", label: "About" },
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#020617]/80 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-white">
-          <Compass className="w-6 h-6 text-amber-500" />
-          <span className="font-medium tracking-wide">Mapping Filipino Heritage Abroad</span>
+    <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
+      <div className="glass-panel mx-auto flex max-w-7xl items-center justify-between rounded-full px-5 py-3 md:px-6">
+        <div className="flex items-center gap-4 text-white">
+          <div className="glass-chip-warm flex h-10 w-10 items-center justify-center rounded-full">
+            <Compass className="h-5 w-5 text-[#f4c430]" />
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.35em] text-slate-300/80">
+              Interactive atlas
+            </p>
+            <span className="section-title text-sm tracking-wide md:text-base">
+              Mapping Filipino Heritage Abroad
+            </span>
+          </div>
         </div>
-        <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
-          <a href="#" className="hover:text-amber-400 transition-colors">Home</a>
-          <a href="#about" className="hover:text-amber-400 transition-colors">About</a>
-          <a href="#globe" className="text-amber-500 font-medium">Globe</a>
-          <a href="#featured" className="hover:text-amber-400 transition-colors">Featured</a>
+
+        <div className="hidden items-center gap-2 text-sm text-slate-200/85 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className={`rounded-full px-4 py-2 transition-all duration-300 ${
+                item.accent
+                  ? "glass-chip-warm text-white"
+                  : "glass-chip hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </div>
     </nav>

@@ -12,11 +12,13 @@ export const InfoPanel = ({ artifact, onClose }: InfoPanelProps) => {
   if (!artifact) return null;
 
   return (
-    <div className="absolute right-6 top-6 z-10 w-96 max-h-[calc(100%-48px)] overflow-y-auto bg-[#020617]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl custom-scrollbar animate-in slide-in-from-right-8 duration-500">
-      <div className="relative h-56 w-full overflow-hidden rounded-t-2xl border-b border-white/10">
+    <div className="glass-panel-strong absolute right-4 top-4 z-10 w-[min(24rem,calc(100%-2rem))] max-h-[calc(100%-32px)] overflow-y-auto rounded-[1.5rem] shadow-2xl custom-scrollbar animate-in slide-in-from-right-8 duration-500 md:right-6 md:top-6 md:max-h-[calc(100%-48px)] md:w-96">
+      <div className="flag-accent absolute inset-x-0 top-0 z-30 h-px" />
+
+      <div className="relative h-56 w-full overflow-hidden rounded-t-[1.5rem] border-b border-white/10">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white backdrop-blur-md transition-colors"
+          className="glass-chip absolute right-4 top-4 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35]"
         >
           <X className="w-4 h-4" />
         </button>
@@ -25,45 +27,50 @@ export const InfoPanel = ({ artifact, onClose }: InfoPanelProps) => {
           alt={artifact.name}
           className="w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.7))]" />
         <div className="absolute bottom-4 left-4">
-          <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs text-white font-medium">
+          <span className="glass-chip-warm rounded-full px-3 py-1 text-xs font-medium text-white">
             {artifact.category}
           </span>
         </div>
       </div>
       
       <div className="p-6">
-        <h2 className="text-xl font-medium text-white leading-tight mb-4">
+        <h2 className="section-title mb-4 text-2xl font-medium leading-tight text-white">
           {artifact.name}
         </h2>
         
-        <div className="space-y-3 mb-6">
-          <div className="flex items-start gap-3 text-sm">
-            <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+        <div className="mb-6 grid gap-3">
+          <div className="glass-chip flex items-start gap-3 rounded-[1.25rem] p-4 text-sm">
+            <div className="glass-chip-warm mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+              <MapPin className="h-4 w-4 text-[#f4c430]" />
+            </div>
             <div>
-              <p className="text-slate-400 text-xs uppercase tracking-wider mb-0.5">Origin</p>
+              <p className="mb-0.5 text-xs uppercase tracking-wider text-slate-400">Origin</p>
               <p className="text-slate-200">{artifact.origin}</p>
             </div>
           </div>
-          <div className="flex items-start gap-3 text-sm">
-            <Building2 className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+          <div className="glass-chip flex items-start gap-3 rounded-[1.25rem] p-4 text-sm">
+            <div className="glass-chip flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(29,73,216,0.16)]">
+              <Building2 className="h-4 w-4 text-[#1d49d8]" />
+            </div>
             <div>
-              <p className="text-slate-400 text-xs uppercase tracking-wider mb-0.5">Current Location</p>
+              <p className="mb-0.5 text-xs uppercase tracking-wider text-slate-400">Current Location</p>
               <p className="text-slate-200">{artifact.institution}, {artifact.location}</p>
             </div>
           </div>
         </div>
 
         <div className="space-y-4">
-          <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wider mb-2">Description</p>
-            <p className="text-slate-300 text-sm leading-relaxed font-light">
+          <div className="glass-chip rounded-[1.25rem] p-4">
+            <p className="mb-2 text-xs uppercase tracking-wider text-slate-400">Description</p>
+            <p className="text-sm font-light leading-relaxed text-slate-300">
               {artifact.description}
             </p>
           </div>
-          <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wider mb-2">Cultural Significance</p>
-            <p className="text-slate-300 text-sm leading-relaxed font-light">
+          <div className="glass-chip rounded-[1.25rem] p-4">
+            <p className="mb-2 text-xs uppercase tracking-wider text-slate-400">Cultural Significance</p>
+            <p className="text-sm font-light leading-relaxed text-slate-300">
               {artifact.significance}
             </p>
           </div>

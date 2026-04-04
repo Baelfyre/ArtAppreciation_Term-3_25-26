@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
@@ -40,45 +40,62 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-amber-500/30 selection:text-white">
+    <div className="heritage-shell min-h-screen text-slate-200 selection:bg-amber-500/30 selection:text-white">
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[rgba(244,196,48,0.18)] blur-[120px]" />
+        <div className="absolute right-[-5rem] top-[-2rem] h-[30rem] w-[30rem] rounded-full bg-[rgba(29,73,216,0.18)] blur-[150px]" />
+        <div className="absolute bottom-[-8rem] right-[10%] h-[22rem] w-[22rem] rounded-full bg-[rgba(185,22,44,0.18)] blur-[130px]" />
+      </div>
+
       <Navbar />
       
-      <main>
+      <main className="relative z-10">
         <Hero />
-        
-        <AboutSection />
-
-        <section id="globe" className="relative w-full h-[800px] border-y border-white/5 bg-black">
-          {/* Main 3D Globe Workspace */}
-          <GlobeView 
-            artifacts={filteredArtifacts} 
-            selectedArtifact={selectedArtifact}
-            onSelectArtifact={handleSelectArtifact} 
-          />
-          
-          {/* Overlay UI Panels */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="relative w-full h-full max-w-[1600px] mx-auto pointer-events-none">
-              <div className="pointer-events-auto">
-                <FilterSidebar 
-                  selectedCategory={selectedCategory} 
-                  onSelectCategory={setSelectedCategory} 
-                />
-              </div>
-              <div className="pointer-events-auto">
-                <InfoPanel 
-                  artifact={selectedArtifact} 
-                  onClose={() => setSelectedArtifact(null)} 
-                />
-              </div>
-            </div>
-          </div>
-        </section>
 
         <FeaturedSection 
           artifacts={ARTIFACTS} 
           onViewOnGlobe={handleSelectArtifact} 
         />
+
+        <section
+          id="globe"
+          className="relative mx-4 my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)] md:mx-6 lg:mx-8"
+        >
+          <div className="flag-accent absolute inset-x-0 top-0 h-px" />
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute left-0 top-0 h-40 w-40 bg-[rgba(244,196,48,0.10)] blur-3xl" />
+            <div className="absolute inset-y-0 right-0 w-[35%] bg-[linear-gradient(180deg,rgba(29,73,216,0.18),transparent_42%,rgba(185,22,44,0.16))]" />
+          </div>
+
+          {/* Main 3D Globe Workspace */}
+          <div className="relative h-[860px] md:h-[840px]">
+            <GlobeView 
+              artifacts={filteredArtifacts} 
+              selectedArtifact={selectedArtifact}
+              onSelectArtifact={handleSelectArtifact} 
+            />
+            
+            {/* Overlay UI Panels */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="relative mx-auto h-full w-full max-w-[1600px] pointer-events-none">
+                <div className="pointer-events-auto">
+                  <FilterSidebar 
+                    selectedCategory={selectedCategory} 
+                    onSelectCategory={setSelectedCategory} 
+                  />
+                </div>
+                <div className="pointer-events-auto">
+                  <InfoPanel 
+                    artifact={selectedArtifact} 
+                    onClose={() => setSelectedArtifact(null)} 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <AboutSection />
       </main>
 
       <Footer />

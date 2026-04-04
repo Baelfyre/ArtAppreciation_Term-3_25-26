@@ -3,24 +3,29 @@ import { Globe2 } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section className="relative pt-32 pb-16 px-6 text-center z-10">
-      <div className="max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium tracking-widest uppercase mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+    <section className="relative z-10 border-y border-white/5 px-6 pb-20 pt-32">
+      <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+        <div className="glass-chip-warm mb-8 inline-flex items-center gap-3 rounded-full px-5 py-2 text-sm uppercase tracking-[0.28em] text-[#f4c430]">
+          <span className="h-2 w-2 rounded-full bg-[#f4c430]" />
           Art Appreciation Project
         </div>
-        <h1 className="text-4xl md:text-6xl font-semibold text-white tracking-tight mb-6">
-          Filipino Art and Culture <br className="hidden md:block"/> Across the World
+
+        <h1 className="section-title mb-8 text-5xl font-semibold leading-[0.95] text-white md:text-7xl lg:text-8xl">
+          Mapping Filipino Heritage
+          <br className="hidden md:block" />
+          Abroad
         </h1>
-        <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-          Explore a curated digital exhibition of significant Filipino artifacts, 
-          artworks, and historical objects currently housed in museums and collections globally.
+
+        <p className="mb-12 max-w-4xl text-xl font-light leading-relaxed text-slate-300 md:text-2xl">
+          Explore a globe-led digital exhibition of significant Filipino artifacts, artworks, and
+          cultural objects currently housed in museums and collections globally.
         </p>
-        <button 
-          onClick={() => document.getElementById('globe')?.scrollIntoView({ behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full border border-white/20 backdrop-blur-sm transition-all shadow-lg hover:shadow-white/10 font-medium"
+
+        <button
+          onClick={() => document.getElementById("globe")?.scrollIntoView({ behavior: "smooth" })}
+          className="glass-button inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-medium text-white"
         >
-          <Globe2 className="w-5 h-5" />
+          <Globe2 className="h-5 w-5" />
           Explore the Globe
         </button>
       </div>

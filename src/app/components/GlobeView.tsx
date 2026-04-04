@@ -2,6 +2,14 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import Globe from 'react-globe.gl';
 import { Artifact, PH_COORDS } from '../data';
 
+const CATEGORY_COLORS: Record<string, string> = {
+  Art: '#f4c430',
+  Religious: '#b9162c',
+  Indigenous: '#f6f4ee',
+  Historical: '#1d49d8',
+  Contemporary: '#86a7ff',
+};
+
 interface GlobeViewProps {
   artifacts: Artifact[];
   onSelectArtifact: (artifact: Artifact) => void;
@@ -12,6 +20,7 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
   const globeRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const getArtifactColor = (artifact: Artifact) => CATEGORY_COLORS[artifact.category] ?? '#86a7ff';
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -56,7 +65,7 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
       startLng: PH_COORDS.lng,
       endLat: artifact.lat,
       endLng: artifact.lng,
-      color: ['#0ea5e9', '#f59e0b'],
+      color: [getArtifactColor(artifact), '#f4c430'],
       artifact
     }));
   }, [artifacts]);
@@ -66,7 +75,7 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
       lat: artifact.lat,
       lng: artifact.lng,
       size: selectedArtifact?.id === artifact.id ? 1.5 : 1,
-      color: selectedArtifact?.id === artifact.id ? '#f59e0b' : '#38bdf8',
+      color: selectedArtifact?.id === artifact.id ? '#f4c430' : getArtifactColor(artifact),
       artifact,
       isOrigin: false
     }));
@@ -87,16 +96,26 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
   return (
     <div 
       ref={containerRef} 
-      className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#020617] via-[#010928] to-[#020617] overflow-hidden"
+      className="absolute inset-0 h-full w-full overflow-hidden bg-[radial-gradient(circle_at_top,rgba(29,73,216,0.2),transparent_26%),linear-gradient(180deg,#050816_0%,#09112c_48%,#04060f_100%)]"
     >
+      <div className="pattern-surface absolute inset-0 opacity-20 pointer-events-none"></div>
+      <div className="pointer-events-none absolute left-1/2 top-6 z-10 -translate-x-1/2 glass-chip rounded-full px-4 py-2 text-xs uppercase tracking-[0.3em] text-slate-200">
+        From the Philippines to the world
+      </div>
+
       {/* Background radial glow to simulate atmosphere */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[rgba(29,73,216,0.10)] blur-[120px]"></div>
+      <div className="pointer-events-none absolute bottom-10 left-[15%] h-48 w-48 rounded-full bg-[rgba(244,196,48,0.10)] blur-[90px]"></div>
+      <div className="pointer-events-none absolute right-[12%] top-[20%] h-56 w-56 rounded-full bg-[rgba(185,22,44,0.10)] blur-[100px]"></div>
 
       {dimensions.width > 0 && (
         <Globe
           ref={globeRef}
           width={dimensions.width}
           height={dimensions.height}
+          showAtmosphere={true}
+          atmosphereColor="#5f82ff"
+          atmosphereAltitude={0.18}
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
           bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
           backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
@@ -130,12 +149,15 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
             dot.style.borderRadius = '50%';
             dot.style.backgroundColor = d.color;
             dot.style.boxShadow = `0 0 15px ${d.color}`;
-            dot.style.border = '2px solid white';
+            dot.style.border = '2px solid rgba(246, 244, 238, 0.95)';
             
             if (d.isOrigin) {
               const label = document.createElement('div');
               label.textContent = 'Philippines';
-              label.className = 'text-amber-500 font-semibold text-xs mt-1 drop-shadow-md whitespace-nowrap bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm border border-amber-500/30';
+              label.className = 'mt-2 whitespace-nowrap rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-md';
+              label.style.color = 'var(--heritage-gold)';
+              label.style.background = 'rgba(5, 8, 22, 0.55)';
+              label.style.borderColor = 'rgba(244, 196, 48, 0.28)';
               el.appendChild(label);
             }
             

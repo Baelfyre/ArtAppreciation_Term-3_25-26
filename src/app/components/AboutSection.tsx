@@ -3,30 +3,36 @@ import { Globe2, Landmark, Fingerprint, MapPin, Compass } from "lucide-react";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="relative py-24 px-6 w-full border-t border-white/5 bg-gradient-to-b from-[#020617] to-black z-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <section id="about" className="relative z-10 w-full border-t border-white/5 px-6 py-24">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
         
         {/* Left Side: Text Content */}
         <div className="flex flex-col">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs font-medium tracking-widest uppercase mb-6 w-fit">
-            <Compass className="w-3.5 h-3.5 text-amber-500" />
+          <div className="glass-chip mb-8 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-slate-200">
+            <Compass className="w-3.5 h-3.5 text-[#f4c430]" />
             Exhibit Overview
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+          <h2 className="section-title mb-8 text-4xl font-semibold text-white md:text-6xl">
             About the Project
           </h2>
           
-          <div className="space-y-6 text-slate-400 font-light leading-relaxed text-lg">
+          <div className="space-y-8 text-xl font-light leading-relaxed text-slate-300">
             <p>
-              This project maps Filipino arts, artifacts, and cultural heritage found around the world. It highlights not only where these objects are located, but also their <strong className="text-white font-medium">cultural meaning</strong>, historical context, and how <strong className="text-white font-medium">Filipino identity</strong> is represented and appreciated globally.
+              This project maps Filipino arts, artifacts, and cultural heritage found around the
+              world. It highlights not only where these objects are located, but also their{" "}
+              <strong className="font-medium text-white">cultural meaning</strong>, historical
+              context, and how <strong className="font-medium text-white">Filipino identity</strong>{" "}
+              is represented and appreciated globally.
             </p>
             <p>
-              Rather than focusing only on acquisition or ownership, the project emphasizes cultural visibility, preservation, and interpretation. It aims to show how Filipino heritage continues to exist and be valued across different countries.
+              Rather than focusing only on acquisition or ownership, the project emphasizes
+              cultural visibility, preservation, and interpretation. It aims to show how Filipino
+              heritage continues to exist and be valued across different countries.
             </p>
           </div>
 
-          <ul className="mt-8 space-y-4">
+          <ul className="mt-12 space-y-6">
             {[
               {
                 text: <> <strong className="text-white font-medium">Global presence</strong> of Filipino culture </>,
@@ -45,9 +51,9 @@ export const AboutSection = () => {
                 icon: MapPin
               }
             ].map((item, i) => (
-              <li key={i} className="flex items-center gap-3 text-slate-300 font-light">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                  <item.icon className="w-4 h-4 text-amber-400" />
+              <li key={i} className="flex items-center gap-4 text-slate-200">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[#f4c430]/25 bg-[rgba(244,196,48,0.08)]">
+                  <item.icon className="h-4 w-4 text-[#f4c430]" />
                 </div>
                 {item.text}
               </li>
@@ -56,37 +62,33 @@ export const AboutSection = () => {
         </div>
 
         {/* Right Side: Visual Support */}
-        <div className="relative aspect-square max-w-[400px] mx-auto lg:ml-auto w-full flex items-center justify-center">
-          {/* Background Ambient Glow */}
-          <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+        <div className="relative mx-auto flex aspect-square w-full max-w-[480px] items-center justify-center lg:ml-auto">
+          <div className="absolute inset-0 rounded-full border border-white/6 opacity-40" />
+          <div className="absolute inset-[10%] rounded-full border border-white/6 opacity-25" />
+          <div className="absolute inset-[22%] rounded-full border border-white/5 border-dashed opacity-40" />
+          <div className="absolute inset-[36%] rounded-full border border-[#f4c430]/10 opacity-60" />
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(29,73,216,0.06),transparent_62%)]" />
           
           {/* Abstract Orbital Rings */}
-          <div className="absolute inset-4 border border-white/5 rounded-full pointer-events-none"></div>
-          <div className="absolute inset-12 border border-white/5 rounded-full border-dashed pointer-events-none animate-[spin_60s_linear_infinite]"></div>
-          <div className="absolute inset-24 border border-amber-500/10 rounded-full pointer-events-none animate-[spin_40s_linear_infinite_reverse]"></div>
-
-          {/* Center Orb */}
-          <div className="relative z-10 w-32 h-32 bg-gradient-to-br from-[#020617] to-slate-900 border border-white/10 rounded-full flex items-center justify-center shadow-2xl">
-            <div className="absolute inset-0 rounded-full bg-amber-500/5 blur-md"></div>
-            <Globe2 className="w-12 h-12 text-slate-300 stroke-[1.5]" />
+          <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_55%,transparent_100%)] shadow-[0_0_80px_rgba(255,255,255,0.04)]">
+            <Globe2 className="h-14 w-14 text-slate-100 stroke-[1.5]" />
           </div>
 
           {/* Floating Element 1: Top Left */}
-          <div className="absolute top-[15%] left-0 md:-left-4 z-20 bg-[#020617]/80 backdrop-blur-xl p-3.5 rounded-2xl border border-white/10 shadow-2xl animate-[bounce_6s_ease-in-out_infinite]">
-            <Landmark className="w-6 h-6 text-amber-500" />
+          <div className="glass-chip absolute left-[8%] top-[18%] z-20 rounded-3xl p-4 shadow-xl">
+            <Landmark className="h-6 w-6 text-[#f4c430]" />
           </div>
 
           {/* Floating Element 2: Bottom Right */}
-          <div className="absolute bottom-[20%] right-0 md:-right-4 z-20 bg-[#020617]/80 backdrop-blur-xl p-3.5 rounded-2xl border border-white/10 shadow-2xl animate-[bounce_5s_ease-in-out_infinite_reverse]">
-            <Fingerprint className="w-6 h-6 text-blue-400" />
+          <div className="glass-chip absolute right-[4%] top-[30%] z-20 rounded-3xl p-4 shadow-xl">
+            <MapPin className="h-5 w-5 text-[#b9162c]" />
           </div>
 
-          {/* Floating Element 3: Top Right */}
-          <div className="absolute top-[25%] right-[5%] z-20 bg-[#020617]/80 backdrop-blur-xl p-2.5 rounded-2xl border border-white/10 shadow-2xl animate-[bounce_7s_ease-in-out_infinite]">
-            <MapPin className="w-5 h-5 text-slate-300" />
+          {/* Floating Element 3: Bottom Right */}
+          <div className="glass-chip absolute bottom-[14%] right-[6%] z-20 rounded-3xl p-4 shadow-xl">
+            <Fingerprint className="h-6 w-6 text-[#1d49d8]" />
           </div>
         </div>
-
       </div>
     </section>
   );
