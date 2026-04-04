@@ -314,4 +314,40 @@ body::after {
     background: repeating-conic-gradient(from -12deg, rgba(244, 196, 48, 0.88) 0deg 14deg, transparent 14deg 30deg);
     filter: drop-shadow(0 0 24px rgba(244, 196, 48, 0.25));
   }
+
+  .orbit-spin {
+    animation: heritage-orbit var(--orbit-duration, 22s) linear infinite;
+  }
+
+  .orbit-spin-reverse {
+    animation: heritage-orbit-reverse var(--orbit-duration, 22s) linear infinite;
+  }
+
+  .orbit-counter {
+    animation: heritage-orbit-reverse var(--orbit-duration, 22s) linear infinite;
+  }
+
+  .orbit-counter-reverse {
+    animation: heritage-orbit var(--orbit-duration, 22s) linear infinite;
+  }
+}
+
+@keyframes heritage-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heritage-orbit-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
