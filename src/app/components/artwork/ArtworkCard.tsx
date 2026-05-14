@@ -6,11 +6,12 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 interface ArtworkCardProps {
   artwork: Artwork;
   onSelect: (artwork: Artwork) => void;
+  actionTabIndex?: number;
 }
 
-export const ArtworkCard = ({ artwork, onSelect }: ArtworkCardProps) => {
+export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardProps) => {
   return (
-    <article className="glass-panel group relative flex flex-col overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+    <article className="glass-panel group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
       <div className="flag-accent absolute inset-x-0 top-0 z-20 h-px opacity-70" />
       <div className="relative h-48 overflow-hidden">
         <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.46))] transition-colors group-hover:bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.34))]" />
@@ -40,6 +41,7 @@ export const ArtworkCard = ({ artwork, onSelect }: ArtworkCardProps) => {
 
         <button
           type="button"
+          tabIndex={actionTabIndex}
           onClick={() => {
             document.getElementById("globe")?.scrollIntoView({ behavior: "smooth" });
             onSelect(artwork);

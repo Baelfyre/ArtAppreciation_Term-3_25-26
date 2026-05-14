@@ -7,7 +7,8 @@ interface FeaturedSectionProps {
 }
 
 export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProps) => {
-  const featured = artworks.slice(0, 4);
+  const featured = artworks.slice(0, 5);
+  const carouselGroups = [0, 1];
 
   return (
     <section id="featured" className="px-6 py-24">
@@ -25,10 +26,25 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {featured.map((artwork) => (
-            <ArtworkCard key={artwork.id} artwork={artwork} onSelect={onViewArtwork} />
-          ))}
+        <div className="featured-carousel -mx-6 overflow-hidden px-6">
+          <div className="featured-carousel-track flex w-max">
+            {carouselGroups.map((groupIndex) => (
+              <div key={groupIndex} className="featured-carousel-group flex gap-6 pr-6">
+                {featured.map((artwork) => (
+                  <div
+                    key={`${artwork.id}-${groupIndex}`}
+                    className="featured-carousel-card w-[min(20rem,78vw)] shrink-0 md:w-[20rem]"
+                  >
+                    <ArtworkCard
+                      artwork={artwork}
+                      onSelect={onViewArtwork}
+                      actionTabIndex={groupIndex === 1 ? -1 : undefined}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

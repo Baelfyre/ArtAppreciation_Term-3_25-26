@@ -424,6 +424,58 @@ body::after {
   .artwork-panel-slide {
     animation: artwork-panel-slide 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+
+  .artwork-focus-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.65);
+    border-radius: 1.5rem;
+    background: rgba(10, 15, 35, 0.72);
+    box-shadow:
+      0 0 18px rgba(212, 175, 55, 0.35),
+      inset 0 0 16px rgba(212, 175, 55, 0.08);
+  }
+
+  .artwork-focus-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+  }
+
+  .featured-carousel {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4rem, #000 calc(100% - 4rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 4rem, #000 calc(100% - 4rem), transparent 100%);
+  }
+
+  .featured-carousel-track {
+    animation: featured-carousel-drift 48s linear infinite;
+    will-change: transform;
+  }
+
+  .featured-carousel:hover .featured-carousel-track,
+  .featured-carousel:focus-within .featured-carousel-track {
+    animation-play-state: paused;
+  }
+
+  .featured-carousel:hover .featured-carousel-card,
+  .featured-carousel:focus-within .featured-carousel-card {
+    animation-play-state: paused;
+  }
+
+  .featured-carousel-card {
+    animation: featured-card-parallax 7s ease-in-out infinite alternate;
+  }
+
+  .featured-carousel-card:nth-child(2n) {
+    animation-delay: -1.8s;
+  }
+
+  .featured-carousel-card:nth-child(3n) {
+    animation-delay: -3.4s;
+  }
 }
 
 @keyframes heritage-orbit {
@@ -473,11 +525,40 @@ body::after {
 @keyframes artwork-panel-slide {
   from {
     opacity: 0;
-    transform: translateX(1.25rem);
+    transform: translateY(1rem);
   }
 
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes featured-carousel-drift {
+  from {
     transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes featured-card-parallax {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-0.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-carousel-track,
+  .featured-carousel-card,
+  .artwork-panel-slide,
+  .local-map-fade {
+    animation: none;
   }
 }
