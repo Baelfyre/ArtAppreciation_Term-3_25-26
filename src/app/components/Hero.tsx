@@ -11,14 +11,14 @@ export const Hero = () => {
         </div>
 
         <h1 className="section-title mb-8 text-5xl font-semibold leading-[0.95] text-white md:text-7xl lg:text-8xl">
-          Mapping Filipino Heritage
+          Filipino Identity
           <br className="hidden md:block" />
-          Abroad
+          Beyond Borders
         </h1>
 
         <p className="mb-12 max-w-4xl text-xl font-light leading-relaxed text-slate-300 md:text-2xl">
-          Explore a globe-led digital exhibition of significant Filipino artifacts, artworks, and
-          cultural objects currently housed in museums and collections globally.
+          Explore a globe-led digital exhibition connecting international Filipino art markers with
+          local creative identity in the Philippines.
         </p>
 
         <button

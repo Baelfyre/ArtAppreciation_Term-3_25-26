@@ -1,0 +1,25 @@
+import type { LocalMapMarker } from "../../services/mapNavigationService";
+
+interface PhilippinesMarkerProps {
+  marker: LocalMapMarker;
+  isSelected: boolean;
+  onSelect: (marker: LocalMapMarker) => void;
+}
+
+export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesMarkerProps) => {
+  return (
+    <button
+      type="button"
+      aria-label={`Open ${marker.artwork.title}`}
+      title={marker.label}
+      onClick={() => onSelect(marker)}
+      className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+        isSelected ? "is-selected" : ""
+      }`}
+      style={{ left: `${marker.mapX}%`, top: `${marker.mapY}%` }}
+    >
+      <span className="local-map-marker-dot" />
+      <span className="local-map-marker-label">{marker.label}</span>
+    </button>
+  );
+};

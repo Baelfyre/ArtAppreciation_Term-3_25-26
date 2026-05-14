@@ -1,13 +1,18 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
-import { GlobeView } from "./components/GlobeView";
-import { FilterSidebar } from "./components/FilterSidebar";
-import { InfoPanel } from "./components/InfoPanel";
+import { ArtworkInfoPanel } from "./components/artwork/ArtworkInfoPanel";
 import { FeaturedSection } from "./components/FeaturedSection";
 import { Footer } from "./components/Footer";
-import { ARTIFACTS, Artifact } from "./data";
+import { GlobeModeToggle } from "./components/globe/GlobeModeToggle";
+import { GlobeView } from "./components/globe/GlobeView";
+import { PhilippinesMapView } from "./components/map/PhilippinesMapView";
+import type { Artwork } from "./domain/Artwork";
+import { useArtworkSelection } from "./hooks/useArtworkSelection";
+import { useViewMode } from "./hooks/useViewMode";
+import { artworkRepository } from "./services/artworkRepository";
+import type { GlobeMode } from "./domain/GlobeMode";
 
 // Suppress THREE.Clock deprecation warning from react-globe.gl
 const originalWarn = console.warn;
@@ -27,16 +32,20 @@ console.error = (...args) => {
 };
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedArtifact, setSelectedArtifact] = useState<Artifact | null>(null);
+  const { mode, selectMode } = useViewMode("international");
+  const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
-  const filteredArtifacts = useMemo(() => {
-    if (selectedCategory === "All") return ARTIFACTS;
-    return ARTIFACTS.filter(a => a.category === selectedCategory);
-  }, [selectedCategory]);
+  const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
+  const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
 
-  const handleSelectArtifact = (artifact: Artifact) => {
-    setSelectedArtifact(artifact);
+  const handleModeChange = (nextMode: GlobeMode) => {
+    selectMode(nextMode);
+    clearSelection();
+  };
+
+  const handleSelectArtwork = (artwork: Artwork) => {
+    selectMode(artwork.scope);
+    selectArtwork(artwork);
   };
 
   return (
@@ -52,9 +61,9 @@ export default function App() {
       <main className="relative z-10">
         <Hero />
 
-        <FeaturedSection 
-          artifacts={ARTIFACTS} 
-          onViewOnGlobe={handleSelectArtifact} 
+        <FeaturedSection
+          artworks={featuredArtworks}
+          onViewArtwork={handleSelectArtwork}
         />
 
         <section
@@ -69,25 +78,30 @@ export default function App() {
 
           {/* Main 3D Globe Workspace */}
           <div className="relative h-[860px] md:h-[840px]">
-            <GlobeView 
-              artifacts={filteredArtifacts} 
-              selectedArtifact={selectedArtifact}
-              onSelectArtifact={handleSelectArtifact} 
+            <GlobeView
+              mode={mode}
+              artworks={modeArtworks}
+              selectedArtwork={selectedArtwork}
+              onSelectArtwork={handleSelectArtwork}
             />
             
             {/* Overlay UI Panels */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="relative mx-auto h-full w-full max-w-[1600px] pointer-events-none">
-                <div className="pointer-events-auto">
-                  <FilterSidebar 
-                    selectedCategory={selectedCategory} 
-                    onSelectCategory={setSelectedCategory} 
+                <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
+
+                {mode === "local" && (
+                  <PhilippinesMapView
+                    artworks={modeArtworks}
+                    selectedArtwork={selectedArtwork}
+                    onSelectArtwork={handleSelectArtwork}
                   />
-                </div>
+                )}
+
                 <div className="pointer-events-auto">
-                  <InfoPanel 
-                    artifact={selectedArtifact} 
-                    onClose={() => setSelectedArtifact(null)} 
+                  <ArtworkInfoPanel
+                    artwork={selectedArtwork}
+                    onClose={clearSelection}
                   />
                 </div>
               </div>

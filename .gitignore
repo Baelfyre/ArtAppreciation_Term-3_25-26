@@ -1,5 +1,8 @@
-node_modules
-dist
+node_modules/
+dist/
 
 # Local Codex instructions
 AGENTS.md
+
+# Raw/local resources
+.resources/
