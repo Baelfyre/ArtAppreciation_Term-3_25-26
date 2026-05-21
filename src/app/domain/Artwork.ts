@@ -8,10 +8,12 @@ export interface Artwork {
   creator: string;
   medium: string;
   imageUrl: string;
+  transitionImageUrl?: string;
   location: Location;
   description: string;
   advocacyConnection: string;
   elements: string;
   principles: string;
   featured?: boolean;
+  isPlaceholder?: boolean;
 }

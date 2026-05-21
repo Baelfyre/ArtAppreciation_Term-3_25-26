@@ -45,6 +45,12 @@ export default function App() {
 
   const handleSelectArtwork = (artwork: Artwork) => {
     selectMode(artwork.scope);
+
+    if (artwork.isPlaceholder) {
+      clearSelection();
+      return;
+    }
+
     selectArtwork(artwork);
   };
 
@@ -68,7 +74,7 @@ export default function App() {
 
         <section
           id="globe"
-          className="relative mx-4 my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)] md:mx-6 lg:mx-8"
+          className="relative mx-4 my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)] md:mx-6 lg:mx-auto lg:max-w-[1500px]"
         >
           <div className="flag-accent absolute inset-x-0 top-0 h-px" />
           <div className="pointer-events-none absolute inset-0">
@@ -77,7 +83,7 @@ export default function App() {
           </div>
 
           {/* Main 3D Globe Workspace */}
-          <div className="relative h-[860px] md:h-[840px]">
+          <div className="relative h-[660px] md:h-[700px] lg:h-[740px]">
             <GlobeView
               mode={mode}
               artworks={modeArtworks}

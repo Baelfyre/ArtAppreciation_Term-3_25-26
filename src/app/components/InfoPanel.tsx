@@ -9,7 +9,7 @@ interface InfoPanelProps {
 }
 
 export const InfoPanel = ({ artifact, onClose }: InfoPanelProps) => {
-  if (!artifact) return null;
+  if (!artifact || artifact.isPlaceholder) return null;
 
   return (
     <div className="glass-panel-strong absolute right-4 top-4 z-10 w-[min(24rem,calc(100%-2rem))] max-h-[calc(100%-32px)] overflow-y-auto rounded-[1.5rem] shadow-2xl custom-scrollbar animate-in slide-in-from-right-8 duration-500 md:right-6 md:top-6 md:max-h-[calc(100%-48px)] md:w-96">

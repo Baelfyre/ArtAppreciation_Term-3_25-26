@@ -18,10 +18,10 @@ export const Navbar = () => {
           </div>
           <div>
             <p className="text-[10px] uppercase tracking-[0.35em] text-slate-300/80">
-              Interactive atlas
+              Contemporary Filipino art
             </p>
             <span className="section-title text-sm tracking-wide md:text-base">
-              Mapping Filipino Heritage Abroad
+              Identity Beyond Borders
             </span>
           </div>
         </div>

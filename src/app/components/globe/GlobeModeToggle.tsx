@@ -16,7 +16,7 @@ export const GlobeModeToggle = ({ mode, onModeChange }: GlobeModeToggleProps) =>
       <div className="flag-accent absolute inset-x-0 top-0 h-px" />
       <div className="mb-3 px-1">
         <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-slate-300">
-          Filipino Identity Beyond Borders
+          Filipino Art Today
         </p>
       </div>
       <div className="grid grid-cols-2 gap-2" role="tablist" aria-label="Atlas view">

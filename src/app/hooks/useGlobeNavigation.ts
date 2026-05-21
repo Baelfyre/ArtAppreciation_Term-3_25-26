@@ -21,7 +21,8 @@ export const useGlobeNavigation = (
 
     controls.autoRotate = mode === "international" && !selectedArtwork;
     controls.autoRotateSpeed = 0.5;
-    controls.enableZoom = true;
+    controls.enableZoom = false;
+    controls.enablePan = false;
     globeRef.current.pointOfView(view, 1300);
   }, [globeRef, isReady, mode, selectedArtwork]);
 };

@@ -2,6 +2,10 @@ import { Brush, Globe2, MapPin, Sparkles, User, X, type LucideIcon } from "lucid
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation } from "../../services/artworkRepository";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
+import { AngCollageAssembly } from "./AngCollageAssembly";
+import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
+import { ViloriaSplitCombine } from "./ViloriaSplitCombine";
 
 interface ArtworkInfoPanelProps {
   artwork: Artwork | null;
@@ -9,7 +13,7 @@ interface ArtworkInfoPanelProps {
 }
 
 export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) => {
-  if (!artwork) return null;
+  if (!artwork || artwork.isPlaceholder) return null;
 
   const locationLabel = formatArtworkLocation(artwork.location);
 
@@ -56,11 +60,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </div>
 
           <div className="artwork-focus-frame min-h-[18rem] flex-1">
-            <ImageWithFallback
-              src={artwork.imageUrl}
-              alt={artwork.title}
-              className="artwork-focus-image"
-            />
+            <ArtworkPreview artwork={artwork} />
           </div>
         </section>
 
@@ -90,6 +90,32 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
       </div>
     </aside>
   );
+};
+
+const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
+  if (artwork.id === "pixel-across-borders") {
+    return <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.title} />;
+  }
+
+  if (artwork.id === "ang-these-pages-contain-a-universe") {
+    return <AngCollageAssembly src={artwork.imageUrl} alt={artwork.title} />;
+  }
+
+  if (artwork.id === "jadloc-tradition-to-vivid-identity" && artwork.transitionImageUrl) {
+    return (
+      <JadlocTraditionToIdentity
+        traditionSrc={artwork.imageUrl}
+        vividSrc={artwork.transitionImageUrl}
+        alt={artwork.title}
+      />
+    );
+  }
+
+  if (artwork.id === "viloria-work-life-balance") {
+    return <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.title} />;
+  }
+
+  return <ImageWithFallback src={artwork.imageUrl} alt={artwork.title} className="artwork-focus-image" />;
 };
 
 interface LocationPreviewProps {

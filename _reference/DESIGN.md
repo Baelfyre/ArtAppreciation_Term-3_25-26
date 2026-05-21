@@ -9,6 +9,36 @@ theme: Interactive Filipino Art Atlas
 
 # Filipino Identity Beyond Borders Design Guide
 
+## International Placeholder Rule
+
+The International section is not the current project priority.
+
+For now, international markers should only serve as visual placeholders to show how Filipino cultural presence may connect across the globe.
+
+Rules:
+
+- Do not use actual artwork photos for international placeholder items.
+- Do not include detailed descriptions for international placeholder items.
+- Keep pseudo locations to illustrate movement lines across the globe.
+- Use simple marker labels such as country, city, or region.
+- Keep line animations from the Philippines to pseudo international locations.
+- Do not open full artwork detail panels for international placeholders yet.
+- International cards should be minimized, hidden, or marked as placeholders.
+
+Example placeholder data:
+
+```js
+{
+  id: "intl-new-york-placeholder",
+  category: "international",
+  locationLabel: "New York, United States",
+  isPlaceholder: true,
+  coordinates: {
+    lat: 40.7128,
+    lng: -74.0060
+  }
+}
+
 ## 1. Project Purpose
 
 This project is an interactive digital exhibition for Art Appreciation. It presents Filipino identity through local and international Filipino-related artworks, artifacts, heritage objects, and cultural markers.

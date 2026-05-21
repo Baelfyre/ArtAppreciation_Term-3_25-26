@@ -8,6 +8,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Indigenous: '#f6f4ee',
   Historical: '#1d49d8',
   Contemporary: '#86a7ff',
+  International: '#86a7ff',
 };
 
 interface GlobeViewProps {
@@ -140,7 +141,7 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
           htmlElementsData={markersData}
           htmlElement={(d: any) => {
             const el = document.createElement('div');
-            el.className = 'flex flex-col items-center pointer-events-auto cursor-pointer';
+            el.className = 'flex flex-col items-center pointer-events-auto';
             el.style.transform = `translate(-50%, -100%) translateY(-10px)`;
             
             const dot = document.createElement('div');
@@ -164,6 +165,14 @@ export const GlobeView = ({ artifacts, onSelectArtifact, selectedArtifact }: Glo
             el.appendChild(dot);
             
             if (!d.isOrigin) {
+              const label = document.createElement('div');
+              label.textContent = d.artifact.location;
+              label.className = 'mt-2 max-w-36 rounded-full border border-white/12 bg-[rgba(5,8,22,0.68)] px-2.5 py-1 text-center text-[11px] font-medium leading-tight text-slate-100 backdrop-blur-md';
+              el.appendChild(label);
+            }
+
+            if (!d.isOrigin && !d.artifact.isPlaceholder) {
+              el.classList.add('cursor-pointer');
               el.onclick = () => onSelectArtifact(d.artifact);
             }
             

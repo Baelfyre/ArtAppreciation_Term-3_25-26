@@ -19,27 +19,26 @@ export const AboutSection = () => {
           
           <div className="space-y-8 text-xl font-light leading-relaxed text-slate-300">
             <p>
-              This project weaves together a global tapestry of Filipino arts, artifacts, and
-              cultural heritage found around the world. It highlights not only where these objects
-              are located, but also their <strong className="font-medium text-white">cultural meaning</strong>,
-              historical context, and how <strong className="font-medium text-white">Filipino identity</strong>{" "}
-              is represented and appreciated globally.
+              This project centers on <strong className="font-medium text-white">Filipino Art in This Day and Age</strong>:
+              diversity, evolution, and identity. Each artwork uses a different medium and personal
+              perspective to show how Filipino creativity continues to adapt in modern life.
             </p>
             <p>
-              Rather than focusing only on acquisition or ownership, the project emphasizes
-              cultural visibility, preservation, and interpretation. It aims to show how Filipino
-              heritage continues to exist and be valued across different countries.
+              The exhibit also carries the idea of <strong className="font-medium text-white">Filipino Identity Beyond Borders</strong>.
+              Local artworks are mapped to the artists’ places in the Philippines, while the wider
+              globe concept shows how Filipino identity can connect across locations, cultures, and
+              contemporary digital spaces.
             </p>
           </div>
 
           <ul className="mt-12 space-y-6">
             {[
               {
-                text: <> <strong className="text-white font-medium">Global presence</strong> of Filipino culture </>,
+                text: <> <strong className="text-white font-medium">Diversity</strong> of modern Filipino art </>,
                 icon: Globe2
               },
               {
-                text: <> <strong className="text-white font-medium">Cultural meaning</strong> and interpretation </>,
+                text: <> <strong className="text-white font-medium">Evolution</strong> through new mediums </>,
                 icon: Landmark
               },
               {
@@ -47,7 +46,7 @@ export const AboutSection = () => {
                 icon: Fingerprint
               },
               {
-                text: "Appreciation across borders",
+                text: "Identity beyond borders",
                 icon: MapPin
               }
             ].map((item, i) => (

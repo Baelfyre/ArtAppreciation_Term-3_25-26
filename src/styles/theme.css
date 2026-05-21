@@ -445,9 +445,47 @@ body::after {
     padding: 1rem;
   }
 
+  .international-placeholder-card {
+    border-color: rgba(148, 163, 184, 0.2);
+  }
+
+  .international-placeholder-card .flag-accent {
+    opacity: 0.42;
+  }
+
   .featured-carousel {
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4rem, #000 calc(100% - 4rem), transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0, #000 4rem, #000 calc(100% - 4rem), transparent 100%);
+  }
+
+  .featured-carousel {
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+
+  .featured-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featured-carousel-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(244, 196, 48, 0.34);
+    background: linear-gradient(135deg, rgba(244, 196, 48, 0.18), rgba(15, 23, 42, 0.72));
+    padding: 0.7rem 1rem;
+    color: #f8fafc;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  }
+
+  .featured-carousel-control:hover {
+    transform: translateY(-1px);
+    border-color: rgba(244, 196, 48, 0.7);
+    background: linear-gradient(135deg, rgba(244, 196, 48, 0.28), rgba(29, 73, 216, 0.2));
   }
 
   .featured-carousel-track {
@@ -560,5 +598,556 @@ body::after {
   .artwork-panel-slide,
   .local-map-fade {
     animation: none;
+  }
+}
+
+/* Pixel Across Borders vertical blinds reveal effect */
+.pixel-across-reveal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pixel-across-reveal-stage {
+  position: relative;
+  max-width: calc(100% - 2rem);
+  max-height: calc(100% - 2rem);
+  overflow: hidden;
+  border-radius: 1rem;
+  background: rgba(5, 8, 22, 0.88);
+  box-shadow:
+    0 18px 52px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(244, 196, 48, 0.16);
+  cursor: pointer;
+}
+
+.pixel-across-reveal-stage:focus-visible {
+  outline: 2px solid rgba(244, 196, 48, 0.72);
+  outline-offset: 4px;
+}
+
+.pixel-across-reveal-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pixel-across-reveal-blinds {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.pixel-across-reveal-stripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: block;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 22, 0.92), rgba(5, 8, 22, 0.68)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 38%, rgba(244, 196, 48, 0.10));
+  box-shadow:
+    inset 1px 0 rgba(246, 244, 238, 0.08),
+    inset -1px 0 rgba(0, 0, 0, 0.28);
+  opacity: 0.92;
+  animation: pixel-vertical-blind-fade 2.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  will-change: opacity, filter;
+}
+
+.pixel-across-reveal-caption {
+  pointer-events: none;
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.75rem;
+  z-index: 3;
+  border: 1px solid rgba(244, 196, 48, 0.24);
+  border-radius: 9999px;
+  background: rgba(5, 8, 22, 0.68);
+  padding: 0.35rem 0.65rem;
+  color: #f4c430;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pixel-across-reveal-button {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  z-index: 4;
+  border: 1px solid rgba(244, 196, 48, 0.28);
+  border-radius: 9999px;
+  background: rgba(5, 8, 22, 0.74);
+  padding: 0.35rem 0.75rem;
+  color: #f6f4ee;
+  font-size: 0.68rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.pixel-across-reveal-button:hover,
+.pixel-across-reveal-button:focus-visible {
+  border-color: rgba(244, 196, 48, 0.58);
+  background: rgba(244, 196, 48, 0.16);
+  color: #f4c430;
+  transform: translateY(-1px);
+}
+
+@keyframes pixel-vertical-blind-fade {
+  0% {
+    opacity: 0.94;
+    filter: blur(0) saturate(100%);
+  }
+
+  48% {
+    opacity: 0.58;
+    filter: blur(0.15px) saturate(116%);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(0.4px) saturate(130%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-across-reveal-stripe {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Shared teammate artwork transition previews */
+.artwork-effect-shell {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.artwork-effect-stage {
+  position: relative;
+  width: min(calc(100% - 2rem), 42rem);
+  max-height: calc(100% - 2rem);
+  overflow: hidden;
+  border-radius: 1rem;
+  background: rgba(5, 8, 22, 0.88);
+  box-shadow:
+    0 18px 52px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(244, 196, 48, 0.16);
+  cursor: pointer;
+}
+
+.artwork-effect-stage:focus-visible {
+  outline: 2px solid rgba(244, 196, 48, 0.72);
+  outline-offset: 4px;
+}
+
+.artwork-effect-shell--landscape .artwork-effect-stage {
+  aspect-ratio: 1277 / 902;
+}
+
+.artwork-effect-shell--portrait .artwork-effect-stage {
+  width: min(calc(100% - 2rem), 32rem);
+  aspect-ratio: 3 / 4;
+}
+
+.artwork-effect-image,
+.ang-collage-piece,
+.jadloc-artwork-image,
+.viloria-base-image,
+.viloria-half,
+.viloria-phase-echo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.artwork-effect-image,
+.jadloc-artwork-image,
+.viloria-base-image,
+.viloria-half,
+.viloria-phase-echo {
+  position: absolute;
+  inset: 0;
+}
+
+.artwork-effect-caption {
+  pointer-events: none;
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.75rem;
+  z-index: 12;
+  border: 1px solid rgba(244, 196, 48, 0.24);
+  border-radius: 9999px;
+  background: rgba(5, 8, 22, 0.68);
+  padding: 0.35rem 0.65rem;
+  color: #f4c430;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.artwork-effect-button {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  z-index: 20;
+  border: 1px solid rgba(244, 196, 48, 0.28);
+  border-radius: 9999px;
+  background: rgba(5, 8, 22, 0.74);
+  padding: 0.35rem 0.75rem;
+  color: #f6f4ee;
+  font-size: 0.68rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.artwork-effect-button:hover,
+.artwork-effect-button:focus-visible {
+  border-color: rgba(244, 196, 48, 0.58);
+  background: rgba(244, 196, 48, 0.16);
+  color: #f4c430;
+  transform: translateY(-1px);
+}
+
+/* Ang collage assembly transition */
+.artwork-effect-stage--ang {
+  background: radial-gradient(circle at 30% 20%, rgba(244, 196, 48, 0.08), transparent 30%), rgba(5, 8, 22, 0.92);
+}
+
+.ang-collage-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+}
+
+.ang-collage-piece {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.35));
+  will-change: transform, opacity;
+}
+
+/* Jadloc charcoal-to-vivid transition */
+.jadloc-transition-stage {
+  background: radial-gradient(circle at 50% 42%, rgba(244, 196, 48, 0.08), transparent 34%), rgba(5, 8, 22, 0.94);
+}
+
+.jadloc-tradition-image {
+  opacity: 1;
+  transition: opacity 1.4s ease, filter 1.4s ease, transform 1.4s ease;
+  filter: grayscale(0.1) contrast(1.05);
+  transform: scale(1);
+  z-index: 1;
+}
+
+.jadloc-vivid-image {
+  opacity: 0;
+  transition: opacity 1.45s ease, filter 1.45s ease, transform 1.45s ease;
+  filter: saturate(0.72) brightness(0.88) blur(0.08rem);
+  transform: scale(0.985);
+  z-index: 2;
+}
+
+.jadloc-transition-stage.phase-transitioning .jadloc-tradition-image,
+.jadloc-transition-stage.phase-vivid .jadloc-tradition-image {
+  opacity: 0;
+  filter: grayscale(1) contrast(1.2) blur(0.16rem);
+  transform: scale(1.015);
+}
+
+.jadloc-transition-stage.phase-transitioning .jadloc-vivid-image,
+.jadloc-transition-stage.phase-vivid .jadloc-vivid-image {
+  opacity: 1;
+  filter: saturate(1.12) brightness(1) blur(0);
+  transform: scale(1);
+}
+
+.jadloc-dust-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.jadloc-dust-particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(230, 219, 195, 0.78);
+  box-shadow: 0 0 12px rgba(244, 196, 48, 0.32);
+  animation: jadloc-dust-drift 2.1s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes jadloc-dust-drift {
+  0% {
+    opacity: 0.72;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--dx, 20px), -6rem, 0) scale(0.12);
+  }
+}
+
+
+.jadloc-mini-nav {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  z-index: 20;
+  display: inline-flex;
+  gap: 0.35rem;
+  border: 1px solid rgba(244, 196, 48, 0.22);
+  border-radius: 9999px;
+  background: rgba(5, 8, 22, 0.74);
+  padding: 0.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.jadloc-mini-nav button {
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  padding: 0.32rem 0.65rem;
+  color: #c8d3ea;
+  font-size: 0.64rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.jadloc-mini-nav button:hover,
+.jadloc-mini-nav button:focus-visible,
+.jadloc-mini-nav button.is-active {
+  background: rgba(244, 196, 48, 0.18);
+  color: #f4c430;
+}
+
+.jadloc-mini-nav button:focus-visible {
+  outline: 1px solid rgba(244, 196, 48, 0.7);
+  outline-offset: 2px;
+}
+
+/* Viloria split, collide, combine transition */
+.viloria-split-stage {
+  aspect-ratio: 896 / 1198;
+  background: rgba(5, 8, 22, 0.94);
+}
+
+.viloria-base-image {
+  z-index: 1;
+  opacity: 0.22;
+  transition: opacity 0.9s ease, filter 0.9s ease;
+}
+
+.viloria-split-stage.phase-merge .viloria-base-image {
+  opacity: 0.45;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.viloria-split-stage.phase-done .viloria-base-image {
+  opacity: 1;
+  filter: none;
+}
+
+.viloria-half {
+  z-index: 4;
+  transition:
+    transform 2.85s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.8s ease,
+    filter 1.8s ease;
+  will-change: transform, opacity, filter;
+}
+
+.viloria-half-left {
+  clip-path: polygon(0 0, 50.25% 0, 50.25% 100%, 0 100%);
+  transform: translateX(-16%);
+  filter: saturate(0.88) brightness(0.86) contrast(1.06);
+}
+
+.viloria-half-right {
+  clip-path: polygon(49.75% 0, 100% 0, 100% 100%, 49.75% 100%);
+  transform: translateX(16%);
+  filter: saturate(1.08) brightness(1.04) contrast(1.02);
+}
+
+.viloria-split-stage.phase-merge .viloria-half-left,
+.viloria-split-stage.phase-done .viloria-half-left,
+.viloria-split-stage.phase-merge .viloria-half-right,
+.viloria-split-stage.phase-done .viloria-half-right {
+  transform: translateX(0);
+  filter: none;
+}
+
+.viloria-split-stage.phase-done .viloria-half {
+  opacity: 0;
+}
+
+.viloria-collision-seam {
+  pointer-events: none;
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  z-index: 8;
+  width: 0.22rem;
+  background: linear-gradient(180deg, transparent, rgba(246, 244, 238, 0.82), transparent);
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0.72);
+}
+
+.viloria-split-stage.phase-merge .viloria-collision-seam {
+  animation: viloria-seam-collision 2.55s ease-out forwards;
+}
+
+.viloria-phase-echo {
+  z-index: 7;
+  clip-path: polygon(36% 0, 64% 0, 64% 100%, 36% 100%);
+  opacity: 0;
+  filter: blur(0.1rem) saturate(1.2);
+  mix-blend-mode: screen;
+  will-change: opacity, transform;
+}
+
+.viloria-split-stage.phase-merge .viloria-phase-echo-left {
+  animation: viloria-echo-left 2.45s ease-out forwards;
+}
+
+.viloria-split-stage.phase-merge .viloria-phase-echo-right {
+  animation: viloria-echo-right 2.45s ease-out forwards;
+}
+
+@keyframes viloria-seam-collision {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.45);
+  }
+
+  28% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleY(0.94);
+  }
+
+  62% {
+    opacity: 0.68;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.84);
+  }
+}
+
+@keyframes viloria-echo-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-1.2rem);
+  }
+
+  38% {
+    opacity: 0.22;
+    transform: translateX(-0.65rem);
+  }
+
+  70% {
+    opacity: 0.3;
+    transform: translateX(-0.25rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@keyframes viloria-echo-right {
+  0% {
+    opacity: 0;
+    transform: translateX(1.2rem);
+  }
+
+  38% {
+    opacity: 0.22;
+    transform: translateX(0.65rem);
+  }
+
+  70% {
+    opacity: 0.3;
+    transform: translateX(0.25rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ang-collage-piece,
+  .jadloc-tradition-image,
+  .jadloc-vivid-image,
+  .jadloc-dust-particle,
+  .viloria-base-image,
+  .viloria-half,
+  .viloria-collision-seam,
+  .viloria-phase-echo {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .jadloc-vivid-image,
+  .viloria-base-image {
+    opacity: 1 !important;
+  }
+
+  .viloria-half,
+  .viloria-phase-echo,
+  .viloria-collision-seam {
+    opacity: 0 !important;
   }
 }

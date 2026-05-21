@@ -41,6 +41,22 @@ export const GlobeView = ({
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const allowPageScroll = (event: WheelEvent) => {
+      event.stopPropagation();
+    };
+
+    container.addEventListener("wheel", allowPageScroll, { capture: true, passive: true });
+
+    return () => {
+      container.removeEventListener("wheel", allowPageScroll, { capture: true });
+    };
+  }, []);
+
   useGlobeNavigation(globeRef, {
     mode,
     selectedArtwork,
@@ -133,8 +149,18 @@ export const GlobeView = ({
             el.appendChild(dot);
 
             if (marker.artwork) {
-              el.classList.add("cursor-pointer");
-              el.onclick = () => onSelectArtwork(marker.artwork as Artwork);
+              const label = document.createElement("div");
+              label.textContent = marker.label;
+              label.className =
+                "mt-2 max-w-36 rounded-full border border-white/12 bg-[rgba(5,8,22,0.68)] px-2.5 py-1 text-center text-[11px] font-medium leading-tight text-slate-100 backdrop-blur-md";
+              el.appendChild(label);
+
+              if (marker.artwork.isPlaceholder) {
+                el.title = `${marker.label} placeholder marker`;
+              } else {
+                el.classList.add("cursor-pointer");
+                el.onclick = () => onSelectArtwork(marker.artwork as Artwork);
+              }
             }
 
             return el;
