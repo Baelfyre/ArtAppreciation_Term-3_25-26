@@ -31,8 +31,8 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
   };
 
   return (
-    <section id="featured" className="px-6 py-24">
-      <div className="mx-auto max-w-7xl">
+    <section id="featured" className="py-24">
+      <div className="gallery-section">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col text-center md:text-left">
             <div className="glass-chip-warm mb-5 inline-flex w-fit self-center rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.32em] text-white md:self-start">

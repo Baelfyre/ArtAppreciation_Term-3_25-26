@@ -74,7 +74,7 @@ export default function App() {
 
         <section
           id="globe"
-          className="relative mx-4 my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)] md:mx-6 lg:mx-auto lg:max-w-[1500px]"
+          className="globe-section-inner relative my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)]"
         >
           <div className="flag-accent absolute inset-x-0 top-0 h-px" />
           <div className="pointer-events-none absolute inset-0">
@@ -93,7 +93,7 @@ export default function App() {
             
             {/* Overlay UI Panels */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="relative mx-auto h-full w-full max-w-[1600px] pointer-events-none">
+              <div className="relative mx-auto h-full w-full max-w-[1200px] pointer-events-none">
                 <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
 
                 {mode === "local" && (

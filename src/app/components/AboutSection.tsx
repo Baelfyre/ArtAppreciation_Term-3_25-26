@@ -3,8 +3,8 @@ import { Globe2, Landmark, Fingerprint, MapPin, Compass } from "lucide-react";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="relative z-10 w-full border-t border-white/5 px-6 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
+    <section id="about" className="relative z-10 w-full border-t border-white/5 py-24">
+      <div className="section-container grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
         
         {/* Left Side: Text Content */}
         <div className="flex flex-col">
