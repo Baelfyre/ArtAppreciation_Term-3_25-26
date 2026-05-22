@@ -27,7 +27,7 @@ The project includes original artworks by members of Group 15:
 * **Pixel Across Borders** by Ongo, James
 * **Ang Original Artwork** by Ang, Monica
 * **The Weight of Tradition** and **Vivid Identity** by Jadloc, Ly-anne
-* **Viloria Original Artwork** by Viloria, Robert
+* **Work Life Balance Artwork** by Viloria, Robert
 
 ## Locations
 
