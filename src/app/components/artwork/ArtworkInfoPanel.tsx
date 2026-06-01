@@ -18,11 +18,11 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   const locationLabel = formatArtworkLocation(artwork.location);
 
   return (
-    <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong absolute z-30 overflow-hidden shadow-2xl">
+    <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong custom-scrollbar absolute z-30 overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl lg:overflow-hidden">
       <div className="flag-accent absolute inset-x-0 top-0 z-30 h-px" />
       <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
-      <div className="relative grid h-full gap-3 overflow-y-auto p-3 pt-12 custom-scrollbar md:gap-4 md:p-4 md:pt-14 lg:grid-cols-[0.85fr_1.25fr_1fr] lg:overflow-hidden lg:p-5 lg:pt-14">
+      <div className="relative grid min-h-full min-w-0 gap-3 p-3 pt-12 md:gap-4 md:p-4 md:pt-14 lg:h-full lg:grid-cols-[0.85fr_1.25fr_1fr] lg:overflow-hidden lg:p-5 lg:pt-14">
         <button
           type="button"
           onClick={onClose}
@@ -32,10 +32,10 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           <X className="h-4 w-4" />
         </button>
 
-        <section className="glass-chip order-3 flex min-h-[13rem] flex-col overflow-hidden rounded-[1.15rem] p-3 md:min-h-[17rem] md:rounded-[1.35rem] md:p-4 lg:order-1 lg:min-h-0">
-          <div className="mb-3 md:mb-4">
+        <section className="glass-chip order-3 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4 lg:order-1">
+          <div className="mb-3 min-w-0 md:mb-4">
             <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
-            <h3 className="section-title text-lg font-semibold text-white md:text-xl">
+            <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
               {artwork.scope === "local" ? "Philippine Local Map" : "Global Marker"}
             </h3>
           </div>
@@ -44,15 +44,15 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
           <div className="mt-3 rounded-[1rem] border border-white/10 bg-black/15 p-3 md:mt-4 md:p-4">
             <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
-            <p className="text-sm leading-relaxed text-slate-200">{locationLabel}</p>
+            <p className="break-words text-sm leading-relaxed text-slate-200">{locationLabel}</p>
           </div>
         </section>
 
-        <section className="order-1 flex min-h-[16rem] flex-col rounded-[1.15rem] md:min-h-[22rem] md:rounded-[1.35rem] lg:order-2 lg:min-h-0">
+        <section className="order-1 flex min-h-0 min-w-0 flex-col rounded-[1.15rem] md:rounded-[1.35rem] lg:order-2">
           <div className="mb-3 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
-              <h3 className="section-title text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
+              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
             </div>
             <span className="glass-chip-warm shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:px-3 md:text-xs">
               {artwork.scope}
@@ -64,12 +64,12 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </div>
         </section>
 
-        <section className="glass-chip custom-scrollbar order-2 flex min-h-[16rem] flex-col rounded-[1.15rem] p-3 md:min-h-[20rem] md:rounded-[1.35rem] md:p-5 lg:order-3 lg:min-h-0 lg:overflow-y-auto">
-          <div className="mb-4 md:mb-5">
+        <section className="glass-chip custom-scrollbar order-2 flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5 lg:order-3 lg:overflow-y-auto">
+          <div className="mb-4 min-w-0 md:mb-5">
             <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
               {artwork.scope}
             </span>
-            <h2 className="section-title text-xl font-medium leading-tight text-white md:text-2xl">
+            <h2 className="section-title break-words text-xl font-medium leading-tight text-white md:text-2xl">
               {artwork.title}
             </h2>
           </div>
@@ -130,7 +130,7 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
 
   if (artwork.scope === "local") {
     return (
-      <div className="relative min-h-0 flex-1 overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)]">
+      <div className="relative min-h-[13.5rem] flex-1 overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:min-h-[17rem] lg:min-h-0">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
         <div className="relative mx-auto aspect-[702/1209] h-full max-h-[28rem] max-w-full">
           <img
@@ -156,7 +156,7 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
   }
 
   return (
-    <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_42%,rgba(29,73,216,0.28),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(244,196,48,0.12),transparent_48%),rgba(255,255,255,0.04)]">
+    <div className="relative flex min-h-[13.5rem] flex-1 items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_42%,rgba(29,73,216,0.28),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(244,196,48,0.12),transparent_48%),rgba(255,255,255,0.04)] md:min-h-[17rem] lg:min-h-0">
       <div className="absolute h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_35%_28%,rgba(246,244,238,0.16),transparent_18%),linear-gradient(135deg,rgba(29,73,216,0.42),rgba(5,8,22,0.9)_58%,rgba(185,22,44,0.22))] shadow-[0_0_48px_rgba(29,73,216,0.22)]" />
       <div className="absolute h-40 w-40 rounded-full border border-[#f4c430]/20" />
       <div className="relative flex max-w-[13rem] flex-col items-center text-center">
@@ -181,13 +181,13 @@ interface InfoRowProps {
 }
 
 const InfoRow = ({ icon: Icon, label, value }: InfoRowProps) => (
-  <div className="glass-chip flex items-start gap-3 rounded-[1.15rem] p-4 text-sm">
+  <div className="glass-chip flex min-w-0 items-start gap-3 rounded-[1.15rem] p-4 text-sm">
     <div className="glass-chip-warm mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
       <Icon className="h-4 w-4 text-[#f4c430]" />
     </div>
-    <div>
+    <div className="min-w-0">
       <p className="mb-0.5 text-xs uppercase tracking-wider text-slate-400">{label}</p>
-      <p className="text-slate-200">{value}</p>
+      <p className="break-words text-slate-200">{value}</p>
     </div>
   </div>
 );
@@ -199,11 +199,11 @@ interface InfoBlockProps {
 }
 
 const InfoBlock = ({ label, value, icon: Icon }: InfoBlockProps) => (
-  <div className="glass-chip rounded-[1.15rem] p-4">
+  <div className="glass-chip min-w-0 rounded-[1.15rem] p-4">
     <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
       {Icon && <Icon className="h-3.5 w-3.5 text-[#f4c430]" />}
       <span>{label}</span>
     </div>
-    <p className="text-sm font-light leading-relaxed text-slate-300">{value}</p>
+    <p className="break-words text-sm font-light leading-relaxed text-slate-300">{value}</p>
   </div>
 );

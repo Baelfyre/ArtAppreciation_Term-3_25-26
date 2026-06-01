@@ -559,6 +559,10 @@ body::after {
     padding: 1rem;
   }
 
+  .philippines-hub-icon {
+    filter: invert(94%) sepia(13%) saturate(620%) hue-rotate(351deg) brightness(103%) contrast(94%) drop-shadow(0 0 22px rgba(244, 196, 48, 0.2));
+  }
+
   .international-placeholder-card {
     border-color: rgba(148, 163, 184, 0.2);
   }

@@ -16,7 +16,7 @@ export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesM
       className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
         isSelected ? "is-selected" : ""
       }`}
-      style={{ left: `${marker.mapX}%`, top: `${marker.mapY}%` }}
+      style={{ left: `${marker.displayMapX}%`, top: `${marker.displayMapY}%` }}
     >
       <span className="local-map-marker-dot" />
       <span className="local-map-marker-label">{marker.label}</span>

@@ -118,7 +118,12 @@ export const AboutSection = () => {
           
           {/* Abstract Orbital Rings */}
           <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_55%,transparent_100%)] shadow-[0_0_80px_rgba(255,255,255,0.04)]">
-            <Globe2 className="h-14 w-14 text-slate-100 stroke-[1.5]" />
+            <img
+              src="/resources/philippines.svg"
+              alt=""
+              aria-hidden="true"
+              className="philippines-hub-icon h-20 w-20 object-contain opacity-95 md:h-24 md:w-24"
+            />
           </div>
         </div>
       </div>

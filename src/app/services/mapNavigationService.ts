@@ -39,10 +39,17 @@ export interface LocalMapMarker {
   label: string;
   mapX: number;
   mapY: number;
+  displayMapX: number;
+  displayMapY: number;
   artwork: Artwork;
 }
 
 const markerColors = ["#f4c430", "#86a7ff", "#b9162c", "#f6f4ee"];
+const localMarkerCollisionDistance = 6;
+const localMarkerOffsetX = 3.8;
+const localMarkerOffsetY = 2.8;
+
+const clampMapPercent = (value: number) => Math.min(96, Math.max(4, value));
 
 const hasGlobeCoordinates = (artwork: Artwork) =>
   typeof artwork.location.lat === "number" && typeof artwork.location.lng === "number";
@@ -98,8 +105,8 @@ export const prepareInternationalConnectionArcs = (artworks: Artwork[]): GlobeAr
     artwork,
   }));
 
-export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
-  artworks
+export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] => {
+  const markers = artworks
     .filter(
       (artwork) =>
         typeof artwork.location.mapX === "number" && typeof artwork.location.mapY === "number",
@@ -109,8 +116,36 @@ export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
       label: artwork.location.label,
       mapX: artwork.location.mapX as number,
       mapY: artwork.location.mapY as number,
+      displayMapX: artwork.location.mapX as number,
+      displayMapY: artwork.location.mapY as number,
       artwork,
     }));
+
+  return markers.map((marker) => {
+    const nearbyMarkers = markers.filter(
+      (other) =>
+        other.id !== marker.id &&
+        Math.hypot(marker.mapX - other.mapX, marker.mapY - other.mapY) <
+          localMarkerCollisionDistance,
+    );
+
+    if (nearbyMarkers.length === 0) return marker;
+
+    const cluster = [marker, ...nearbyMarkers];
+    const centerX = cluster.reduce((sum, item) => sum + item.mapX, 0) / cluster.length;
+    const centerY = cluster.reduce((sum, item) => sum + item.mapY, 0) / cluster.length;
+
+    return {
+      ...marker,
+      displayMapX: clampMapPercent(
+        marker.mapX + (marker.mapX >= centerX ? localMarkerOffsetX : -localMarkerOffsetX),
+      ),
+      displayMapY: clampMapPercent(
+        marker.mapY + (marker.mapY >= centerY ? localMarkerOffsetY : -localMarkerOffsetY),
+      ),
+    };
+  });
+};
 
 export const getGlobePointOfView = (
   mode: GlobeMode,
