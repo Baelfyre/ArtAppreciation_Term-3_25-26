@@ -50,10 +50,6 @@ export const ViloriaSplitCombine = ({ src, alt }: ViloriaSplitCombineProps) => {
             <img src={src} alt="" aria-hidden="true" className="viloria-phase-echo viloria-phase-echo-right" />
           </>
         )}
-
-        <span className="artwork-effect-caption">
-          {phase === "split" ? "Two worlds" : phase === "merge" ? "Combining" : "Hover to merge"}
-        </span>
       </div>
     </div>
   );

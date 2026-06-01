@@ -21,7 +21,11 @@ export const PhilippinesMarker = ({
       type="button"
       aria-label={`Open ${marker.artwork.title}`}
       title={marker.label}
-      onClick={() => onSelect(marker)}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        onSelect(marker);
+      }}
       className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
         isSelected ? "is-selected" : ""
       } ${isHighlighted ? "is-highlighted" : ""}`}

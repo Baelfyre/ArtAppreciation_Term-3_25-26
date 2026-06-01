@@ -93,10 +93,6 @@ export const JadlocTraditionToIdentity = ({
             ))}
           </div>
         )}
-
-        <span className="artwork-effect-caption">
-          {phase === "tradition" ? "The Weight of Tradition" : phase === "vivid" ? "Vivid Identity" : "Charcoal to vivid"}
-        </span>
       </div>
 
       <div className="jadloc-mini-nav" aria-label="Jadloc artwork view navigation">

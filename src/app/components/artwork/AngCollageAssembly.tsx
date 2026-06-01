@@ -77,8 +77,6 @@ export const AngCollageAssembly = ({ src, alt }: AngCollageAssemblyProps) => {
             ))}
           </div>
         )}
-
-        <span className="artwork-effect-caption">{isPlaying ? "Collage assembly" : "Hover to assemble"}</span>
       </div>
     </div>
   );

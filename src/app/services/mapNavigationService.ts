@@ -52,6 +52,17 @@ const localMarkerColors = {
   blue: "#86a7ff",
   red: "#b9162c",
 };
+const localMarkerCollisionThreshold = 6;
+const localMarkerDisplayOffsets = [
+  { x: 0, y: 0 },
+  { x: -6, y: -4 },
+  { x: 6, y: 4 },
+  { x: -6, y: 4 },
+  { x: 6, y: -4 },
+  { x: 0, y: 6 },
+];
+
+const clampMapPercent = (value: number) => Math.min(96, Math.max(4, value));
 
 const hasGlobeCoordinates = (artwork: Artwork) =>
   typeof artwork.location.lat === "number" && typeof artwork.location.lng === "number";
@@ -108,7 +119,7 @@ export const prepareInternationalConnectionArcs = (artworks: Artwork[]): GlobeAr
   }));
 
 export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] => {
-  return artworks
+  const markers = artworks
     .filter(
       (artwork) =>
         typeof artwork.location.mapX === "number" && typeof artwork.location.mapY === "number",
@@ -124,6 +135,34 @@ export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
       color: getArtworkMarkerColor(artwork),
       artwork,
     }));
+
+  const clusters: LocalMapMarker[][] = [];
+
+  markers.forEach((marker) => {
+    const cluster = clusters.find((candidate) =>
+      candidate.some((clusterMarker) => {
+        const distance = Math.hypot(marker.mapX - clusterMarker.mapX, marker.mapY - clusterMarker.mapY);
+        return distance <= localMarkerCollisionThreshold;
+      }),
+    );
+
+    if (cluster) {
+      cluster.push(marker);
+      return;
+    }
+
+    clusters.push([marker]);
+  });
+
+  clusters.forEach((cluster) => {
+    cluster.forEach((marker, index) => {
+      const offset = localMarkerDisplayOffsets[index % localMarkerDisplayOffsets.length];
+      marker.displayMapX = clampMapPercent(marker.mapX + offset.x);
+      marker.displayMapY = clampMapPercent(marker.mapY + offset.y);
+    });
+  });
+
+  return markers;
 };
 
 export const getGlobePointOfView = (

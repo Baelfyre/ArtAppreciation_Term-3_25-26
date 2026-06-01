@@ -39,6 +39,8 @@ export const PhilippinesMapView = ({
   };
 
   const handleMapClickCapture = (event: MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).closest(".local-map-marker")) return;
+
     const bounds = event.currentTarget.getBoundingClientRect();
     const clickX = event.clientX - bounds.left;
     const clickY = event.clientY - bounds.top;
@@ -61,7 +63,7 @@ export const PhilippinesMapView = ({
     if (nearestMarker && nearestMarker.distance <= 24) {
       event.preventDefault();
       event.stopPropagation();
-      onSelectArtwork(nearestMarker.marker.artwork);
+      handleSelectMarker(nearestMarker.marker);
     }
   };
 
@@ -275,7 +277,11 @@ const LocalArtworkListItem = ({
     onFocusCapture={() => onIntent(marker)}
     onBlur={() => onClearIntent(marker)}
     onBlurCapture={() => onClearIntent(marker)}
-    onClick={() => onSelect(marker)}
+    onClick={(event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      onSelect(marker);
+    }}
     className={`local-map-list-row ${isActive ? "is-active" : ""}`}
     style={
       {

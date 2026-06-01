@@ -111,10 +111,6 @@ export const PixelAcrossBordersReveal = ({ src, alt }: PixelAcrossBordersRevealP
             ))}
           </div>
         )}
-
-        <div className="pixel-across-reveal-caption" aria-hidden="true">
-          {isPlaying ? "Vertical blinds reveal" : "Hover to reveal"}
-        </div>
       </div>
     </div>
   );
