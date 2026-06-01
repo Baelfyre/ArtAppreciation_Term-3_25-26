@@ -401,6 +401,153 @@ body::after {
     animation: heritage-orbit var(--orbit-duration, 22s) linear infinite;
   }
 
+  .identity-hub {
+    isolation: isolate;
+  }
+
+  .identity-starfield {
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .identity-star {
+    position: absolute;
+    border-radius: 9999px;
+    background: rgba(246, 244, 238, 0.72);
+    box-shadow: 0 0 10px rgba(244, 196, 48, 0.2);
+    opacity: 0.12;
+    transform: translate3d(0, 0, 0);
+    animation: identity-star-drift var(--particle-duration, 34s) ease-in-out var(--particle-delay, 0s) infinite;
+  }
+
+  .identity-connection-arcs {
+    pointer-events: none;
+    overflow: visible;
+    opacity: 0.84;
+  }
+
+  .identity-arc {
+    fill: none;
+    stroke-width: 0.28;
+    stroke-linecap: round;
+    stroke-dasharray: 0.12 0.055;
+    animation: identity-arc-flow 18s linear infinite;
+  }
+
+  .identity-arc--gold {
+    color: rgba(244, 196, 48, 0.78);
+    stroke: rgba(244, 196, 48, 0.5);
+  }
+
+  .identity-arc--blue {
+    color: rgba(134, 167, 255, 0.72);
+    stroke: rgba(134, 167, 255, 0.42);
+  }
+
+  .identity-arc--red {
+    color: rgba(185, 22, 44, 0.68);
+    stroke: rgba(185, 22, 44, 0.34);
+  }
+
+  .identity-arc--white {
+    color: rgba(246, 244, 238, 0.72);
+    stroke: rgba(246, 244, 238, 0.34);
+  }
+
+  .identity-travel-light {
+    fill: currentColor;
+    stroke: none;
+    opacity: 0.82;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  .identity-particle-orbit {
+    pointer-events: none;
+    z-index: 6;
+    border: 1px solid rgba(255, 255, 255, 0.026);
+    border-radius: 9999px;
+  }
+
+  .identity-orbit-dot {
+    position: absolute;
+    left: 50%;
+    top: -0.16rem;
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 9999px;
+    transform: translateX(-50%);
+  }
+
+  .identity-orbit-dot::after {
+    content: "";
+    position: absolute;
+    right: 45%;
+    top: 50%;
+    width: 1.35rem;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, transparent, currentColor);
+    opacity: 0.28;
+  }
+
+  .identity-orbit-dot--gold {
+    color: rgba(244, 196, 48, 0.72);
+    background: rgba(244, 196, 48, 0.92);
+    box-shadow: 0 0 14px rgba(244, 196, 48, 0.38);
+  }
+
+  .identity-orbit-dot--blue {
+    color: rgba(134, 167, 255, 0.68);
+    background: rgba(134, 167, 255, 0.86);
+    box-shadow: 0 0 14px rgba(134, 167, 255, 0.34);
+  }
+
+  .identity-orbit-dot--red {
+    color: rgba(185, 22, 44, 0.62);
+    background: rgba(185, 22, 44, 0.82);
+    box-shadow: 0 0 14px rgba(185, 22, 44, 0.28);
+  }
+
+  .identity-orbit-dot--warm,
+  .identity-orbit-dot--white {
+    color: rgba(246, 244, 238, 0.62);
+    background: rgba(246, 244, 238, 0.82);
+    box-shadow: 0 0 12px rgba(246, 244, 238, 0.22);
+  }
+
+  .identity-support-icon {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 0 30px rgba(255, 255, 255, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    opacity: 0.72;
+    backdrop-filter: blur(24px) saturate(145%);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+    animation: identity-icon-float var(--float-duration, 7s) ease-in-out infinite;
+  }
+
+  .identity-core {
+    box-shadow:
+      0 0 70px rgba(244, 196, 48, 0.08),
+      0 0 120px rgba(29, 73, 216, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .identity-core-glow {
+    background:
+      radial-gradient(circle, rgba(244, 196, 48, 0.16), transparent 46%),
+      radial-gradient(circle, rgba(246, 244, 238, 0.12), transparent 58%);
+    filter: blur(10px);
+    opacity: 0.75;
+    animation: identity-core-pulse 7s ease-in-out infinite;
+  }
+
   .globe-html-marker-dot {
     position: relative;
     display: block;
@@ -560,7 +707,9 @@ body::after {
   }
 
   .philippines-hub-icon {
-    filter: invert(94%) sepia(13%) saturate(620%) hue-rotate(351deg) brightness(103%) contrast(94%) drop-shadow(0 0 22px rgba(244, 196, 48, 0.2));
+    transform: scale(1.18);
+    transform-origin: center;
+    filter: invert(94%) sepia(13%) saturate(620%) hue-rotate(351deg) brightness(103%) contrast(94%) drop-shadow(0 0 18px rgba(244, 196, 48, 0.25)) drop-shadow(0 0 34px rgba(246, 244, 238, 0.08));
   }
 
   .international-placeholder-card {
@@ -734,6 +883,26 @@ body::after {
       padding: 0.2rem 0.45rem;
       font-size: 0.62rem;
     }
+
+    .identity-connection-arcs {
+      inset: 0;
+      opacity: 0.72;
+    }
+
+    .identity-support-icon {
+      width: 2.55rem;
+      height: 2.55rem;
+      opacity: 0.66;
+    }
+
+    .identity-support-icon svg {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+
+    .identity-star:nth-child(n + 10) {
+      display: none;
+    }
   }
 
   @media (min-width: 768px) {
@@ -776,6 +945,53 @@ body::after {
 
   to {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes identity-star-drift {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    opacity: 0.18;
+    transform: translate3d(var(--particle-x, 8px), var(--particle-y, -10px), 0);
+  }
+}
+
+@keyframes identity-arc-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+
+@keyframes identity-icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes identity-core-pulse {
+  0%,
+  100% {
+    opacity: 0.58;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.88;
+    transform: scale(1.03);
   }
 }
 
@@ -839,8 +1055,21 @@ body::after {
   .featured-carousel-track,
   .featured-carousel-card,
   .artwork-panel-slide,
-  .local-map-fade {
+  .local-map-fade,
+  .identity-hub .orbit-spin,
+  .identity-hub .orbit-spin-reverse,
+  .identity-hub .orbit-counter,
+  .identity-hub .orbit-counter-reverse,
+  .identity-star,
+  .identity-arc,
+  .identity-particle-orbit,
+  .identity-support-icon,
+  .identity-core-glow {
     animation: none;
+  }
+
+  .identity-travel-light {
+    display: none;
   }
 }
 
