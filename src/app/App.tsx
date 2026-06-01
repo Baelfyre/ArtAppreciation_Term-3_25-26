@@ -158,14 +158,14 @@ const CurationPlaceholderPanel = () => {
   const placeholder = curationPlaceholders.international;
 
   return (
-    <aside className="local-map-fade curved-card-accent pointer-events-auto absolute inset-x-3 top-40 z-10 mx-auto max-w-[28rem] overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.58)] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:inset-x-4 md:top-40 md:rounded-[1.75rem] md:p-6 lg:left-auto lg:right-6 lg:top-32 lg:w-[28rem]">
-      <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">
+    <aside className="international-curation-placeholder local-map-fade curved-card-accent pointer-events-auto absolute inset-x-4 bottom-4 z-10 mx-auto max-w-[22rem] overflow-hidden rounded-[1.15rem] border border-white/14 bg-[rgba(5,8,22,0.62)] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.34)] backdrop-blur-xl md:inset-x-auto md:bottom-6 md:right-6 md:w-[22rem] md:rounded-[1.35rem] md:p-5 lg:bottom-6 lg:right-6">
+      <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#f4c430] md:text-[11px] md:tracking-[0.24em]">
         {placeholder.eyebrow}
       </p>
-      <h3 className="section-title text-2xl font-semibold leading-tight text-white md:text-3xl">
+      <h3 className="section-title text-xl font-semibold leading-tight text-white md:text-2xl">
         {placeholder.title}
       </h3>
-      <p className="mt-4 text-sm font-light leading-relaxed text-slate-300 md:text-base">
+      <p className="mt-3 text-sm font-light leading-relaxed text-slate-300">
         {placeholder.body}
       </p>
     </aside>

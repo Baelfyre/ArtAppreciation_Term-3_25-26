@@ -12,9 +12,10 @@ export interface Artwork {
   medium: string;
   imageUrl: string;
   transitionImageUrl?: string;
-  mediaProvider?: "youtube";
+  mediaProvider?: "youtube" | "spotify";
   mediaType?: "music";
   embedUrl?: string;
+  embedHeight?: number;
   locationBasis?: string;
   location: Location;
   description: string;

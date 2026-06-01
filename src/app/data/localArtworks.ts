@@ -136,11 +136,11 @@ export const localArtworks: Artwork[] = [
     creator: "SB19",
     medium: "Music / OPM / P-pop ballad",
     imageUrl: "",
-    mediaProvider: "youtube",
+    mediaProvider: "spotify",
     mediaType: "music",
-    embedUrl: "https://www.youtube-nocookie.com/embed/DDyr3DbTPtk",
+    embedUrl: "https://open.spotify.com/embed/track/6Fz2TpxUD0YvAPsuG8nDMJ",
     location: {
-      label: "Manila, Philippines",
+      label: "Manila, Metro Manila, Philippines",
       city: "Manila",
       province: "Metro Manila",
       country: "Philippines",
@@ -151,14 +151,13 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Artist origin / cultural production anchor",
     description:
-      "A placeholder sample for the local Filipino art curation set, using contemporary OPM and P-pop music as a research entry.",
+      "MAPA is a contemporary Filipino song that honors both mother and father through modern OPM and P-pop. It reflects gratitude, family love, and respect for parents in a style that connects with today's generation.",
     advocacyConnection:
-      "The song is included as a local art research sample connected to family, memory, and Filipino identity.",
+      "This artwork connects to Filipino Identity Beyond Borders because it shows how Filipino values continue to evolve through modern music and global platforms. It keeps the traditional value of honoring parents while expressing it through contemporary Filipino pop.",
     elements:
-      "Vocals, melody, harmony, lyrics, and contemporary OPM production.",
+      "Vocals, melody, harmony, rhythm, lyrics, emotional tone, and contemporary music production.",
     principles:
-      "The work uses emotional emphasis, repetition, balance between voices, and unity through its central family theme.",
-    isPlaceholder: true,
+      "The song uses emphasis through emotional delivery, repetition through its lyrical structure, balance between voices and arrangement, and unity through its central family theme.",
   },
   {
     id: "local-sa-ugoy-ng-duyan",
@@ -168,11 +167,12 @@ export const localArtworks: Artwork[] = [
     markerColor: "blue",
     title: "Sa Ugoy ng Duyan",
     creator: "Lucio San Pedro and Levi Celerio",
-    medium: "Musical composition / lullaby",
+    medium: "Musical composition / vocal lullaby",
     imageUrl: "",
-    mediaProvider: "youtube",
+    mediaProvider: "spotify",
     mediaType: "music",
-    embedUrl: "https://www.youtube-nocookie.com/embed/HOwOuk0ElqI",
+    // TODO: Add verified Spotify embed URL for Sa Ugoy ng Duyan.
+    embedUrl: "",
     location: {
       label: "Angono, Rizal, Philippines",
       city: "Angono",
@@ -185,13 +185,12 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Composer hometown / cultural anchor",
     description:
-      "A placeholder sample for the local Filipino art curation set, representing a researched musical work from the Filipino lullaby tradition.",
+      "Sa Ugoy ng Duyan is a Filipino lullaby that expresses childhood memory, a mother's care, and the emotional comfort of home. It represents an earlier form of Filipino music that preserves family love and cultural memory.",
     advocacyConnection:
-      "The composition is included as a local art research sample connected to memory, caregiving, and Filipino cultural identity.",
+      "This artwork connects to Filipino Identity Beyond Borders because it shows how Filipino identity and family values have long been expressed through music. When paired with MAPA, it shows the evolution of Filipino music from traditional lullaby to modern pop ballad while keeping love and respect for parents.",
     elements:
-      "Melody, rhythm, lyrics, vocal phrasing, and lullaby form.",
+      "Melody, rhythm, harmony, lyrics, vocal phrasing, emotional tone, and lullaby form.",
     principles:
-      "The work uses repetition, gentle contrast, balance, and unity to create an intimate musical mood.",
-    isPlaceholder: true,
+      "The song uses repetition, gentle movement, balance, unity, and emotional emphasis to create a nostalgic and comforting musical experience.",
   },
 ];

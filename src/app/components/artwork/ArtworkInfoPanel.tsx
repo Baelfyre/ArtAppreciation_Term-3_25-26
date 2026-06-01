@@ -18,6 +18,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
   const locationLabel = formatArtworkLocation(artwork.location);
   const collectionLabel = getArtworkCollectionLabel(artwork);
+  const hasPlayableMusic = artwork.mediaType === "music" && Boolean(artwork.embedUrl);
 
   return (
     <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar absolute z-30 overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl lg:overflow-hidden">
@@ -60,7 +61,11 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </span>
           </div>
 
-          <div className="artwork-focus-frame min-h-[13rem] flex-1 md:min-h-[18rem]">
+          <div
+            className={`artwork-focus-frame flex-1 ${
+              hasPlayableMusic ? "min-h-[21rem] md:min-h-[24rem]" : "min-h-[13rem] md:min-h-[18rem]"
+            }`}
+          >
             <ArtworkPreview artwork={artwork} />
           </div>
         </section>
@@ -85,11 +90,6 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </div>
 
           <div className="space-y-4">
-            <ArtworkMediaEmbed
-              embedUrl={artwork.embedUrl}
-              title={artwork.title}
-              provider={artwork.mediaProvider}
-            />
             <InfoBlock label="Description" value={artwork.description} />
             <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
             <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
@@ -102,6 +102,19 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 };
 
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
+  if (artwork.mediaType === "music" && artwork.embedUrl) {
+    return (
+      <div className="flex h-full w-full items-center justify-center p-2 md:p-3">
+        <ArtworkMediaEmbed
+          embedUrl={artwork.embedUrl}
+          title={artwork.title}
+          provider={artwork.mediaProvider}
+          embedHeight={artwork.embedHeight}
+        />
+      </div>
+    );
+  }
+
   if (artwork.mediaType === "music" && !artwork.imageUrl) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center p-6 text-center">
