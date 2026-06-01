@@ -1,10 +1,10 @@
 import { internationalArtworks } from "../data/internationalArtworks";
-import { localArtworks } from "../data/localArtworks";
+import { groupMemberArtworks } from "../data/localArtworks";
 import type { Artwork } from "../domain/Artwork";
 import type { GlobeMode } from "../domain/GlobeMode";
 import type { Location } from "../domain/Location";
 
-const artworks = [...localArtworks, ...internationalArtworks];
+const artworks = [...groupMemberArtworks, ...internationalArtworks];
 
 export const artworkRepository = {
   getAll(): Artwork[] {
@@ -34,4 +34,13 @@ export const formatArtworkLocation = (location: Location) => {
   }
 
   return location.label;
+};
+
+export const getArtworkCollectionLabel = (
+  artwork: Pick<Artwork, "scope" | "isPlaceholder">,
+) => {
+  if (artwork.scope === "group") return "Group Members' Art";
+  if (artwork.scope === "local") return "Local Art";
+
+  return "International Art";
 };

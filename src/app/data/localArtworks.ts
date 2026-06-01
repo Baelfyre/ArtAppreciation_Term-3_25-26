@@ -1,9 +1,9 @@
 import type { Artwork } from "../domain/Artwork";
 
-export const localArtworks: Artwork[] = [
+export const groupMemberArtworks: Artwork[] = [
   {
     id: "pixel-across-borders",
-    scope: "local",
+    scope: "group",
     title: "Pixel Across Borders",
     creator: "James Lynelle Ongo",
     medium: "Excel-based digital pixel art",
@@ -13,10 +13,10 @@ export const localArtworks: Artwork[] = [
       city: "Bacolod City",
       province: "Negros Occidental",
       country: "Philippines",
-      lat: 10.6765,
-      lng: 122.9509,
-      mapX: 62.5,
-      mapY: 63,
+      lat: 10.6778,
+      lng: 122.9069,
+      mapX: 61.8,
+      mapY: 62.7,
     },
     description:
       "Pixel Across Borders represents Filipino identity connecting with the world through art, migration, and digital globalization.",
@@ -30,7 +30,7 @@ export const localArtworks: Artwork[] = [
   },
   {
     id: "ang-these-pages-contain-a-universe",
-    scope: "local",
+    scope: "group",
     title: "These Pages Contain a Universe",
     creator: "Monica K. Ang",
     medium: "Mixed media junk journal collage",
@@ -57,7 +57,7 @@ export const localArtworks: Artwork[] = [
   },
   {
     id: "jadloc-tradition-to-vivid-identity",
-    scope: "local",
+    scope: "group",
     title: "Tradition to Vivid Identity",
     creator: "Ly-anne Jadloc",
     medium: "Charcoal drawing and vivid neo-expressionist artwork",
@@ -68,10 +68,10 @@ export const localArtworks: Artwork[] = [
       city: "Sagay City",
       province: "Negros Occidental",
       country: "Philippines",
-      lat: 10.94472,
-      lng: 123.42417,
-      mapX: 67.1,
-      mapY: 61.1,
+      lat: 10.9,
+      lng: 123.4167,
+      mapX: 67.0,
+      mapY: 61.4,
     },
     description:
       "This paired artwork moves from a charcoal still-life study into a vivid expressive portrait, showing the contrast between traditional hand-made practice and bold modern identity.",
@@ -85,7 +85,7 @@ export const localArtworks: Artwork[] = [
   },
   {
     id: "viloria-work-life-balance",
-    scope: "local",
+    scope: "group",
     title: "Work Life Balance",
     creator: "Robert Mark Viloria",
     medium: "Digital art poster / digital illustration",

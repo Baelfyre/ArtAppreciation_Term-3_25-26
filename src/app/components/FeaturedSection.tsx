@@ -10,11 +10,9 @@ interface FeaturedSectionProps {
 
 export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const scopeOrder = { group: 0, local: 1, international: 2 };
   const featured = [...artworks]
-    .sort((a, b) => {
-      if (a.scope === b.scope) return 0;
-      return a.scope === "local" ? -1 : 1;
-    })
+    .sort((a, b) => scopeOrder[a.scope] - scopeOrder[b.scope])
     .slice(0, 5);
   const carouselGroups = [0, 1];
 
@@ -42,7 +40,7 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
               Filipino Art in This Day and Age
             </h2>
             <p className="mx-auto max-w-[38rem] text-base font-light leading-relaxed text-slate-300 md:mx-0">
-              Explore local artworks that show Filipino identity through diverse mediums,
+              Explore group member artworks that show Filipino identity through diverse mediums,
               evolving styles, personal stories, and interactive transitions.
             </p>
           </div>

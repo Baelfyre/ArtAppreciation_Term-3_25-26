@@ -24,6 +24,13 @@ export const GlobeView = ({
   const globeRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const isPhilippinesFocused = mode === "group" || mode === "local";
+  const globeStatusLabel =
+    mode === "group"
+      ? "Zooming into the Philippines"
+      : mode === "local"
+        ? "Milestone 2 Local Art Curation"
+        : "From the Philippines to the world";
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -79,12 +86,12 @@ export const GlobeView = ({
     <div
       ref={containerRef}
       className={`absolute inset-0 h-full w-full overflow-hidden bg-[radial-gradient(circle_at_top,rgba(29,73,216,0.2),transparent_26%),linear-gradient(180deg,#050816_0%,#09112c_48%,#04060f_100%)] transition-[filter,opacity] duration-700 ${
-        mode === "local" ? "opacity-85 saturate-[0.85]" : "opacity-100"
+        isPhilippinesFocused ? "opacity-85 saturate-[0.85]" : "opacity-100"
       }`}
     >
       <div className="pattern-surface pointer-events-none absolute inset-0 opacity-20" />
       <div className="glass-chip pointer-events-none absolute left-1/2 top-[7.6rem] z-10 w-[calc(100%-2rem)] max-w-[26rem] -translate-x-1/2 rounded-full px-3 py-1.5 text-center text-[10px] uppercase leading-tight tracking-[0.12em] text-slate-200 md:px-4 md:py-2 md:text-xs md:tracking-[0.3em] lg:top-6 lg:w-auto">
-        {mode === "local" ? "Zooming into the Philippines" : "From the Philippines to the world"}
+        {globeStatusLabel}
       </div>
 
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[rgba(29,73,216,0.10)] blur-[120px]" />

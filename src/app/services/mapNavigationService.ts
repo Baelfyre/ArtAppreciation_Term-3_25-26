@@ -45,17 +45,12 @@ export interface LocalMapMarker {
 }
 
 const markerColors = ["#f4c430", "#86a7ff", "#b9162c", "#f6f4ee"];
-const localMarkerCollisionDistance = 6;
-const localMarkerOffsetX = 3.8;
-const localMarkerOffsetY = 2.8;
-
-const clampMapPercent = (value: number) => Math.min(96, Math.max(4, value));
 
 const hasGlobeCoordinates = (artwork: Artwork) =>
   typeof artwork.location.lat === "number" && typeof artwork.location.lng === "number";
 
 export const getArtworkMarkerColor = (artwork: Artwork, index = 0) => {
-  if (artwork.scope === "local") return "#f4c430";
+  if (artwork.scope === "group") return "#f4c430";
   return markerColors[index % markerColors.length];
 };
 
@@ -106,7 +101,7 @@ export const prepareInternationalConnectionArcs = (artworks: Artwork[]): GlobeAr
   }));
 
 export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] => {
-  const markers = artworks
+  return artworks
     .filter(
       (artwork) =>
         typeof artwork.location.mapX === "number" && typeof artwork.location.mapY === "number",
@@ -120,31 +115,6 @@ export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
       displayMapY: artwork.location.mapY as number,
       artwork,
     }));
-
-  return markers.map((marker) => {
-    const nearbyMarkers = markers.filter(
-      (other) =>
-        other.id !== marker.id &&
-        Math.hypot(marker.mapX - other.mapX, marker.mapY - other.mapY) <
-          localMarkerCollisionDistance,
-    );
-
-    if (nearbyMarkers.length === 0) return marker;
-
-    const cluster = [marker, ...nearbyMarkers];
-    const centerX = cluster.reduce((sum, item) => sum + item.mapX, 0) / cluster.length;
-    const centerY = cluster.reduce((sum, item) => sum + item.mapY, 0) / cluster.length;
-
-    return {
-      ...marker,
-      displayMapX: clampMapPercent(
-        marker.mapX + (marker.mapX >= centerX ? localMarkerOffsetX : -localMarkerOffsetX),
-      ),
-      displayMapY: clampMapPercent(
-        marker.mapY + (marker.mapY >= centerY ? localMarkerOffsetY : -localMarkerOffsetY),
-      ),
-    };
-  });
 };
 
 export const getGlobePointOfView = (
@@ -158,11 +128,11 @@ export const getGlobePointOfView = (
     return {
       lat: selectedArtwork.location.lat,
       lng: selectedArtwork.location.lng,
-      altitude: selectedArtwork.scope === "local" ? 0.95 : 1.2,
+      altitude: selectedArtwork.scope === "group" ? 0.95 : 1.2,
     };
   }
 
-  if (mode === "local") {
+  if (mode === "group" || mode === "local") {
     return {
       lat: PHILIPPINES_ORIGIN.lat,
       lng: PHILIPPINES_ORIGIN.lng,

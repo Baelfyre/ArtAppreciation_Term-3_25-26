@@ -5,9 +5,7 @@ const groupMembers = ["Ang, Monica", "Jadloc, Ly-anne", "Ongo, James", "Viloria,
 export const Footer = () => {
   return (
     <footer className="relative z-10 pb-12 pt-16">
-      <div className="group-info-footer glass-panel section-container relative rounded-[1.75rem] px-6 py-8 sm:px-8">
-        <div className="flag-accent absolute inset-x-0 top-0 h-px" />
-
+      <div className="group-info-footer glass-panel curved-card-accent section-container relative overflow-hidden rounded-[1.75rem] px-6 py-8 sm:px-8">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="footer-label mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#f4c430]">

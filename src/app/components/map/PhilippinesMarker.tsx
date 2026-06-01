@@ -7,6 +7,8 @@ interface PhilippinesMarkerProps {
 }
 
 export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesMarkerProps) => {
+  const displayLabel = marker.artwork.location.city ?? marker.label;
+
   return (
     <button
       type="button"
@@ -19,7 +21,7 @@ export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesM
       style={{ left: `${marker.displayMapX}%`, top: `${marker.displayMapY}%` }}
     >
       <span className="local-map-marker-dot" />
-      <span className="local-map-marker-label">{marker.label}</span>
+      <span className="local-map-marker-label">{displayLabel}</span>
     </button>
   );
 };

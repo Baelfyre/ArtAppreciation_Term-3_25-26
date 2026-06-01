@@ -1,6 +1,6 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
-import { formatArtworkLocation } from "../../services/artworkRepository";
+import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 interface ArtworkCardProps {
@@ -11,14 +11,14 @@ interface ArtworkCardProps {
 
 export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardProps) => {
   const isPlaceholder = artwork.isPlaceholder;
+  const collectionLabel = getArtworkCollectionLabel(artwork);
 
   return (
     <article
-      className={`glass-panel artwork-card group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 md:rounded-[1.75rem] ${
+      className={`glass-panel curved-card-accent artwork-card group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 md:rounded-[1.75rem] ${
         isPlaceholder ? "international-placeholder-card" : ""
       }`}
     >
-      <div className="flag-accent absolute inset-x-0 top-0 z-20 h-px opacity-70" />
       <div className="relative h-44 overflow-hidden md:h-48">
         <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.46))] transition-colors group-hover:bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.34))]" />
         <div className="pattern-surface absolute inset-0 z-10 opacity-20" />
@@ -42,7 +42,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         )}
         <div className="absolute left-3 top-3 z-20">
           <span className="glass-chip-warm rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white">
-            {isPlaceholder ? "placeholder" : artwork.scope}
+            {collectionLabel}
           </span>
         </div>
       </div>
@@ -56,7 +56,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         </p>
         <p className="mb-5 line-clamp-3 flex-grow text-sm font-light leading-relaxed text-slate-300 md:mb-6">
           {isPlaceholder
-            ? "International marker only. Full artwork details will be added later."
+            ? "International curation placeholder for Terminal Assessment."
             : artwork.description}
         </p>
 

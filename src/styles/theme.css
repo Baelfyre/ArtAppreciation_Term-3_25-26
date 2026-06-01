@@ -373,6 +373,35 @@ body::after {
     background: linear-gradient(90deg, var(--heritage-blue) 0%, var(--heritage-blue) 35%, var(--heritage-gold) 53%, var(--heritage-red) 100%);
   }
 
+  .curved-card-accent {
+    position: relative;
+  }
+
+  .curved-card-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      118deg,
+      rgba(29, 73, 216, 0.78) 0%,
+      rgba(29, 73, 216, 0.36) 28%,
+      rgba(244, 196, 48, 0.82) 50%,
+      rgba(185, 22, 44, 0.64) 100%
+    );
+    opacity: 0.72;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
   .pattern-surface {
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 38%, rgba(244, 196, 48, 0.08) 48%, transparent 58%, rgba(185, 22, 44, 0.08) 82%, rgba(29, 73, 216, 0.16) 100%),
@@ -620,28 +649,31 @@ body::after {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: clamp(1.55rem, 4vw, 2rem);
+    height: clamp(1.55rem, 4vw, 2rem);
+    border: 0;
+    background: transparent;
     color: var(--heritage-gold);
+    touch-action: manipulation;
   }
 
   .local-map-marker-dot {
     position: relative;
     display: block;
-    width: 0.85rem;
-    height: 0.85rem;
+    width: clamp(0.46rem, 1.2vw, 0.58rem);
+    height: clamp(0.46rem, 1.2vw, 0.58rem);
     border-radius: 9999px;
-    border: 2px solid rgba(246, 244, 238, 0.95);
+    border: 1px solid rgba(246, 244, 238, 0.95);
     background: var(--heritage-gold);
-    box-shadow: 0 0 18px rgba(244, 196, 48, 0.75);
+    box-shadow: 0 0 12px rgba(244, 196, 48, 0.68);
   }
 
   .local-map-marker-dot::after {
     content: "";
     position: absolute;
-    inset: -0.65rem;
+    inset: -0.42rem;
     border-radius: inherit;
-    border: 1px solid rgba(244, 196, 48, 0.7);
+    border: 1px solid rgba(244, 196, 48, 0.52);
     animation: marker-pulse 1.8s ease-out infinite;
   }
 
@@ -716,7 +748,7 @@ body::after {
     border-color: rgba(148, 163, 184, 0.2);
   }
 
-  .international-placeholder-card .flag-accent {
+  .international-placeholder-card.curved-card-accent::before {
     opacity: 0.42;
   }
 
@@ -864,18 +896,17 @@ body::after {
     }
 
     .local-map-marker {
-      width: 1.55rem;
-      height: 1.55rem;
+      width: 1.65rem;
+      height: 1.65rem;
     }
 
     .local-map-marker-dot {
-      width: 0.65rem;
-      height: 0.65rem;
-      border-width: 1px;
+      width: 0.44rem;
+      height: 0.44rem;
     }
 
     .local-map-marker-dot::after {
-      inset: -0.48rem;
+      inset: -0.34rem;
     }
 
     .local-map-marker-label {
