@@ -139,6 +139,10 @@ export const localArtworks: Artwork[] = [
     mediaProvider: "spotify",
     mediaType: "music",
     embedUrl: "https://open.spotify.com/embed/track/6Fz2TpxUD0YvAPsuG8nDMJ",
+    comparisonGroupId: "music-evolution",
+    comparisonRole: "contemporary",
+    comparisonLabel: "Now",
+    pairedArtworkId: "local-sa-ugoy-ng-duyan",
     location: {
       label: "Manila, Metro Manila, Philippines",
       city: "Manila",
@@ -169,10 +173,13 @@ export const localArtworks: Artwork[] = [
     creator: "Lucio San Pedro and Levi Celerio",
     medium: "Musical composition / vocal lullaby",
     imageUrl: "",
-    mediaProvider: "spotify",
+    mediaProvider: "youtube",
     mediaType: "music",
-    // TODO: Add verified Spotify embed URL for Sa Ugoy ng Duyan.
-    embedUrl: "",
+    embedUrl: "https://www.youtube.com/embed/HOwOuk0ElqI",
+    comparisonGroupId: "music-evolution",
+    comparisonRole: "traditional",
+    comparisonLabel: "Then",
+    pairedArtworkId: "local-mapa-sb19",
     location: {
       label: "Angono, Rizal, Philippines",
       city: "Angono",

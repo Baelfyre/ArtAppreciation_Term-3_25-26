@@ -94,6 +94,9 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
             <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
             <InfoBlock label="Principles" value={artwork.principles} />
+            {artwork.comparisonGroupId === "music-evolution" && (
+              <MusicEvolutionComparison activeRole={artwork.comparisonRole} />
+            )}
           </div>
         </section>
       </div>
@@ -239,5 +242,57 @@ const InfoBlock = ({ label, value, icon: Icon }: InfoBlockProps) => (
       <span>{label}</span>
     </div>
     <p className="break-words text-sm font-light leading-relaxed text-slate-300">{value}</p>
+  </div>
+);
+
+const musicEvolutionItems = [
+  {
+    role: "traditional",
+    label: "Then",
+    title: "Sa Ugoy ng Duyan",
+    creator: "Lucio San Pedro and Levi Celerio",
+    medium: "Traditional Filipino lullaby / earlier OPM",
+  },
+  {
+    role: "contemporary",
+    label: "Now",
+    title: "MAPA",
+    creator: "SB19",
+    medium: "Modern OPM / P-pop ballad",
+  },
+] as const;
+
+const MusicEvolutionComparison = ({
+  activeRole,
+}: {
+  activeRole?: "traditional" | "contemporary";
+}) => (
+  <div className="glass-chip min-w-0 rounded-[1.15rem] p-4">
+    <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
+      <Music2 className="h-3.5 w-3.5 text-[#f4c430]" />
+      <span>Music Evolution: Sa Ugoy ng Duyan -&gt; MAPA</span>
+    </div>
+    <p className="mb-3 text-sm font-light leading-relaxed text-slate-300">
+      Sa Ugoy ng Duyan and MAPA both honor parents, but they show how Filipino music has evolved across generations.
+      Sa Ugoy ng Duyan reflects parental love through a traditional lullaby, while MAPA expresses the same Filipino
+      value through modern OPM and P-pop.
+    </p>
+    <div className="grid gap-2">
+      {musicEvolutionItems.map((item) => (
+        <div
+          key={item.role}
+          className={`rounded-[0.85rem] border p-3 ${
+            activeRole === item.role
+              ? "border-[#f4c430]/55 bg-[#f4c430]/10"
+              : "border-white/10 bg-black/15"
+          }`}
+        >
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f4c430]">{item.label}</p>
+          <p className="mt-1 text-sm font-semibold leading-snug text-white">{item.title}</p>
+          <p className="mt-0.5 text-xs leading-snug text-slate-300">{item.creator}</p>
+          <p className="mt-1 text-xs leading-snug text-slate-400">{item.medium}</p>
+        </div>
+      ))}
+    </div>
   </div>
 );

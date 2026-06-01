@@ -108,16 +108,18 @@ export default function App() {
             
             {/* Overlay UI Panels */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="relative mx-auto h-full w-full max-w-[1200px] pointer-events-none">
-                <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
+              <div className="globe-overlay-shell relative mx-auto h-full w-full max-w-[1200px] pointer-events-none">
+                <div className="globe-control-stack pointer-events-none">
+                  <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
 
-                {mode === "local" && (
-                  <PhilippinesMapView
-                    artworks={modeArtworks}
-                    selectedArtwork={selectedArtwork}
-                    onSelectArtwork={handleSelectArtwork}
-                  />
-                )}
+                  {mode === "local" && (
+                    <PhilippinesMapView
+                      artworks={modeArtworks}
+                      selectedArtwork={selectedArtwork}
+                      onSelectArtwork={handleSelectArtwork}
+                    />
+                  )}
+                </div>
 
                 {mode === "international" && (
                   <CurationPlaceholderPanel />

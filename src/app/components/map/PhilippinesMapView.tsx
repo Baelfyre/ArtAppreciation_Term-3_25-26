@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEvent } from "react";
+import { useState, type CSSProperties, type MouseEvent } from "react";
 import type { Artwork } from "../../domain/Artwork";
 import {
   prepareLocalMapMarkers,
@@ -18,9 +18,24 @@ export const PhilippinesMapView = ({
   onSelectArtwork,
 }: PhilippinesMapViewProps) => {
   const markers = prepareLocalMapMarkers(artworks);
+  const [highlightedMarkerId, setHighlightedMarkerId] = useState<string | null>(null);
+  const activeMarkerId = highlightedMarkerId ?? selectedArtwork?.id ?? null;
+  const groupMemberMarkers = markers.filter((marker) => marker.artwork.localCategory !== "localArtist");
+  const localArtistMarkers = markers.filter((marker) => marker.artwork.localCategory === "localArtist");
 
   const handleSelectMarker = (marker: LocalMapMarker) => {
+    setHighlightedMarkerId(marker.id);
     onSelectArtwork(marker.artwork);
+  };
+
+  const handleMarkerIntent = (marker: LocalMapMarker) => {
+    setHighlightedMarkerId(marker.id);
+  };
+
+  const handleClearMarkerIntent = (marker: LocalMapMarker) => {
+    setHighlightedMarkerId((currentMarkerId) =>
+      currentMarkerId === marker.id ? null : currentMarkerId,
+    );
   };
 
   const handleMapClickCapture = (event: MouseEvent<HTMLDivElement>) => {
@@ -51,7 +66,7 @@ export const PhilippinesMapView = ({
   };
 
   return (
-    <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto absolute inset-x-3 bottom-3 top-40 z-10 mx-auto flex max-w-[34rem] flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:inset-x-4 md:bottom-6 md:top-40 md:rounded-[1.75rem] md:p-5 lg:left-1/2 lg:right-auto lg:top-32 lg:w-[min(64rem,calc(100%-3rem))] lg:max-w-none lg:-translate-x-1/2">
+    <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto flex min-h-0 w-full max-w-[34rem] flex-1 flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:rounded-[1.75rem] md:p-5 lg:max-w-[66rem]">
       <div className="mb-3 flex items-start justify-between gap-3 md:mb-4 md:gap-4">
         <div>
           <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Art</p>
@@ -78,10 +93,20 @@ export const PhilippinesMapView = ({
 
       <div className="relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
-        <div className="relative flex h-full min-h-0 flex-col">
-          <div className="local-map-stage relative min-h-[17rem] flex-1 overflow-visible px-2 py-2 lg:px-[15rem] lg:py-3">
+        <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,13rem)_minmax(14rem,1fr)_minmax(0,13rem)]">
+          <LocalArtworkList
+            title="Group Members' Art"
+            markers={groupMemberMarkers}
+            activeMarkerId={activeMarkerId}
+            className="hidden lg:flex"
+            onSelect={handleSelectMarker}
+            onIntent={handleMarkerIntent}
+            onClearIntent={handleClearMarkerIntent}
+          />
+
+          <div className="local-map-stage relative min-h-[14rem] overflow-visible lg:min-h-0">
             <div
-              className="relative mx-auto aspect-[702/1209] h-full max-h-[620px] max-w-full overflow-visible"
+              className="relative mx-auto aspect-[702/1209] h-full max-h-[560px] max-w-full overflow-visible"
               onClickCapture={handleMapClickCapture}
             >
               <img
@@ -96,23 +121,20 @@ export const PhilippinesMapView = ({
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                {markers.map((marker, index) => {
-                  const placement = getCalloutPlacement(marker.id, index);
-
-                  return (
-                    <line
-                      key={`${marker.id}-leader`}
-                      x1={marker.displayMapX}
-                      y1={marker.displayMapY}
-                      x2={placement.lineX}
-                      y2={placement.lineY}
-                      stroke={marker.color}
-                      strokeWidth="0.34"
-                      strokeLinecap="round"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  );
-                })}
+                {markers.map((marker) => (
+                  <line
+                    key={`${marker.id}-leader`}
+                    className={`local-map-leader ${activeMarkerId === marker.id ? "is-active" : ""}`}
+                    x1={marker.displayMapX}
+                    y1={marker.displayMapY}
+                    x2={marker.artwork.localCategory === "localArtist" ? 96 : 4}
+                    y2={marker.displayMapY}
+                    stroke={marker.color}
+                    strokeWidth={activeMarkerId === marker.id ? "0.55" : "0.26"}
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
               </svg>
 
               {markers.map((marker) => (
@@ -120,35 +142,40 @@ export const PhilippinesMapView = ({
                   key={marker.id}
                   marker={marker}
                   isSelected={selectedArtwork?.id === marker.artwork.id}
+                  isHighlighted={activeMarkerId === marker.id}
                   onSelect={handleSelectMarker}
                 />
               ))}
-
-              <div className="hidden lg:block">
-                {markers.map((marker, index) => (
-                  <PhilippinesMapCallout
-                    key={`${marker.id}-callout`}
-                    marker={marker}
-                    placement={getCalloutPlacement(marker.id, index)}
-                    isSelected={selectedArtwork?.id === marker.artwork.id}
-                    onSelect={handleSelectMarker}
-                  />
-                ))}
-              </div>
             </div>
           </div>
 
-          <div className="local-map-mobile-list border-t border-white/10 p-2 lg:hidden">
-            <div className="flex gap-2 overflow-x-auto pb-1">
-              {markers.map((marker) => (
-                <PhilippinesMapMobileItem
-                  key={`${marker.id}-mobile`}
-                  marker={marker}
-                  isSelected={selectedArtwork?.id === marker.artwork.id}
-                  onSelect={handleSelectMarker}
-                />
-              ))}
-            </div>
+          <LocalArtworkList
+            title="Local Artist Research"
+            markers={localArtistMarkers}
+            activeMarkerId={activeMarkerId}
+            className="hidden lg:flex"
+            onSelect={handleSelectMarker}
+            onIntent={handleMarkerIntent}
+            onClearIntent={handleClearMarkerIntent}
+          />
+
+          <div className="local-map-mobile-list lg:hidden">
+            <LocalArtworkMobileGroup
+              title="Group Members' Art"
+              markers={groupMemberMarkers}
+              activeMarkerId={activeMarkerId}
+              onSelect={handleSelectMarker}
+              onIntent={handleMarkerIntent}
+              onClearIntent={handleClearMarkerIntent}
+            />
+            <LocalArtworkMobileGroup
+              title="Local Artist Research"
+              markers={localArtistMarkers}
+              activeMarkerId={activeMarkerId}
+              onSelect={handleSelectMarker}
+              onIntent={handleMarkerIntent}
+              onClearIntent={handleClearMarkerIntent}
+            />
           </div>
         </div>
       </div>
@@ -156,99 +183,108 @@ export const PhilippinesMapView = ({
   );
 };
 
-interface CalloutPlacement {
-  side: "left" | "right";
-  x: number;
-  y: number;
-  lineX: number;
-  lineY: number;
-}
-
-const calloutPlacements: Record<string, CalloutPlacement> = {
-  "pixel-across-borders": { side: "left", x: -8, y: 58, lineX: -5, lineY: 58 },
-  "ang-these-pages-contain-a-universe": { side: "right", x: 108, y: 82, lineX: 105, lineY: 82 },
-  "jadloc-tradition-to-vivid-identity": { side: "right", x: 108, y: 62, lineX: 105, lineY: 62 },
-  "viloria-work-life-balance": { side: "left", x: -8, y: 34, lineX: -5, lineY: 34 },
-  "local-mapa-sb19": { side: "right", x: 108, y: 22, lineX: 105, lineY: 22 },
-  "local-sa-ugoy-ng-duyan": { side: "right", x: 108, y: 42, lineX: 105, lineY: 42 },
-};
-
-const fallbackPlacements: CalloutPlacement[] = [
-  { side: "left", x: -8, y: 44, lineX: -5, lineY: 44 },
-  { side: "right", x: 108, y: 44, lineX: 105, lineY: 44 },
-  { side: "left", x: -8, y: 66, lineX: -5, lineY: 66 },
-  { side: "right", x: 108, y: 66, lineX: 105, lineY: 66 },
-];
-
-const getCalloutPlacement = (markerId: string, index: number) =>
-  calloutPlacements[markerId] ?? fallbackPlacements[index % fallbackPlacements.length];
-
-interface PhilippinesMapCalloutProps {
-  marker: LocalMapMarker;
-  placement: CalloutPlacement;
-  isSelected: boolean;
+interface LocalArtworkListProps {
+  title: string;
+  markers: LocalMapMarker[];
+  activeMarkerId: string | null;
+  className?: string;
   onSelect: (marker: LocalMapMarker) => void;
+  onIntent: (marker: LocalMapMarker) => void;
+  onClearIntent: (marker: LocalMapMarker) => void;
 }
 
-const PhilippinesMapCallout = ({
-  marker,
-  placement,
-  isSelected,
+const LocalArtworkList = ({
+  title,
+  markers,
+  activeMarkerId,
+  className = "",
   onSelect,
-}: PhilippinesMapCalloutProps) => {
-  const categoryLabel = getLocalCategoryLabel(marker);
-  const cityLabel = marker.artwork.location.city ?? marker.label;
+  onIntent,
+  onClearIntent,
+}: LocalArtworkListProps) => (
+  <section className={`local-map-side-list ${className}`} aria-label={title}>
+    <p className="local-map-list-heading">{title}</p>
+    <div className="grid gap-2">
+      {markers.map((marker) => (
+        <LocalArtworkListItem
+          key={`${marker.id}-list`}
+          marker={marker}
+          isActive={activeMarkerId === marker.id}
+          onSelect={onSelect}
+          onIntent={onIntent}
+          onClearIntent={onClearIntent}
+        />
+      ))}
+    </div>
+  </section>
+);
 
-  return (
-    <button
-      type="button"
-      aria-label={`Open ${marker.artwork.title}`}
-      onClick={() => onSelect(marker)}
-      className={`local-map-callout is-${placement.side} ${isSelected ? "is-selected" : ""}`}
-      style={
-        {
-          "--callout-x": `${placement.x}%`,
-          "--callout-y": `${placement.y}%`,
-          "--callout-accent": marker.color,
-        } as CSSProperties
-      }
-    >
-      <span className="local-map-callout-badge">{categoryLabel}</span>
-      <span className="local-map-callout-title">{marker.artwork.title}</span>
-      <span className="local-map-callout-meta">{marker.artwork.creator}</span>
-      <span className="local-map-callout-place">{cityLabel}</span>
-    </button>
-  );
-};
+interface LocalArtworkMobileGroupProps extends LocalArtworkListProps {}
 
-interface PhilippinesMapMobileItemProps {
+const LocalArtworkMobileGroup = ({
+  title,
+  markers,
+  activeMarkerId,
+  onSelect,
+  onIntent,
+  onClearIntent,
+}: LocalArtworkMobileGroupProps) => (
+  <section className="local-map-mobile-group" aria-label={title}>
+    <p className="local-map-list-heading">{title}</p>
+    <div className="grid gap-2">
+      {markers.map((marker) => (
+        <LocalArtworkListItem
+          key={`${marker.id}-mobile`}
+          marker={marker}
+          isActive={activeMarkerId === marker.id}
+          onSelect={onSelect}
+          onIntent={onIntent}
+          onClearIntent={onClearIntent}
+        />
+      ))}
+    </div>
+  </section>
+);
+
+interface LocalArtworkListItemProps {
   marker: LocalMapMarker;
-  isSelected: boolean;
+  isActive: boolean;
   onSelect: (marker: LocalMapMarker) => void;
+  onIntent: (marker: LocalMapMarker) => void;
+  onClearIntent: (marker: LocalMapMarker) => void;
 }
 
-const PhilippinesMapMobileItem = ({
+const LocalArtworkListItem = ({
   marker,
-  isSelected,
+  isActive,
   onSelect,
-}: PhilippinesMapMobileItemProps) => (
+  onIntent,
+  onClearIntent,
+}: LocalArtworkListItemProps) => (
   <button
     type="button"
-    aria-label={`Open ${marker.artwork.title}`}
+    aria-label={`Open ${marker.artwork.title} at ${marker.artwork.location.city ?? marker.label}`}
+    onMouseEnter={() => onIntent(marker)}
+    onMouseLeave={() => onClearIntent(marker)}
+    onPointerEnter={() => onIntent(marker)}
+    onPointerLeave={() => onClearIntent(marker)}
+    onFocus={() => onIntent(marker)}
+    onFocusCapture={() => onIntent(marker)}
+    onBlur={() => onClearIntent(marker)}
+    onBlurCapture={() => onClearIntent(marker)}
     onClick={() => onSelect(marker)}
-    className={`local-map-mobile-card ${isSelected ? "is-selected" : ""}`}
+    className={`local-map-list-row ${isActive ? "is-active" : ""}`}
     style={
       {
-        "--callout-accent": marker.color,
+        "--list-accent": marker.color,
       } as CSSProperties
     }
   >
-    <span className="local-map-callout-badge">{getLocalCategoryLabel(marker)}</span>
-    <span className="local-map-callout-title">{marker.artwork.title}</span>
-    <span className="local-map-callout-meta">{marker.artwork.creator}</span>
-    <span className="local-map-callout-place">{marker.artwork.location.city ?? marker.label}</span>
+    <span className="local-map-list-dot" aria-hidden="true" />
+    <span className="min-w-0">
+      <span className="local-map-list-title">{marker.artwork.title}</span>
+      <span className="local-map-list-meta">{marker.artwork.creator}</span>
+      <span className="local-map-list-place">{marker.artwork.location.city ?? marker.label}</span>
+    </span>
   </button>
 );
-
-const getLocalCategoryLabel = (marker: LocalMapMarker) =>
-  marker.artwork.localCategory === "localArtist" ? "Local Artist Research" : "Group Members' Art";

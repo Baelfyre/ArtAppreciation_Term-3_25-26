@@ -15,7 +15,7 @@ export const GlobeModeToggle = ({ mode, onModeChange }: GlobeModeToggleProps) =>
     mode === "local" ? "Local Art" : "International Art";
 
   return (
-    <div className="glass-panel curved-card-accent pointer-events-auto absolute left-1/2 top-3 z-20 w-[calc(100%-1.5rem)] max-w-[21rem] -translate-x-1/2 overflow-hidden rounded-[1rem] p-2.5 shadow-2xl md:left-6 md:top-6 md:w-[min(21rem,calc(100%-3rem))] md:translate-x-0 md:rounded-[1.35rem] md:p-3">
+    <div className="globe-mode-toggle glass-panel curved-card-accent pointer-events-auto w-full max-w-[21rem] overflow-hidden rounded-[1rem] p-2.5 shadow-2xl md:self-start md:rounded-[1.35rem] md:p-3">
       <div className="mb-2 px-1 md:mb-3">
         <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-slate-300 md:text-[11px] md:tracking-[0.25em]">
           Art Curation

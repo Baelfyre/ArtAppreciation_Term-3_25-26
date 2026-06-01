@@ -16,6 +16,10 @@ export interface Artwork {
   mediaType?: "music";
   embedUrl?: string;
   embedHeight?: number;
+  comparisonGroupId?: string;
+  comparisonRole?: "traditional" | "contemporary";
+  comparisonLabel?: "Then" | "Now";
+  pairedArtworkId?: string;
   locationBasis?: string;
   location: Location;
   description: string;

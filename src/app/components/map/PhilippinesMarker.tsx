@@ -4,10 +4,16 @@ import type { LocalMapMarker } from "../../services/mapNavigationService";
 interface PhilippinesMarkerProps {
   marker: LocalMapMarker;
   isSelected: boolean;
+  isHighlighted?: boolean;
   onSelect: (marker: LocalMapMarker) => void;
 }
 
-export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesMarkerProps) => {
+export const PhilippinesMarker = ({
+  marker,
+  isSelected,
+  isHighlighted = false,
+  onSelect,
+}: PhilippinesMarkerProps) => {
   const displayLabel = marker.artwork.location.city ?? marker.label;
 
   return (
@@ -18,7 +24,7 @@ export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesM
       onClick={() => onSelect(marker)}
       className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
         isSelected ? "is-selected" : ""
-      }`}
+      } ${isHighlighted ? "is-highlighted" : ""}`}
       style={{
         left: `${marker.displayMapX}%`,
         top: `${marker.displayMapY}%`,
