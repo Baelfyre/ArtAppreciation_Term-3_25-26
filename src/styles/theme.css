@@ -677,11 +677,6 @@ body::after {
       font-size: 0.8125rem;
     }
 
-    .featured-carousel-track,
-    .featured-carousel-card {
-      animation: none;
-    }
-
     .artwork-card {
       min-height: 25.25rem;
     }
@@ -734,13 +729,6 @@ body::after {
       max-width: 6.75rem;
       padding: 0.2rem 0.45rem;
       font-size: 0.62rem;
-    }
-  }
-
-  @media (max-width: 1023px) {
-    .featured-carousel-track,
-    .featured-carousel-card {
-      animation: none;
     }
   }
 
