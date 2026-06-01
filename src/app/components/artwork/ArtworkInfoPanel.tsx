@@ -34,7 +34,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           <X className="h-4 w-4" />
         </button>
 
-        <section className="glass-chip order-3 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4 lg:order-1">
+        <section className="artwork-panel-section order-3 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4 lg:order-1">
           <div className="mb-3 min-w-0 md:mb-4">
             <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
             <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
@@ -44,7 +44,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
           <LocationPreview artwork={artwork} />
 
-          <div className="mt-3 rounded-[1rem] border border-white/10 bg-black/15 p-3 md:mt-4 md:p-4">
+          <div className="artwork-selected-place mt-3 rounded-[1rem] p-3 md:mt-4 md:p-4">
             <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
             <p className="break-words text-sm leading-relaxed text-slate-200">{locationLabel}</p>
           </div>
@@ -70,7 +70,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </div>
         </section>
 
-        <section className="glass-chip custom-scrollbar order-2 flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5 lg:order-3 lg:overflow-y-auto">
+        <section className="artwork-panel-section custom-scrollbar order-2 flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5 lg:order-3 lg:overflow-y-auto">
           <div className="mb-4 min-w-0 md:mb-5">
             <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
               {collectionLabel}
@@ -218,7 +218,7 @@ interface InfoRowProps {
 }
 
 const InfoRow = ({ icon: Icon, label, value }: InfoRowProps) => (
-  <div className="glass-chip flex min-w-0 items-start gap-3 rounded-[1.15rem] p-4 text-sm">
+  <div className="artwork-info-row flex min-w-0 items-start gap-3 text-sm">
     <div className="glass-chip-warm mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
       <Icon className="h-4 w-4 text-[#f4c430]" />
     </div>
@@ -236,7 +236,7 @@ interface InfoBlockProps {
 }
 
 const InfoBlock = ({ label, value, icon: Icon }: InfoBlockProps) => (
-  <div className="glass-chip min-w-0 rounded-[1.15rem] p-4">
+  <div className="artwork-info-block min-w-0">
     <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
       {Icon && <Icon className="h-3.5 w-3.5 text-[#f4c430]" />}
       <span>{label}</span>
@@ -267,7 +267,7 @@ const MusicEvolutionComparison = ({
 }: {
   activeRole?: "traditional" | "contemporary";
 }) => (
-  <div className="glass-chip min-w-0 rounded-[1.15rem] p-4">
+  <div className="artwork-info-block min-w-0">
     <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
       <Music2 className="h-3.5 w-3.5 text-[#f4c430]" />
       <span>Music Evolution: Sa Ugoy ng Duyan -&gt; MAPA</span>

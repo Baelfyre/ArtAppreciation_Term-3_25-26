@@ -69,6 +69,9 @@ export const PhilippinesMapView = ({
     <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto flex min-h-0 w-full max-w-[34rem] flex-1 flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:rounded-[1.75rem] md:p-5 lg:max-w-[66rem]">
       <div className="mb-3 flex items-start justify-between gap-3 md:mb-4 md:gap-4">
         <div>
+          <p className="globe-local-status-label mb-2 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
+            Zooming Into the Philippines
+          </p>
           <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Art</p>
           <h3 className="section-title text-xl font-semibold text-white md:text-2xl">Philippines Map</h3>
           <p className="mt-1 max-w-[18rem] text-xs leading-snug text-slate-300">

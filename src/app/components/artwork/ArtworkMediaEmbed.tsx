@@ -27,8 +27,8 @@ export const ArtworkMediaEmbed = ({
     : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
   return (
-    <div className="artwork-media-embed glass-chip overflow-hidden rounded-[1.15rem] p-3">
-      <div className="mb-2 flex items-center justify-between gap-3 text-xs uppercase tracking-wider text-slate-400">
+    <div className="artwork-media-embed overflow-hidden rounded-[1.15rem]">
+      <div className="mb-2 flex items-center justify-between gap-3 px-1 text-xs uppercase tracking-wider text-slate-400">
         <span>Playable media</span>
         {provider && <span className="text-[#f4c430]">{provider}</span>}
       </div>
