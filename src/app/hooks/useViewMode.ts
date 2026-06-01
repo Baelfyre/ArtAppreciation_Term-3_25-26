@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import type { GlobeMode } from "../domain/GlobeMode";
 
-export const useViewMode = (initialMode: GlobeMode = "group") => {
+export const useViewMode = (initialMode: GlobeMode = "local") => {
   const [mode, setMode] = useState<GlobeMode>(initialMode);
 
   const selectMode = useCallback((nextMode: GlobeMode) => {

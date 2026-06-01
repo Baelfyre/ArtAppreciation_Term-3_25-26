@@ -24,13 +24,8 @@ export const GlobeView = ({
   const globeRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const isPhilippinesFocused = mode === "group" || mode === "local";
   const globeStatusLabel =
-    mode === "group"
-      ? "Zooming into the Philippines"
-      : mode === "local"
-        ? "Milestone 2 Local Art Curation"
-        : "From the Philippines to the world";
+    mode === "local" ? "Zooming into the Philippines" : "From the Philippines to the world";
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -86,7 +81,7 @@ export const GlobeView = ({
     <div
       ref={containerRef}
       className={`absolute inset-0 h-full w-full overflow-hidden bg-[radial-gradient(circle_at_top,rgba(29,73,216,0.2),transparent_26%),linear-gradient(180deg,#050816_0%,#09112c_48%,#04060f_100%)] transition-[filter,opacity] duration-700 ${
-        isPhilippinesFocused ? "opacity-85 saturate-[0.85]" : "opacity-100"
+        mode === "local" ? "opacity-85 saturate-[0.85]" : "opacity-100"
       }`}
     >
       <div className="pattern-surface pointer-events-none absolute inset-0 opacity-20" />

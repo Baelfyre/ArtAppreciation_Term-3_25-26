@@ -4,11 +4,18 @@ import type { Location } from "./Location";
 export interface Artwork {
   id: string;
   scope: GlobeMode;
+  localCategory?: "groupMember" | "localArtist";
+  markerType?: "groupMember" | "localArtist" | "toVerify";
+  markerColor?: "yellow" | "blue" | "red";
   title: string;
   creator: string;
   medium: string;
   imageUrl: string;
   transitionImageUrl?: string;
+  mediaProvider?: "youtube";
+  mediaType?: "music";
+  embedUrl?: string;
+  locationBasis?: string;
   location: Location;
   description: string;
   advocacyConnection: string;

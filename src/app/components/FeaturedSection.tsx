@@ -10,7 +10,7 @@ interface FeaturedSectionProps {
 
 export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const scopeOrder = { group: 0, local: 1, international: 2 };
+  const scopeOrder = { local: 0, international: 1 };
   const featured = [...artworks]
     .sort((a, b) => scopeOrder[a.scope] - scopeOrder[b.scope])
     .slice(0, 5);

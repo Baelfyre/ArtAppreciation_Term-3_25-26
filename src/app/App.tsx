@@ -32,7 +32,7 @@ console.error = (...args) => {
 };
 
 export default function App() {
-  const { mode, selectMode } = useViewMode("group");
+  const { mode, selectMode } = useViewMode("local");
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
@@ -62,7 +62,7 @@ export default function App() {
   const handleSelectArtwork = (artwork: Artwork) => {
     selectMode(artwork.scope);
 
-    if (artwork.isPlaceholder) {
+    if (artwork.isPlaceholder && artwork.scope === "international") {
       clearSelection();
       return;
     }
@@ -111,7 +111,7 @@ export default function App() {
               <div className="relative mx-auto h-full w-full max-w-[1200px] pointer-events-none">
                 <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
 
-                {mode === "group" && (
+                {mode === "local" && (
                   <PhilippinesMapView
                     artworks={modeArtworks}
                     selectedArtwork={selectedArtwork}
@@ -119,8 +119,8 @@ export default function App() {
                   />
                 )}
 
-                {(mode === "local" || mode === "international") && (
-                  <CurationPlaceholderPanel mode={mode} />
+                {mode === "international" && (
+                  <CurationPlaceholderPanel />
                 )}
 
                 <div className="pointer-events-auto">
@@ -143,28 +143,19 @@ export default function App() {
 }
 
 const curationPlaceholders = {
-  local: {
-    eyebrow: "Milestone 2",
-    title: "Local Art Curation",
-    body: "Local Filipino artworks will be curated here for Milestone 2.",
-  },
   international: {
     eyebrow: "Terminal Assessment",
     title: "International Art Curation",
     body: "International artworks connected to Filipino identity beyond borders will be curated here for the Terminal Assessment.",
   },
-} satisfies Record<Extract<GlobeMode, "local" | "international">, {
+} satisfies Record<Extract<GlobeMode, "international">, {
   eyebrow: string;
   title: string;
   body: string;
 }>;
 
-interface CurationPlaceholderPanelProps {
-  mode: Extract<GlobeMode, "local" | "international">;
-}
-
-const CurationPlaceholderPanel = ({ mode }: CurationPlaceholderPanelProps) => {
-  const placeholder = curationPlaceholders[mode];
+const CurationPlaceholderPanel = () => {
+  const placeholder = curationPlaceholders.international;
 
   return (
     <aside className="local-map-fade curved-card-accent pointer-events-auto absolute inset-x-3 top-40 z-10 mx-auto max-w-[28rem] overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.58)] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:inset-x-4 md:top-40 md:rounded-[1.75rem] md:p-6 lg:left-auto lg:right-6 lg:top-32 lg:w-[28rem]">

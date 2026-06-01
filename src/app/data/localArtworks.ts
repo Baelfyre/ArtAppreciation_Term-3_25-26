@@ -1,9 +1,12 @@
 import type { Artwork } from "../domain/Artwork";
 
-export const groupMemberArtworks: Artwork[] = [
+export const localArtworks: Artwork[] = [
   {
     id: "pixel-across-borders",
-    scope: "group",
+    scope: "local",
+    localCategory: "groupMember",
+    markerType: "groupMember",
+    markerColor: "yellow",
     title: "Pixel Across Borders",
     creator: "James Lynelle Ongo",
     medium: "Excel-based digital pixel art",
@@ -18,6 +21,7 @@ export const groupMemberArtworks: Artwork[] = [
       mapX: 61.8,
       mapY: 62.7,
     },
+    locationBasis: "Group member hometown / artwork origin",
     description:
       "Pixel Across Borders represents Filipino identity connecting with the world through art, migration, and digital globalization.",
     advocacyConnection:
@@ -30,7 +34,10 @@ export const groupMemberArtworks: Artwork[] = [
   },
   {
     id: "ang-these-pages-contain-a-universe",
-    scope: "group",
+    scope: "local",
+    localCategory: "groupMember",
+    markerType: "groupMember",
+    markerColor: "yellow",
     title: "These Pages Contain a Universe",
     creator: "Monica K. Ang",
     medium: "Mixed media junk journal collage",
@@ -45,6 +52,7 @@ export const groupMemberArtworks: Artwork[] = [
       mapX: 89.6,
       mapY: 85.0,
     },
+    locationBasis: "Group member hometown / artwork origin",
     description:
       "This mixed media collage uses paper layers, photo strips, stickers, travel details, and illustrated panels to present memory, identity, and self-expression.",
     advocacyConnection:
@@ -57,7 +65,10 @@ export const groupMemberArtworks: Artwork[] = [
   },
   {
     id: "jadloc-tradition-to-vivid-identity",
-    scope: "group",
+    scope: "local",
+    localCategory: "groupMember",
+    markerType: "groupMember",
+    markerColor: "yellow",
     title: "Tradition to Vivid Identity",
     creator: "Ly-anne Jadloc",
     medium: "Charcoal drawing and vivid neo-expressionist artwork",
@@ -73,6 +84,7 @@ export const groupMemberArtworks: Artwork[] = [
       mapX: 67.0,
       mapY: 61.4,
     },
+    locationBasis: "Group member hometown / artwork origin",
     description:
       "This paired artwork moves from a charcoal still-life study into a vivid expressive portrait, showing the contrast between traditional hand-made practice and bold modern identity.",
     advocacyConnection:
@@ -85,7 +97,10 @@ export const groupMemberArtworks: Artwork[] = [
   },
   {
     id: "viloria-work-life-balance",
-    scope: "group",
+    scope: "local",
+    localCategory: "groupMember",
+    markerType: "groupMember",
+    markerColor: "yellow",
     title: "Work Life Balance",
     creator: "Robert Mark Viloria",
     medium: "Digital art poster / digital illustration",
@@ -100,6 +115,7 @@ export const groupMemberArtworks: Artwork[] = [
       mapX: 42.0,
       mapY: 39.5,
     },
+    locationBasis: "Group member hometown / artwork origin",
     description:
       "The artwork presents the balancing act of modern remote workers, especially those working at night, by splitting work pressure and personal life into two visual worlds.",
     advocacyConnection:
@@ -109,5 +125,73 @@ export const groupMemberArtworks: Artwork[] = [
     principles:
       "The design uses contrast between the two sides, emphasis on the central worker, and unity when both worlds combine into one complete image.",
     featured: true,
+  },
+  {
+    id: "local-mapa-sb19",
+    scope: "local",
+    localCategory: "localArtist",
+    markerType: "localArtist",
+    markerColor: "blue",
+    title: "MAPA",
+    creator: "SB19",
+    medium: "Music / OPM / P-pop ballad",
+    imageUrl: "",
+    mediaProvider: "youtube",
+    mediaType: "music",
+    embedUrl: "https://www.youtube-nocookie.com/embed/DDyr3DbTPtk",
+    location: {
+      label: "Manila, Philippines",
+      city: "Manila",
+      province: "Metro Manila",
+      country: "Philippines",
+      lat: 14.5958,
+      lng: 120.9772,
+      mapX: 41.8,
+      mapY: 38.5,
+    },
+    locationBasis: "Artist origin / cultural production anchor",
+    description:
+      "A placeholder sample for the local Filipino art curation set, using contemporary OPM and P-pop music as a research entry.",
+    advocacyConnection:
+      "The song is included as a local art research sample connected to family, memory, and Filipino identity.",
+    elements:
+      "Vocals, melody, harmony, lyrics, and contemporary OPM production.",
+    principles:
+      "The work uses emotional emphasis, repetition, balance between voices, and unity through its central family theme.",
+    isPlaceholder: true,
+  },
+  {
+    id: "local-sa-ugoy-ng-duyan",
+    scope: "local",
+    localCategory: "localArtist",
+    markerType: "localArtist",
+    markerColor: "blue",
+    title: "Sa Ugoy ng Duyan",
+    creator: "Lucio San Pedro and Levi Celerio",
+    medium: "Musical composition / lullaby",
+    imageUrl: "",
+    mediaProvider: "youtube",
+    mediaType: "music",
+    embedUrl: "https://www.youtube-nocookie.com/embed/HOwOuk0ElqI",
+    location: {
+      label: "Angono, Rizal, Philippines",
+      city: "Angono",
+      province: "Rizal",
+      country: "Philippines",
+      lat: 14.523375,
+      lng: 121.153625,
+      mapX: 43.7,
+      mapY: 39.0,
+    },
+    locationBasis: "Composer hometown / cultural anchor",
+    description:
+      "A placeholder sample for the local Filipino art curation set, representing a researched musical work from the Filipino lullaby tradition.",
+    advocacyConnection:
+      "The composition is included as a local art research sample connected to memory, caregiving, and Filipino cultural identity.",
+    elements:
+      "Melody, rhythm, lyrics, vocal phrasing, and lullaby form.",
+    principles:
+      "The work uses repetition, gentle contrast, balance, and unity to create an intimate musical mood.",
+    isPlaceholder: true,
   },
 ];

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { LocalMapMarker } from "../../services/mapNavigationService";
 
 interface PhilippinesMarkerProps {
@@ -18,7 +19,11 @@ export const PhilippinesMarker = ({ marker, isSelected, onSelect }: PhilippinesM
       className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
         isSelected ? "is-selected" : ""
       }`}
-      style={{ left: `${marker.displayMapX}%`, top: `${marker.displayMapY}%` }}
+      style={{
+        left: `${marker.displayMapX}%`,
+        top: `${marker.displayMapY}%`,
+        "--local-marker-color": marker.color,
+      } as CSSProperties}
     >
       <span className="local-map-marker-dot" />
       <span className="local-map-marker-label">{displayLabel}</span>

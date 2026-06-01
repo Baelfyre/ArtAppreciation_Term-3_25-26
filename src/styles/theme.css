@@ -653,27 +653,27 @@ body::after {
     height: clamp(1.55rem, 4vw, 2rem);
     border: 0;
     background: transparent;
-    color: var(--heritage-gold);
+    color: var(--local-marker-color, var(--heritage-gold));
     touch-action: manipulation;
   }
 
   .local-map-marker-dot {
     position: relative;
     display: block;
-    width: clamp(0.46rem, 1.2vw, 0.58rem);
-    height: clamp(0.46rem, 1.2vw, 0.58rem);
+    width: clamp(0.23rem, 0.65vw, 0.28rem);
+    height: clamp(0.23rem, 0.65vw, 0.28rem);
     border-radius: 9999px;
     border: 1px solid rgba(246, 244, 238, 0.95);
-    background: var(--heritage-gold);
-    box-shadow: 0 0 12px rgba(244, 196, 48, 0.68);
+    background: currentColor;
+    box-shadow: 0 0 12px currentColor;
   }
 
   .local-map-marker-dot::after {
     content: "";
     position: absolute;
-    inset: -0.42rem;
+    inset: -0.28rem;
     border-radius: inherit;
-    border: 1px solid rgba(244, 196, 48, 0.52);
+    border: 1px solid currentColor;
     animation: marker-pulse 1.8s ease-out infinite;
   }
 
@@ -684,7 +684,7 @@ body::after {
     width: max-content;
     max-width: 11rem;
     transform: translateX(-50%);
-    border: 1px solid rgba(244, 196, 48, 0.24);
+    border: 1px solid var(--local-marker-color, rgba(244, 196, 48, 0.24));
     border-radius: 9999px;
     background: rgba(5, 8, 22, 0.74);
     padding: 0.25rem 0.65rem;
@@ -901,12 +901,12 @@ body::after {
     }
 
     .local-map-marker-dot {
-      width: 0.44rem;
-      height: 0.44rem;
+      width: 0.23rem;
+      height: 0.23rem;
     }
 
     .local-map-marker-dot::after {
-      inset: -0.34rem;
+      inset: -0.24rem;
     }
 
     .local-map-marker-label {

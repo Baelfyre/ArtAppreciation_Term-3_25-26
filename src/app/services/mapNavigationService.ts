@@ -41,16 +41,23 @@ export interface LocalMapMarker {
   mapY: number;
   displayMapX: number;
   displayMapY: number;
+  markerType: NonNullable<Artwork["markerType"]>;
+  color: string;
   artwork: Artwork;
 }
 
 const markerColors = ["#f4c430", "#86a7ff", "#b9162c", "#f6f4ee"];
+const localMarkerColors = {
+  yellow: "#f4c430",
+  blue: "#86a7ff",
+  red: "#b9162c",
+};
 
 const hasGlobeCoordinates = (artwork: Artwork) =>
   typeof artwork.location.lat === "number" && typeof artwork.location.lng === "number";
 
 export const getArtworkMarkerColor = (artwork: Artwork, index = 0) => {
-  if (artwork.scope === "group") return "#f4c430";
+  if (artwork.scope === "local") return localMarkerColors[artwork.markerColor ?? "yellow"];
   return markerColors[index % markerColors.length];
 };
 
@@ -113,6 +120,8 @@ export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
       mapY: artwork.location.mapY as number,
       displayMapX: artwork.location.mapX as number,
       displayMapY: artwork.location.mapY as number,
+      markerType: artwork.markerType ?? "groupMember",
+      color: getArtworkMarkerColor(artwork),
       artwork,
     }));
 };
@@ -128,11 +137,11 @@ export const getGlobePointOfView = (
     return {
       lat: selectedArtwork.location.lat,
       lng: selectedArtwork.location.lng,
-      altitude: selectedArtwork.scope === "group" ? 0.95 : 1.2,
+      altitude: selectedArtwork.scope === "local" ? 0.95 : 1.2,
     };
   }
 
-  if (mode === "group" || mode === "local") {
+  if (mode === "local") {
     return {
       lat: PHILIPPINES_ORIGIN.lat,
       lng: PHILIPPINES_ORIGIN.lng,

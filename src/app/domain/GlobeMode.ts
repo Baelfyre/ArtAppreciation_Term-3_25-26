@@ -1,1 +1,1 @@
-export type GlobeMode = "group" | "local" | "international";
+export type GlobeMode = "local" | "international";

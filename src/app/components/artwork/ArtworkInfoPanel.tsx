@@ -1,7 +1,8 @@
-import { Brush, Globe2, MapPin, Sparkles, User, X, type LucideIcon } from "lucide-react";
+import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
 import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
 import { AngCollageAssembly } from "./AngCollageAssembly";
 import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
@@ -13,7 +14,7 @@ interface ArtworkInfoPanelProps {
 }
 
 export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) => {
-  if (!artwork || artwork.isPlaceholder) return null;
+  if (!artwork || (artwork.isPlaceholder && artwork.scope === "international")) return null;
 
   const locationLabel = formatArtworkLocation(artwork.location);
   const collectionLabel = getArtworkCollectionLabel(artwork);
@@ -36,7 +37,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           <div className="mb-3 min-w-0 md:mb-4">
             <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
             <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
-              {artwork.scope === "group" ? "Philippines Map" : "Global Marker"}
+              {artwork.scope === "local" ? "Philippines Map" : "Global Marker"}
             </h3>
           </div>
 
@@ -78,9 +79,17 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             <InfoRow icon={User} label="Creator" value={artwork.creator} />
             <InfoRow icon={MapPin} label="Location" value={locationLabel} />
             <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
+            {artwork.locationBasis && (
+              <InfoRow icon={MapPin} label="Location basis" value={artwork.locationBasis} />
+            )}
           </div>
 
           <div className="space-y-4">
+            <ArtworkMediaEmbed
+              embedUrl={artwork.embedUrl}
+              title={artwork.title}
+              provider={artwork.mediaProvider}
+            />
             <InfoBlock label="Description" value={artwork.description} />
             <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
             <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
@@ -93,6 +102,18 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 };
 
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
+  if (artwork.mediaType === "music" && !artwork.imageUrl) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center p-6 text-center">
+        <span className="glass-chip-warm mb-4 flex h-14 w-14 items-center justify-center rounded-full">
+          <Music2 className="h-6 w-6 text-[#f4c430]" />
+        </span>
+        <p className="section-title text-xl font-semibold text-white">{artwork.title}</p>
+        <p className="mt-2 text-sm text-slate-300">{artwork.creator}</p>
+      </div>
+    );
+  }
+
   if (artwork.id === "pixel-across-borders") {
     return <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.title} />;
   }
@@ -128,7 +149,7 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
   const hasCoordinates =
     typeof artwork.location.lat === "number" && typeof artwork.location.lng === "number";
 
-  if (artwork.scope === "group") {
+  if (artwork.scope === "local") {
     return (
       <div className="relative min-h-[13.5rem] flex-1 overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:min-h-[17rem] lg:min-h-0">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
