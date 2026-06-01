@@ -14,12 +14,12 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
 
   return (
     <article
-      className={`glass-panel group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 ${
+      className={`glass-panel artwork-card group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 md:rounded-[1.75rem] ${
         isPlaceholder ? "international-placeholder-card" : ""
       }`}
     >
       <div className="flag-accent absolute inset-x-0 top-0 z-20 h-px opacity-70" />
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-44 overflow-hidden md:h-48">
         <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.46))] transition-colors group-hover:bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.34))]" />
         <div className="pattern-surface absolute inset-0 z-10 opacity-20" />
         {isPlaceholder ? (
@@ -47,14 +47,14 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         </div>
       </div>
 
-      <div className="flex flex-grow flex-col p-5">
-        <h3 className="section-title mb-2 line-clamp-1 text-lg font-medium text-white">
+      <div className="flex flex-grow flex-col p-4 md:p-5">
+        <h3 className="section-title mb-2 line-clamp-2 text-lg font-medium leading-snug text-white">
           {artwork.title}
         </h3>
-        <p className="mb-2 text-xs uppercase tracking-[0.18em] text-[#f4c430]">
+        <p className="mb-2 text-[11px] uppercase leading-snug tracking-[0.14em] text-[#f4c430] md:text-xs md:tracking-[0.18em]">
           {formatArtworkLocation(artwork.location)}
         </p>
-        <p className="mb-6 line-clamp-3 flex-grow text-sm font-light text-slate-300">
+        <p className="mb-5 line-clamp-3 flex-grow text-sm font-light leading-relaxed text-slate-300 md:mb-6">
           {isPlaceholder
             ? "International marker only. Full artwork details will be added later."
             : artwork.description}

@@ -18,58 +18,58 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   const locationLabel = formatArtworkLocation(artwork.location);
 
   return (
-    <aside className="artwork-panel-slide glass-panel-strong absolute bottom-4 left-4 right-4 top-28 z-30 overflow-hidden rounded-[1.75rem] shadow-2xl md:bottom-6 md:left-6 md:right-6 md:top-32">
+    <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong absolute z-30 overflow-hidden shadow-2xl">
       <div className="flag-accent absolute inset-x-0 top-0 z-30 h-px" />
       <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
-      <div className="relative grid h-full gap-4 overflow-y-auto p-4 pt-14 custom-scrollbar lg:grid-cols-[0.85fr_1.25fr_1fr] lg:overflow-hidden lg:p-5 lg:pt-14">
+      <div className="relative grid h-full gap-3 overflow-y-auto p-3 pt-12 custom-scrollbar md:gap-4 md:p-4 md:pt-14 lg:grid-cols-[0.85fr_1.25fr_1fr] lg:overflow-hidden lg:p-5 lg:pt-14">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close artwork panel"
-          className="glass-chip absolute right-4 top-4 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35] md:right-5 md:top-5"
+          className="glass-chip absolute right-3 top-3 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35] md:right-5 md:top-5"
         >
           <X className="h-4 w-4" />
         </button>
 
-        <section className="glass-chip order-3 flex min-h-[17rem] flex-col overflow-hidden rounded-[1.35rem] p-4 lg:order-1 lg:min-h-0">
-          <div className="mb-4">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-[#f4c430]">Location</p>
-            <h3 className="section-title text-xl font-semibold text-white">
+        <section className="glass-chip order-3 flex min-h-[13rem] flex-col overflow-hidden rounded-[1.15rem] p-3 md:min-h-[17rem] md:rounded-[1.35rem] md:p-4 lg:order-1 lg:min-h-0">
+          <div className="mb-3 md:mb-4">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
+            <h3 className="section-title text-lg font-semibold text-white md:text-xl">
               {artwork.scope === "local" ? "Philippine Local Map" : "Global Marker"}
             </h3>
           </div>
 
           <LocationPreview artwork={artwork} />
 
-          <div className="mt-4 rounded-[1rem] border border-white/10 bg-black/15 p-4">
-            <p className="mb-1 text-xs uppercase tracking-[0.2em] text-slate-400">Selected place</p>
+          <div className="mt-3 rounded-[1rem] border border-white/10 bg-black/15 p-3 md:mt-4 md:p-4">
+            <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
             <p className="text-sm leading-relaxed text-slate-200">{locationLabel}</p>
           </div>
         </section>
 
-        <section className="order-1 flex min-h-[22rem] flex-col rounded-[1.35rem] lg:order-2 lg:min-h-0">
-          <div className="mb-4 flex items-center justify-between gap-4">
+        <section className="order-1 flex min-h-[16rem] flex-col rounded-[1.15rem] md:min-h-[22rem] md:rounded-[1.35rem] lg:order-2 lg:min-h-0">
+          <div className="mb-3 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#f4c430]">Artwork preview</p>
-              <h3 className="section-title text-xl font-semibold text-white">Focused Artwork</h3>
+              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
+              <h3 className="section-title text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
             </div>
-            <span className="glass-chip-warm rounded-full px-3 py-1 text-xs font-medium capitalize text-white">
+            <span className="glass-chip-warm shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:px-3 md:text-xs">
               {artwork.scope}
             </span>
           </div>
 
-          <div className="artwork-focus-frame min-h-[18rem] flex-1">
+          <div className="artwork-focus-frame min-h-[13rem] flex-1 md:min-h-[18rem]">
             <ArtworkPreview artwork={artwork} />
           </div>
         </section>
 
-        <section className="glass-chip custom-scrollbar order-2 flex min-h-[20rem] flex-col rounded-[1.35rem] p-5 lg:order-3 lg:min-h-0 lg:overflow-y-auto">
-          <div className="mb-5">
-            <span className="glass-chip-warm mb-4 inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize text-white">
+        <section className="glass-chip custom-scrollbar order-2 flex min-h-[16rem] flex-col rounded-[1.15rem] p-3 md:min-h-[20rem] md:rounded-[1.35rem] md:p-5 lg:order-3 lg:min-h-0 lg:overflow-y-auto">
+          <div className="mb-4 md:mb-5">
+            <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
               {artwork.scope}
             </span>
-            <h2 className="section-title text-2xl font-medium leading-tight text-white">
+            <h2 className="section-title text-xl font-medium leading-tight text-white md:text-2xl">
               {artwork.title}
             </h2>
           </div>

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
@@ -37,6 +37,22 @@ export default function App() {
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const targetId = window.location.hash.slice(1);
+      if (!targetId) return;
+
+      window.requestAnimationFrame(() => {
+        document.getElementById(decodeURIComponent(targetId))?.scrollIntoView({ block: "start" });
+      });
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, []);
 
   const handleModeChange = (nextMode: GlobeMode) => {
     selectMode(nextMode);
@@ -83,7 +99,7 @@ export default function App() {
           </div>
 
           {/* Main 3D Globe Workspace */}
-          <div className="relative h-[660px] md:h-[700px] lg:h-[740px]">
+          <div className="globe-workspace relative">
             <GlobeView
               mode={mode}
               artworks={modeArtworks}

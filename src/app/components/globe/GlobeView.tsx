@@ -83,7 +83,7 @@ export const GlobeView = ({
       }`}
     >
       <div className="pattern-surface pointer-events-none absolute inset-0 opacity-20" />
-      <div className="glass-chip pointer-events-none absolute left-1/2 top-6 z-10 -translate-x-1/2 rounded-full px-4 py-2 text-xs uppercase tracking-[0.3em] text-slate-200">
+      <div className="glass-chip pointer-events-none absolute left-1/2 top-[7.6rem] z-10 w-[calc(100%-2rem)] max-w-[26rem] -translate-x-1/2 rounded-full px-3 py-1.5 text-center text-[10px] uppercase leading-tight tracking-[0.12em] text-slate-200 md:px-4 md:py-2 md:text-xs md:tracking-[0.3em] lg:top-6 lg:w-auto">
         {mode === "local" ? "Zooming into the Philippines" : "From the Philippines to the world"}
       </div>
 
@@ -138,8 +138,7 @@ export const GlobeView = ({
             if (marker.isOrigin) {
               const label = document.createElement("div");
               label.textContent = "Philippines";
-              label.className =
-                "mt-2 whitespace-nowrap rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-md";
+              label.className = "globe-html-origin-label";
               label.style.color = "var(--heritage-gold)";
               label.style.background = "rgba(5, 8, 22, 0.55)";
               label.style.borderColor = "rgba(244, 196, 48, 0.28)";
@@ -151,8 +150,7 @@ export const GlobeView = ({
             if (marker.artwork) {
               const label = document.createElement("div");
               label.textContent = marker.label;
-              label.className =
-                "mt-2 max-w-36 rounded-full border border-white/12 bg-[rgba(5,8,22,0.68)] px-2.5 py-1 text-center text-[11px] font-medium leading-tight text-slate-100 backdrop-blur-md";
+              label.className = "globe-html-marker-label";
               el.appendChild(label);
 
               if (marker.artwork.isPlaceholder) {

@@ -247,12 +247,25 @@ body::after {
     width: min(calc(100% - 48px), 1100px);
     margin-right: auto;
     margin-left: auto;
+    max-width: 1100px;
   }
 
   .globe-section-inner {
     width: min(calc(100% - 48px), 1280px);
     margin-right: auto;
     margin-left: auto;
+    scroll-margin-top: 7rem;
+  }
+
+  .globe-workspace {
+    height: clamp(32rem, calc(100svh - 4rem), 44rem);
+    min-height: 32rem;
+  }
+
+  @supports not (height: 100svh) {
+    .globe-workspace {
+      height: clamp(32rem, calc(100vh - 4rem), 44rem);
+    }
   }
 
   .hero-title {
@@ -261,6 +274,7 @@ body::after {
     margin-left: auto;
     text-align: center;
     line-height: 0.95;
+    text-wrap: balance;
   }
 
   .hero-title-main {
@@ -275,6 +289,17 @@ body::after {
     color: var(--heritage-gold);
     font-size: clamp(2.6rem, 4.4vw, 4.25rem);
     font-weight: 500;
+  }
+
+  .hero-lede {
+    max-width: 58rem;
+    line-height: 1.65;
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    text-wrap: pretty;
+  }
+
+  .hero-cta {
+    max-width: min(100%, 18rem);
   }
 
   .group-info-footer {
@@ -406,6 +431,40 @@ body::after {
     height: 0.9rem;
   }
 
+  .globe-html-marker {
+    max-width: min(11rem, calc(100vw - 2rem));
+  }
+
+  .globe-html-origin-label,
+  .globe-html-marker-label {
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(5, 8, 22, 0.68);
+    padding: 0.25rem 0.65rem;
+    text-align: center;
+    line-height: 1.2;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .globe-html-origin-label {
+    margin-bottom: 0.5rem;
+    border-color: rgba(244, 196, 48, 0.28);
+    color: var(--heritage-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .globe-html-marker-label {
+    margin-top: 0.5rem;
+    max-width: 9rem;
+    color: #f1f5f9;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
   .local-map-fade {
     animation: local-map-fade 420ms ease-out both;
   }
@@ -457,6 +516,8 @@ body::after {
     pointer-events: none;
     transition: opacity 160ms ease, transform 160ms ease;
     white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
   }
 
   .local-map-marker:hover .local-map-marker-label,
@@ -468,6 +529,14 @@ body::after {
 
   .artwork-panel-slide {
     animation: artwork-panel-slide 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .artwork-info-panel {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    height: min(32rem, calc(100% - 10.75rem));
+    border-radius: 1.25rem;
   }
 
   .artwork-focus-frame {
@@ -552,6 +621,10 @@ body::after {
     animation: featured-card-parallax 7s ease-in-out infinite alternate;
   }
 
+  .artwork-card {
+    min-height: 26.5rem;
+  }
+
   .featured-carousel-card:nth-child(2n) {
     animation-delay: -1.8s;
   }
@@ -569,16 +642,127 @@ body::after {
     }
 
     .hero-title {
-      line-height: 1;
+      max-width: min(100%, 25rem);
+      line-height: 1.05;
     }
 
     .hero-title-main {
-      font-size: clamp(1.25rem, 6vw, 3.35rem);
-      white-space: nowrap;
+      font-size: clamp(1.75rem, 8vw, 2.65rem);
+      white-space: normal;
     }
 
     .hero-title-accent {
-      font-size: clamp(1.15rem, 5.5vw, 3rem);
+      margin-top: 0.2em;
+      font-size: clamp(1.55rem, 7vw, 2.35rem);
+      line-height: 1.05;
+    }
+
+    .hero-lede {
+      max-width: min(100%, 34rem);
+      line-height: 1.65;
+      font-size: clamp(0.98rem, 4vw, 1.12rem);
+    }
+
+    .hero-cta {
+      width: min(100%, 17rem);
+    }
+
+    .featured-carousel {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.25rem, #000 calc(100% - 1.25rem), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 1.25rem, #000 calc(100% - 1.25rem), transparent 100%);
+    }
+
+    .featured-carousel-control {
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8125rem;
+    }
+
+    .featured-carousel-track,
+    .featured-carousel-card {
+      animation: none;
+    }
+
+    .artwork-card {
+      min-height: 25.25rem;
+    }
+
+    .globe-html-marker-dot {
+      width: 0.52rem;
+      height: 0.52rem;
+      border-width: 1px;
+    }
+
+    .globe-html-marker-dot::after {
+      inset: -0.45rem;
+    }
+
+    .globe-html-marker-dot.is-origin,
+    .globe-html-marker-dot.is-selected {
+      width: 0.68rem;
+      height: 0.68rem;
+    }
+
+    .globe-html-origin-label {
+      margin-bottom: 0.4rem;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.625rem;
+    }
+
+    .globe-html-marker-label {
+      margin-top: 0.4rem;
+      max-width: 7rem;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.625rem;
+    }
+
+    .local-map-marker {
+      width: 1.55rem;
+      height: 1.55rem;
+    }
+
+    .local-map-marker-dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-width: 1px;
+    }
+
+    .local-map-marker-dot::after {
+      inset: -0.48rem;
+    }
+
+    .local-map-marker-label {
+      max-width: 6.75rem;
+      padding: 0.2rem 0.45rem;
+      font-size: 0.62rem;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .featured-carousel-track,
+    .featured-carousel-card {
+      animation: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .globe-workspace {
+      height: clamp(40rem, calc(100svh - 6rem), 46.25rem);
+      min-height: 40rem;
+    }
+
+    @supports not (height: 100svh) {
+      .globe-workspace {
+        height: clamp(40rem, calc(100vh - 6rem), 46.25rem);
+      }
+    }
+
+    .artwork-info-panel {
+      top: 8rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      height: auto;
+      border-radius: 1.75rem;
     }
   }
 }
