@@ -25,25 +25,13 @@ export const artworkRepository = {
 };
 
 export const formatArtworkLocation = (location: Location) => {
-  if (location.city && location.province) {
-    return `${location.city}, ${location.province}, ${location.country}`;
-  }
-
-  if (location.city) {
-    return `${location.city}, ${location.country}`;
-  }
-
   return location.label;
 };
 
 export const getArtworkCollectionLabel = (
   artwork: Pick<Artwork, "scope" | "isPlaceholder" | "localCategory">,
 ) => {
-  if (artwork.scope === "local" && artwork.localCategory === "localArtist") {
-    return "Local Artist Research";
-  }
+  if (artwork.scope === "local") return "Proposed Local Gallery";
 
-  if (artwork.scope === "local") return "Group Members' Art";
-
-  return "International Art";
+  return "Filipino Art Abroad";
 };

@@ -1889,3 +1889,434 @@ body::after {
     opacity: 0 !important;
   }
 }
+
+/* Proposed local gallery cards and artwork-specific effects */
+.local-artwork-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gallery-route-card {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.gallery-route-card:hover,
+.gallery-route-card:focus-within {
+  transform: translateY(-0.2rem);
+  border-color: rgba(244, 196, 48, 0.28);
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.art-abroad-preview {
+  background:
+    radial-gradient(circle at 84% 20%, rgba(133, 83, 48, 0.22), transparent 28%),
+    var(--glass-surface);
+}
+
+.art-abroad-effect-frame {
+  min-height: 22rem;
+  overflow: hidden;
+  border: 1px solid rgba(174, 117, 77, 0.3);
+  border-radius: 1.25rem;
+  background: rgba(31, 19, 14, 0.42);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.artwork-visual-effect {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(244, 196, 48, 0.09), transparent 36%),
+    rgba(5, 8, 22, 0.9);
+}
+
+.artwork-visual-effect:focus-visible {
+  outline: 2px solid rgba(244, 196, 48, 0.78);
+  outline-offset: -4px;
+}
+
+.artwork-visual-effect-image,
+.triangle-fusion-fragment {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.artwork-visual-effect-image {
+  transition:
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 650ms ease;
+}
+
+.artwork-visual-effect.is-compact .artwork-visual-effect-image {
+  object-fit: cover;
+}
+
+.effect-slow-zoom:hover .artwork-visual-effect-image,
+.effect-slow-zoom:focus-visible .artwork-visual-effect-image {
+  transform: scale(1.1);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.brush-stroke-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.42;
+  mix-blend-mode: screen;
+}
+
+.brush-stroke-layer span {
+  position: absolute;
+  left: -12%;
+  width: 124%;
+  height: 16%;
+  border-radius: 48% 34% 52% 28%;
+  background: linear-gradient(90deg, transparent, rgba(244, 196, 48, 0.62), rgba(185, 22, 44, 0.2), transparent);
+  filter: blur(0.15rem);
+  opacity: 0;
+  transform: translateX(-28%) rotate(-4deg);
+  transition:
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms ease;
+}
+
+.brush-stroke-layer span:nth-child(1) {
+  top: 18%;
+}
+
+.brush-stroke-layer span:nth-child(2) {
+  top: 45%;
+  transition-delay: 90ms;
+}
+
+.brush-stroke-layer span:nth-child(3) {
+  top: 72%;
+  transition-delay: 180ms;
+}
+
+.effect-brush-stroke:hover .brush-stroke-layer span,
+.effect-brush-stroke:focus-visible .brush-stroke-layer span {
+  opacity: 0.5;
+  transform: translateX(0) rotate(-2deg);
+}
+
+.effect-brush-stroke::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0.65rem;
+  z-index: 3;
+  border: 0.18rem solid rgba(244, 196, 48, 0.38);
+  border-radius: 38% 52% 42% 48% / 8% 12% 9% 13%;
+  opacity: 0.48;
+  transform: rotate(-0.5deg);
+}
+
+.triangle-fusion-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.triangle-fusion-fragment {
+  position: absolute;
+  inset: 0;
+  transition:
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 700ms ease;
+  will-change: transform;
+}
+
+.triangle-fusion-fragment--left {
+  clip-path: polygon(0 0, 42% 0, 56% 100%, 0 100%);
+  transform: translate(-3.5%, 1.5%) rotate(-1.2deg);
+  filter: saturate(0.86);
+}
+
+.triangle-fusion-fragment--center {
+  clip-path: polygon(32% 0, 72% 0, 62% 100%, 45% 100%);
+  transform: translateY(-3%);
+  filter: brightness(1.08);
+}
+
+.triangle-fusion-fragment--right {
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 52% 100%);
+  transform: translate(3.5%, 1.5%) rotate(1.2deg);
+  filter: saturate(1.08);
+}
+
+.effect-triangle-fusion:hover .triangle-fusion-fragment,
+.effect-triangle-fusion:focus-visible .triangle-fusion-fragment {
+  transform: translate(0) rotate(0);
+  filter: none;
+}
+
+.lively-poster-shapes {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.lively-poster-shapes span {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(246, 244, 238, 0.82);
+  opacity: 0.68;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lively-poster-shapes span:nth-child(1) {
+  top: 12%;
+  left: 9%;
+  border-radius: 50%;
+  background: rgba(244, 196, 48, 0.66);
+}
+
+.lively-poster-shapes span:nth-child(2) {
+  top: 18%;
+  right: 8%;
+  transform: rotate(35deg);
+  background: rgba(29, 73, 216, 0.66);
+}
+
+.lively-poster-shapes span:nth-child(3) {
+  bottom: 15%;
+  left: 12%;
+  transform: rotate(-20deg);
+  background: rgba(185, 22, 44, 0.68);
+}
+
+.lively-poster-shapes span:nth-child(4) {
+  right: 10%;
+  bottom: 10%;
+  border-radius: 50%;
+  background: rgba(244, 196, 48, 0.5);
+}
+
+.effect-lively-poster:hover .artwork-visual-effect-image,
+.effect-lively-poster:focus-visible .artwork-visual-effect-image {
+  transform: scale(1.035) rotate(0.6deg);
+  filter: saturate(1.12);
+}
+
+.effect-lively-poster:hover .lively-poster-shapes span:nth-child(odd),
+.effect-lively-poster:focus-visible .lively-poster-shapes span:nth-child(odd) {
+  transform: translateY(-0.55rem) rotate(18deg);
+}
+
+.effect-lively-poster:hover .lively-poster-shapes span:nth-child(even),
+.effect-lively-poster:focus-visible .lively-poster-shapes span:nth-child(even) {
+  transform: translateY(0.55rem) rotate(-18deg);
+}
+
+.coffee-ripple-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  mix-blend-mode: multiply;
+}
+
+.coffee-ripple-layer span {
+  position: absolute;
+  border: clamp(0.2rem, 0.6vw, 0.45rem) solid rgba(111, 67, 38, 0.58);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 0.16rem rgba(188, 132, 86, 0.2),
+    0 0 1.2rem rgba(72, 40, 23, 0.18);
+  opacity: 0.48;
+  transform: scale(0.82);
+  transition:
+    transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 600ms ease;
+}
+
+.coffee-ripple-layer span:nth-child(1) {
+  right: 7%;
+  bottom: 8%;
+  width: 34%;
+  aspect-ratio: 1;
+}
+
+.coffee-ripple-layer span:nth-child(2) {
+  top: 7%;
+  left: 5%;
+  width: 20%;
+  aspect-ratio: 1;
+  opacity: 0.34;
+}
+
+.coffee-ripple-layer span:nth-child(3) {
+  right: 28%;
+  bottom: 21%;
+  width: 14%;
+  aspect-ratio: 1;
+  opacity: 0.28;
+}
+
+.effect-coffee-ripple:hover .coffee-ripple-layer span,
+.effect-coffee-ripple:focus-visible .coffee-ripple-layer span {
+  opacity: 0.68;
+  transform: scale(1.18);
+}
+
+.effect-coffee-ripple:hover .artwork-visual-effect-image,
+.effect-coffee-ripple:focus-visible .artwork-visual-effect-image {
+  filter: sepia(0.16) contrast(1.04);
+}
+
+.effect-music-wave {
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(244, 196, 48, 0.2), transparent 24%),
+    linear-gradient(145deg, rgba(29, 73, 216, 0.32), rgba(5, 8, 22, 0.94) 58%, rgba(185, 22, 44, 0.25));
+}
+
+.music-wave-orbit {
+  position: absolute;
+  width: min(58%, 16rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(244, 196, 48, 0.26);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1.5rem rgba(244, 196, 48, 0.035),
+    0 0 0 3rem rgba(29, 73, 216, 0.04);
+  transition: transform 650ms ease;
+}
+
+.music-wave-icon {
+  position: relative;
+  z-index: 2;
+  width: 2.2rem;
+  height: 2.2rem;
+  color: #f4c430;
+  filter: drop-shadow(0 0 1rem rgba(244, 196, 48, 0.42));
+}
+
+.music-wave-bars {
+  position: absolute;
+  inset: auto 8% 17%;
+  z-index: 2;
+  display: flex;
+  height: 28%;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.18rem, 0.8vw, 0.45rem);
+}
+
+.music-wave-bars span {
+  width: clamp(0.16rem, 0.65vw, 0.34rem);
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #f4c430, #86a7ff);
+  opacity: 0.72;
+  animation: gallery-music-wave 1.45s ease-in-out infinite alternate;
+}
+
+.music-wave-copy {
+  position: absolute;
+  inset: auto 1rem 0.9rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.music-wave-copy strong {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.music-wave-copy span {
+  margin-top: 0.15rem;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+}
+
+.effect-music-wave:hover .music-wave-orbit,
+.effect-music-wave:focus-visible .music-wave-orbit {
+  transform: scale(1.12);
+}
+
+@keyframes gallery-music-wave {
+  from {
+    transform: scaleY(0.55);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+}
+
+@media (min-width: 640px) {
+  .local-artwork-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .local-artwork-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-title-accent {
+    font-size: clamp(1.15rem, 5vw, 1.55rem);
+    line-height: 1.2;
+  }
+
+  .art-abroad-effect-frame {
+    min-height: 18rem;
+  }
+
+  .triangle-fusion-fragment {
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-title-accent {
+    width: min(100%, 52rem);
+    margin-right: auto;
+    margin-left: auto;
+    font-size: clamp(1.4rem, 2.5vw, 2.35rem);
+    line-height: 1.18;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-route-card,
+  .artwork-visual-effect-image,
+  .brush-stroke-layer span,
+  .triangle-fusion-fragment,
+  .lively-poster-shapes span,
+  .coffee-ripple-layer span,
+  .music-wave-orbit,
+  .music-wave-bars span {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

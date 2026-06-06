@@ -65,39 +65,37 @@ export const AboutSection = () => {
           </div>
           
           <h2 className="section-title mb-5 text-[clamp(2rem,8vw,3rem)] font-semibold leading-tight text-white md:mb-8 md:text-6xl">
-            About the Project
+            Gallery Synthesis
           </h2>
           
           <div className="mx-auto max-w-[42rem] space-y-5 text-base font-light leading-relaxed text-slate-300 md:space-y-8 md:text-xl lg:mx-0">
             <p>
-              This project centers on <strong className="font-medium text-white">Filipino Art in This Day and Age</strong>:
-              diversity, evolution, and identity. Each artwork uses a different medium and personal
-              perspective to show how Filipino creativity continues to adapt in modern life.
+              This proposed gallery centers on <strong className="font-medium text-white">Filipino Art at This Day and Age</strong>.
+              Each selected work uses a different art form to show how Filipino creativity continues
+              to express place, values, community, and change.
             </p>
             <p>
-              The exhibit also carries the idea of <strong className="font-medium text-white">Filipino Identity Beyond Borders</strong>.
-              Local artworks are mapped to the artists’ places in the Philippines, while the wider
-              globe concept shows how Filipino identity can connect across locations, cultures, and
-              contemporary digital spaces.
+              Local art helps us see that Filipino identity is still being shaped through place,
+              memory, values, and creative expression.
             </p>
           </div>
 
           <ul className="mt-9 space-y-4 text-left md:mt-12 md:space-y-6">
             {[
               {
-                text: <> <strong className="text-white font-medium">Diversity</strong> of modern Filipino art </>,
+                text: <> <strong className="text-white font-medium">Regional identity</strong> through local stories </>,
                 icon: Globe2
               },
               {
-                text: <> <strong className="text-white font-medium">Evolution</strong> through new mediums </>,
+                text: <> <strong className="text-white font-medium">Creative change</strong> across art forms </>,
                 icon: Landmark
               },
               {
-                text: "Art as representation of identity",
+                text: "Family and community values",
                 icon: Fingerprint
               },
               {
-                text: "Identity beyond borders",
+                text: "Place, memory, and expression",
                 icon: MapPin
               }
             ].map((item, i) => (

@@ -4,13 +4,21 @@ import type { Location } from "./Location";
 export interface Artwork {
   id: string;
   scope: GlobeMode;
-  localCategory?: "groupMember" | "localArtist";
+  localCategory?: "visualArt" | "performingMedia";
   markerType?: "groupMember" | "localArtist" | "toVerify";
   markerColor?: "yellow" | "blue" | "red";
   title: string;
   creator: string;
   medium: string;
   imageUrl: string;
+  altText?: string;
+  effect?:
+    | "brush-stroke"
+    | "slow-zoom"
+    | "triangle-fusion"
+    | "music-wave"
+    | "lively-poster"
+    | "coffee-ripple";
   transitionImageUrl?: string;
   mediaProvider?: "youtube" | "spotify";
   mediaType?: "music";

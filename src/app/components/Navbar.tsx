@@ -4,8 +4,8 @@ import { Compass } from "lucide-react";
 export const Navbar = () => {
   const navItems = [
     { href: "#", label: "Home" },
-    { href: "#featured", label: "Featured" },
-    { href: "#globe", label: "Globe", accent: true },
+    { href: "#gallery-map", label: "Gallery Map" },
+    { href: "#featured", label: "Artworks", accent: true },
     { href: "#about", label: "About" },
   ];
 
@@ -21,7 +21,7 @@ export const Navbar = () => {
               Contemporary Filipino art
             </p>
             <span className="section-title block truncate text-sm tracking-wide md:text-base">
-              Identity Beyond Borders
+              Proposed Local Art Gallery
             </span>
           </div>
         </div>

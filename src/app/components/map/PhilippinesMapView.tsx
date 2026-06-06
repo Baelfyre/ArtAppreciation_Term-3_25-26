@@ -20,8 +20,10 @@ export const PhilippinesMapView = ({
   const markers = prepareLocalMapMarkers(artworks);
   const [highlightedMarkerId, setHighlightedMarkerId] = useState<string | null>(null);
   const activeMarkerId = highlightedMarkerId ?? selectedArtwork?.id ?? null;
-  const groupMemberMarkers = markers.filter((marker) => marker.artwork.localCategory !== "localArtist");
-  const localArtistMarkers = markers.filter((marker) => marker.artwork.localCategory === "localArtist");
+  const visualArtMarkers = markers.filter((marker) => marker.artwork.localCategory === "visualArt");
+  const performingMediaMarkers = markers.filter(
+    (marker) => marker.artwork.localCategory === "performingMedia",
+  );
 
   const handleSelectMarker = (marker: LocalMapMarker) => {
     setHighlightedMarkerId(marker.id);
@@ -72,12 +74,12 @@ export const PhilippinesMapView = ({
       <div className="mb-3 flex items-start justify-between gap-3 md:mb-4 md:gap-4">
         <div>
           <p className="globe-local-status-label mb-2 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
-            Zooming Into the Philippines
+            Proposed Gallery Map
           </p>
-          <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Art</p>
-          <h3 className="section-title text-xl font-semibold text-white md:text-2xl">Philippines Map</h3>
+          <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Gallery Flow</p>
+          <h3 className="section-title text-xl font-semibold text-white md:text-2xl">The Proposed Gallery Map</h3>
           <p className="mt-1 max-w-[18rem] text-xs leading-snug text-slate-300">
-            Group Members' Art and researched Filipino art
+            Negros Occidental, Davao, Modern OPM, and Philippine Cinema
           </p>
         </div>
         <span className="glass-chip shrink-0 rounded-full px-2.5 py-1 text-[11px] text-slate-200 md:px-3 md:text-xs">
@@ -88,11 +90,11 @@ export const PhilippinesMapView = ({
       <div className="mb-3 grid grid-cols-2 gap-2 text-[10px] leading-tight text-slate-200 md:mb-4 md:text-xs">
         <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
           <span className="h-2 w-2 shrink-0 rounded-full bg-[#f4c430]" />
-          Group Members' Art
+          Painting, Mixed Media, Sculpture
         </span>
         <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
           <span className="h-2 w-2 shrink-0 rounded-full bg-[#86a7ff]" />
-          Local Artist Research
+          Music and Film
         </span>
       </div>
 
@@ -100,8 +102,8 @@ export const PhilippinesMapView = ({
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
         <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,13rem)_minmax(14rem,1fr)_minmax(0,13rem)]">
           <LocalArtworkList
-            title="Group Members' Art"
-            markers={groupMemberMarkers}
+            title="Visual Art"
+            markers={visualArtMarkers}
             activeMarkerId={activeMarkerId}
             className="hidden lg:flex"
             onSelect={handleSelectMarker}
@@ -132,7 +134,7 @@ export const PhilippinesMapView = ({
                     className={`local-map-leader ${activeMarkerId === marker.id ? "is-active" : ""}`}
                     x1={marker.displayMapX}
                     y1={marker.displayMapY}
-                    x2={marker.artwork.localCategory === "localArtist" ? 96 : 4}
+                    x2={marker.artwork.localCategory === "performingMedia" ? 96 : 4}
                     y2={marker.displayMapY}
                     stroke={marker.color}
                     strokeWidth={activeMarkerId === marker.id ? "0.55" : "0.26"}
@@ -155,8 +157,8 @@ export const PhilippinesMapView = ({
           </div>
 
           <LocalArtworkList
-            title="Local Artist Research"
-            markers={localArtistMarkers}
+            title="Music and Film"
+            markers={performingMediaMarkers}
             activeMarkerId={activeMarkerId}
             className="hidden lg:flex"
             onSelect={handleSelectMarker}
@@ -166,16 +168,16 @@ export const PhilippinesMapView = ({
 
           <div className="local-map-mobile-list lg:hidden">
             <LocalArtworkMobileGroup
-              title="Group Members' Art"
-              markers={groupMemberMarkers}
+              title="Visual Art"
+              markers={visualArtMarkers}
               activeMarkerId={activeMarkerId}
               onSelect={handleSelectMarker}
               onIntent={handleMarkerIntent}
               onClearIntent={handleClearMarkerIntent}
             />
             <LocalArtworkMobileGroup
-              title="Local Artist Research"
-              markers={localArtistMarkers}
+              title="Music and Film"
+              markers={performingMediaMarkers}
               activeMarkerId={activeMarkerId}
               onSelect={handleSelectMarker}
               onIntent={handleMarkerIntent}

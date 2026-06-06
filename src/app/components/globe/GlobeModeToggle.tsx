@@ -6,13 +6,13 @@ interface GlobeModeToggleProps {
 }
 
 const modes: Array<{ value: GlobeMode; label: string }> = [
-  { value: "local", label: "Local" },
-  { value: "international", label: "International" },
+  { value: "local", label: "Local Gallery" },
+  { value: "international", label: "Art Abroad" },
 ];
 
 export const GlobeModeToggle = ({ mode, onModeChange }: GlobeModeToggleProps) => {
   const activeCollectionLabel =
-    mode === "local" ? "Local Art" : "International Art";
+    mode === "local" ? "Proposed Local Gallery" : "Filipino Art Abroad";
 
   return (
     <div className="globe-mode-toggle glass-panel curved-card-accent pointer-events-auto w-full max-w-[21rem] overflow-hidden rounded-[1rem] p-2.5 shadow-2xl md:self-start md:rounded-[1.35rem] md:p-3">

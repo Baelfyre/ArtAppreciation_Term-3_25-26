@@ -1,7 +1,7 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ArtworkEffectImage } from "./ArtworkEffectImage";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -19,9 +19,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         isPlaceholder ? "international-placeholder-card" : ""
       }`}
     >
-      <div className="relative h-44 overflow-hidden md:h-48">
-        <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.46))] transition-colors group-hover:bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.34))]" />
-        <div className="pattern-surface absolute inset-0 z-10 opacity-20" />
+      <div className="relative h-52 overflow-hidden md:h-56">
         {isPlaceholder ? (
           <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_50%_42%,rgba(244,196,48,0.16),transparent_32%),linear-gradient(135deg,rgba(29,73,216,0.18),rgba(5,8,22,0.88))]">
             <div className="flex flex-col items-center text-center">
@@ -34,11 +32,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
             </div>
           </div>
         ) : (
-          <ImageWithFallback
-            src={artwork.imageUrl}
-            alt={artwork.title}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
+          <ArtworkEffectImage artwork={artwork} compact />
         )}
         <div className="absolute left-3 top-3 z-20">
           <span className="glass-chip-warm rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white">
@@ -56,7 +50,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         </p>
         <p className="mb-5 line-clamp-3 flex-grow text-sm font-light leading-relaxed text-slate-300 md:mb-6">
           {isPlaceholder
-            ? "International curation placeholder for Terminal Assessment."
+            ? "Reserved for a future international exhibit direction."
             : artwork.description}
         </p>
 

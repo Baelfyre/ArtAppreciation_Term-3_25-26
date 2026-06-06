@@ -1,12 +1,8 @@
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
-import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
-import { AngCollageAssembly } from "./AngCollageAssembly";
-import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
-import { ViloriaSplitCombine } from "./ViloriaSplitCombine";
+import { ArtworkEffectImage } from "./ArtworkEffectImage";
 
 interface ArtworkInfoPanelProps {
   artwork: Artwork | null;
@@ -66,7 +62,11 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
           <div className="mt-5 space-y-4">
             <InfoBlock label="Description" value={artwork.description} />
-            <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
+            <InfoBlock
+              label="Connection to Filipino Art at This Day and Age"
+              value={artwork.advocacyConnection}
+              icon={Globe2}
+            />
             <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
             <InfoBlock label="Principles" value={artwork.principles} />
             {artwork.comparisonGroupId === "music-evolution" && (
@@ -79,7 +79,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           <div className="mb-3 min-w-0 md:mb-4">
             <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
             <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
-              {artwork.scope === "local" ? "Philippines Map" : "Global Marker"}
+              {artwork.scope === "local" ? "Philippines Map" : "International Exhibit Context"}
             </h3>
           </div>
 
@@ -121,29 +121,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
     );
   }
 
-  if (artwork.id === "pixel-across-borders") {
-    return <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  if (artwork.id === "ang-these-pages-contain-a-universe") {
-    return <AngCollageAssembly src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  if (artwork.id === "jadloc-tradition-to-vivid-identity" && artwork.transitionImageUrl) {
-    return (
-      <JadlocTraditionToIdentity
-        traditionSrc={artwork.imageUrl}
-        vividSrc={artwork.transitionImageUrl}
-        alt={artwork.title}
-      />
-    );
-  }
-
-  if (artwork.id === "viloria-work-life-balance") {
-    return <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  return <ImageWithFallback src={artwork.imageUrl} alt={artwork.title} className="artwork-focus-image" />;
+  return <ArtworkEffectImage artwork={artwork} />;
 };
 
 interface LocationPreviewProps {
