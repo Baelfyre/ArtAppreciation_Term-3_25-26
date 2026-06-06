@@ -35,5 +35,6 @@ export interface Artwork {
   elements: string;
   principles: string;
   featured?: boolean;
+  isLocalMapItem?: boolean;
   isPlaceholder?: boolean;
 }

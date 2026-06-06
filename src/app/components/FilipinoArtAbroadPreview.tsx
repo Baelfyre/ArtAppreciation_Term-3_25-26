@@ -7,9 +7,9 @@ interface FilipinoArtAbroadPreviewProps {
 }
 
 export const FilipinoArtAbroadPreview = ({ artwork }: FilipinoArtAbroadPreviewProps) => (
-  <section id="filipino-art-abroad" className="relative z-10 py-16 md:py-24">
+  <section id="filipino-art-abroad" className="relative z-10 py-12 md:py-16">
     <div className="gallery-section">
-      <div className="mb-9 max-w-[44rem] md:mb-12">
+      <div className="mb-7 max-w-[40rem] md:mb-9">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#f4c430]">
           International Exhibit Feature
         </p>
@@ -17,8 +17,8 @@ export const FilipinoArtAbroadPreview = ({ artwork }: FilipinoArtAbroadPreviewPr
           Filipino Art Abroad
         </h2>
         <p className="mt-4 text-base font-light leading-relaxed text-slate-300">
-          Filipino creativity also reaches international exhibit spaces through distinctive
-          materials, stories, and contemporary practice.
+          Filipino creativity reaches international exhibit spaces through distinctive materials
+          and contemporary practice.
         </p>
       </div>
 
@@ -36,24 +36,24 @@ export const FilipinoArtAbroadPreview = ({ artwork }: FilipinoArtAbroadPreviewPr
             Featured in an International Exhibition
           </p>
           <h2 className="section-title mt-2 text-3xl font-semibold text-white">
-            The Coffee Maker
+            {artwork.title}
           </h2>
-          <p className="mt-1 text-sm text-slate-300">Renato "Rens" E. Tuzon</p>
+          <p className="mt-1 text-sm text-slate-300">{artwork.creator}</p>
 
           <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
             <div>
               <dt className="museum-label-heading">Medium</dt>
-              <dd className="mt-1 text-slate-200">Coffee on Paper</dd>
+              <dd className="mt-1 text-slate-200">{artwork.medium}</dd>
             </div>
             <div>
               <dt className="museum-label-heading">Context</dt>
               <dd className="mt-1 text-slate-200">
-                Coffee Table Art Book International Exhibition, New Jersey, USA
+                {artwork.location.label}
               </dd>
             </div>
           </dl>
 
-          <p className="mt-5 max-w-[42rem] text-sm font-light leading-relaxed text-slate-300">
+          <p className="mt-4 max-w-[36rem] text-sm font-light leading-relaxed text-slate-300">
             {artwork.description}
           </p>
         </div>

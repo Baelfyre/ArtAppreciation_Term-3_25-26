@@ -6,9 +6,9 @@ export const Navbar = () => {
     { href: "#", label: "Home" },
     { href: "#featured", label: "Featured" },
     { href: "#globe", label: "Globe", accent: true },
-    { href: "#local-curation", label: "Local Art" },
     { href: "#filipino-art-abroad", label: "Art Abroad" },
     { href: "#about", label: "About" },
+    { href: "#group-information", label: "Group" },
     { href: "#sources", label: "Sources" },
   ];
 

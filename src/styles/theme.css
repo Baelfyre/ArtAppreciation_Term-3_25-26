@@ -1382,70 +1382,22 @@ body::after {
   }
 }
 
-/* Additive local and international curation sections */
+/* Integrated artwork and reference sections */
 #featured,
-#local-curation,
 #filipino-art-abroad,
 #about,
+#group-information,
 #sources {
   scroll-margin-top: 5rem;
 }
 
-.local-curation-grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.local-curation-card,
 .art-abroad-preview,
-.source-card {
+.source-group-card {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025)),
     rgba(5, 8, 22, 0.72);
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.24);
-}
-
-.local-curation-card {
-  overflow: hidden;
-  border-radius: 1.5rem;
-  transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
-}
-
-.local-curation-card:hover {
-  transform: translateY(-0.35rem);
-  border-color: rgba(244, 196, 48, 0.32);
-  box-shadow: 0 1.75rem 4.5rem rgba(0, 0, 0, 0.34), 0 0 2rem rgba(244, 196, 48, 0.07);
-}
-
-.local-curation-card:last-child {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
-}
-
-.local-curation-visual {
-  height: clamp(20rem, 32vw, 24rem);
-  overflow: hidden;
-  background: #080d22;
-}
-
-.local-curation-card:last-child .local-curation-visual {
-  height: 24rem;
-}
-
-.local-curation-copy {
-  padding: 1.35rem;
-}
-
-.local-curation-medium,
-.source-type {
-  color: #f4c430;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
 }
 
 .artwork-visual-effect {
@@ -1470,7 +1422,7 @@ body::after {
   transform: scale(1.01);
 }
 
-.local-curation-card:hover .effect-slow-zoom .artwork-visual-effect-image {
+.artwork-card:hover .effect-slow-zoom .artwork-visual-effect-image {
   transform: scale(1.1);
 }
 
@@ -1507,7 +1459,7 @@ body::after {
   transition-delay: 160ms;
 }
 
-.local-curation-card:hover .brush-stroke-layer span {
+.artwork-card:hover .brush-stroke-layer span {
   transform: translateX(76%) rotate(-4deg);
   opacity: 0.35;
 }
@@ -1543,7 +1495,7 @@ body::after {
   transform: translate(1rem, 0.8rem);
 }
 
-.local-curation-card:hover .triangle-fusion-fragment {
+.artwork-card:hover .triangle-fusion-fragment {
   transform: translate(0);
   opacity: 0.18;
 }
@@ -1617,7 +1569,7 @@ body::after {
   transform: scale(1.02);
 }
 
-.local-curation-card:hover .effect-lively-poster .artwork-visual-effect-image {
+.artwork-card:hover .effect-lively-poster .artwork-visual-effect-image {
   transform: scale(1.06) rotate(-0.8deg);
   filter: saturate(1.08);
 }
@@ -1664,7 +1616,7 @@ body::after {
 
 .art-abroad-effect-frame {
   position: relative;
-  height: 30rem;
+  height: 26rem;
 }
 
 .international-preview-badge {
@@ -1688,7 +1640,7 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.35rem, 3vw, 2.4rem);
 }
 
 .coffee-ripple-layer {
@@ -1719,20 +1671,46 @@ body::after {
   animation-delay: 2.7s;
 }
 
-.source-card-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.source-group-card {
+  overflow: hidden;
+  border-radius: 1.35rem;
 }
 
-.source-card {
+.source-group-heading {
   display: flex;
-  min-height: 15rem;
-  flex-direction: column;
+  align-items: end;
   justify-content: space-between;
-  gap: 1.25rem;
-  border-radius: 1.1rem;
-  padding: 1.2rem;
+  gap: 1.5rem;
+  padding: 1.25rem 1.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-list {
+  display: grid;
+}
+
+.source-list-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1.1fr) minmax(12rem, 1fr) minmax(10rem, auto);
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.5rem;
+  padding: 0.8rem 1.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.source-list-row:last-child {
+  border-bottom: 0;
+}
+
+.source-list-type {
+  color: rgb(203 213 225);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.source-list-action {
+  justify-self: end;
 }
 
 .source-link,
@@ -1803,46 +1781,47 @@ body::after {
 }
 
 @media (max-width: 900px) {
-  .source-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .art-abroad-preview {
     grid-template-columns: 1fr;
   }
 
   .art-abroad-effect-frame {
-    height: 25rem;
+    height: 24rem;
+  }
+
+  .source-list-row {
+    grid-template-columns: minmax(9rem, 1fr) minmax(10rem, 1fr);
+  }
+
+  .source-list-action {
+    justify-self: start;
   }
 }
 
 @media (max-width: 640px) {
-  .local-curation-grid,
-  .source-card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .local-curation-card:last-child {
-    grid-column: auto;
-    display: block;
-  }
-
-  .local-curation-visual,
-  .local-curation-card:last-child .local-curation-visual {
-    height: 22rem;
-  }
-
   .art-abroad-effect-frame {
-    height: 22rem;
+    height: 20rem;
   }
 
-  .source-card {
-    min-height: 0;
+  .source-group-heading {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.1rem;
+  }
+
+  .source-list-row {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .source-link,
+  .source-unverified {
+    min-height: 2.75rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .local-curation-card,
   .artwork-visual-effect-image,
   .brush-stroke-layer span,
   .triangle-fusion-fragment,

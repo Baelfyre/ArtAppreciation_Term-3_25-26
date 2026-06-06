@@ -13,21 +13,21 @@ export const artworkSources: ArtworkSource[] = [
     title: "Babaye sa Banwa",
     artist: "Maestro Nunelucio Alvarado",
     label: "Nunelucio Alvarado and the courtship of 'Babaye' | Lifestyle.INQ",
-    type: "Article / Artwork reference",
+    type: "Article / Artwork Reference",
   },
   {
     artworkId: "wayfarer",
     title: "Wayfarer",
     artist: "Dary Feril",
     label: "Wayfarer - Orange Project",
-    type: "Gallery / Artwork reference",
+    type: "Gallery / Artwork Reference",
   },
   {
     artworkId: "the-durian",
     title: "The Durian",
     artist: "Kublai Millan",
     label: "Encyclopedia of Philippine Art, Cultural Center of the Philippines",
-    type: "Artwork reference",
+    type: "CCP Encyclopedia of Philippine Art",
     url: "https://epa.culturalcenter.gov.ph/3/82/2173/",
   },
   {
@@ -35,7 +35,7 @@ export const artworkSources: ArtworkSource[] = [
     title: "MAPA",
     artist: "SB19",
     label: "MAPA official video/reference",
-    type: "Video / Music reference",
+    type: "Music / Video Reference",
     url: "https://www.youtube.com/watch?v=DDyr3DbTPtk",
   },
   {
@@ -43,7 +43,7 @@ export const artworkSources: ArtworkSource[] = [
     title: "Sa Ugoy ng Duyan",
     artist: "Lucio San Pedro and Levi Celerio",
     label: "Sa Ugoy ng Duyan reference",
-    type: "Comparative music reference",
+    type: "Comparative Music Reference",
     url: "https://www.youtube.com/watch?v=HOwOuk0ElqI",
   },
   {
@@ -51,7 +51,7 @@ export const artworkSources: ArtworkSource[] = [
     title: "Call Me Mother",
     artist: "Jun Robles Lana",
     label: "Call Me Mother video/reference",
-    type: "Film reference",
+    type: "Film Reference",
     url: "https://www.youtube.com/watch?v=cFZmGrP108E",
   },
   {
@@ -59,7 +59,7 @@ export const artworkSources: ArtworkSource[] = [
     title: "The Coffee Maker",
     artist: 'Renato "Rens" E. Tuzon',
     label: "Coffee Table Art Book",
-    type: "International exhibition / artwork reference",
+    type: "International Exhibition Reference",
     url: "https://www.coffeetableartbook.com/shopprints-HvJzJ/p/coffeemaker-by-renato-rens-e-tuzon",
   },
 ];

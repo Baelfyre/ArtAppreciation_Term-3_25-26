@@ -11,9 +11,7 @@ interface FeaturedSectionProps {
 export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const scopeOrder = { local: 0, international: 1 };
-  const featured = [...artworks]
-    .sort((a, b) => scopeOrder[a.scope] - scopeOrder[b.scope])
-    .slice(0, 5);
+  const featured = [...artworks].sort((a, b) => scopeOrder[a.scope] - scopeOrder[b.scope]);
   const carouselGroups = [0, 1];
 
   const moveCarousel = (direction: "previous" | "next") => {
@@ -29,9 +27,9 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
   };
 
   return (
-    <section id="featured" className="py-16 md:py-24">
+    <section id="featured" className="py-12 md:py-16">
       <div className="gallery-section">
-        <div className="mb-9 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
+        <div className="mb-7 flex flex-col gap-5 md:mb-9 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col text-center md:text-left">
             <div className="glass-chip-warm mb-4 inline-flex w-fit self-center rounded-full px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white md:mb-5 md:self-start md:px-4 md:text-xs md:tracking-[0.32em]">
               Featured artworks
@@ -40,8 +38,8 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
               Filipino Art in This Day and Age
             </h2>
             <p className="mx-auto max-w-[38rem] text-base font-light leading-relaxed text-slate-300 md:mx-0">
-              Explore group member artworks that show Filipino identity through diverse mediums,
-              evolving styles, personal stories, and interactive transitions.
+              Explore group artworks, local art research, and an international exhibit feature
+              through one continuous museum collection.
             </p>
           </div>
 

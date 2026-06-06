@@ -6,7 +6,6 @@ import { ArtworkInfoPanel } from "./components/artwork/ArtworkInfoPanel";
 import { FeaturedSection } from "./components/FeaturedSection";
 import { FilipinoArtAbroadPreview } from "./components/FilipinoArtAbroadPreview";
 import { Footer } from "./components/Footer";
-import { LocalArtCurationSection } from "./components/LocalArtCurationSection";
 import { ArtworkSourcesSection } from "./components/ArtworkSourcesSection";
 import { GlobeModeToggle } from "./components/globe/GlobeModeToggle";
 import { GlobeView } from "./components/globe/GlobeView";
@@ -16,7 +15,6 @@ import { useArtworkSelection } from "./hooks/useArtworkSelection";
 import { useViewMode } from "./hooks/useViewMode";
 import { artworkRepository } from "./services/artworkRepository";
 import type { GlobeMode } from "./domain/GlobeMode";
-import { coffeeMakerArtwork } from "./data/curatedArtworks";
 
 // Suppress THREE.Clock deprecation warning from react-globe.gl
 const originalWarn = console.warn;
@@ -40,6 +38,7 @@ export default function App() {
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
+  const coffeeMaker = useMemo(() => artworkRepository.findById("the-coffee-maker"), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
 
   useEffect(() => {
@@ -144,16 +143,14 @@ export default function App() {
           </div>
         </section>
 
-        <LocalArtCurationSection />
-
-        <FilipinoArtAbroadPreview artwork={coffeeMakerArtwork} />
+        {coffeeMaker && <FilipinoArtAbroadPreview artwork={coffeeMaker} />}
 
         <AboutSection />
 
+        <Footer />
+
         <ArtworkSourcesSection />
       </main>
-
-      <Footer />
     </div>
   );
 }

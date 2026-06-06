@@ -2,6 +2,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ArtworkEffectImage } from "./ArtworkEffectImage";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -33,6 +34,8 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
               </span>
             </div>
           </div>
+        ) : artwork.effect && artwork.scope === "local" ? (
+          <ArtworkEffectImage artwork={artwork} compact />
         ) : (
           <ImageWithFallback
             src={artwork.imageUrl}

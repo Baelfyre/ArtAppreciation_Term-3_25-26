@@ -2,6 +2,32 @@ import type { Artwork } from "../domain/Artwork";
 
 export const internationalArtworks: Artwork[] = [
   {
+    id: "the-coffee-maker",
+    scope: "international",
+    title: "The Coffee Maker",
+    creator: 'Renato "Rens" E. Tuzon',
+    medium: "Coffee on Paper",
+    imageUrl: "/resources/The Coffee Maker.png",
+    altText:
+      "The Coffee Maker by Renato Rens E. Tuzon, a coffee-on-paper artwork showing a man pouring coffee.",
+    effect: "coffee-ripple",
+    location: {
+      label: "Coffee Table Art Book International Exhibition, New Jersey, USA",
+      city: "New Jersey",
+      country: "United States",
+      lat: 40.0583,
+      lng: -74.4057,
+    },
+    locationBasis: "Featured in an International Exhibition",
+    description:
+      "The Coffee Maker shows how a Filipino artist can transform an everyday material, coffee, into contemporary art within an international exhibition context.",
+    advocacyConnection:
+      "The work presents Filipino experimentation and material creativity in an international exhibit space.",
+    elements: "Value, contrast, texture, balance, and emphasis.",
+    principles: "Coffee tones and paper texture create contrast and a clear focal point.",
+    featured: true,
+  },
+  {
     id: "intl-new-york-placeholder",
     scope: "international",
     title: "New York, United States",
@@ -19,7 +45,6 @@ export const internationalArtworks: Artwork[] = [
     advocacyConnection: "",
     elements: "",
     principles: "",
-    featured: true,
     isPlaceholder: true,
   },
   {
@@ -40,7 +65,6 @@ export const internationalArtworks: Artwork[] = [
     advocacyConnection: "",
     elements: "",
     principles: "",
-    featured: true,
     isPlaceholder: true,
   },
   {
@@ -61,7 +85,6 @@ export const internationalArtworks: Artwork[] = [
     advocacyConnection: "",
     elements: "",
     principles: "",
-    featured: true,
     isPlaceholder: true,
   },
   {
@@ -82,7 +105,6 @@ export const internationalArtworks: Artwork[] = [
     advocacyConnection: "",
     elements: "",
     principles: "",
-    featured: true,
     isPlaceholder: true,
   },
 ];

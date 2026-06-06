@@ -45,5 +45,5 @@ export const getArtworkCollectionLabel = (
 
   if (artwork.scope === "local") return "Group Members' Art";
 
-  return "International Art";
+  return artwork.isPlaceholder ? "International Art" : "International Feature";
 };

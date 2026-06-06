@@ -122,6 +122,7 @@ export const prepareLocalMapMarkers = (artworks: Artwork[]): LocalMapMarker[] =>
   const markers = artworks
     .filter(
       (artwork) =>
+        artwork.isLocalMapItem !== false &&
         typeof artwork.location.mapX === "number" && typeof artwork.location.mapY === "number",
     )
     .map((artwork) => ({
