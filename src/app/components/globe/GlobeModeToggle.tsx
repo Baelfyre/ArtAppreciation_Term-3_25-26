@@ -6,13 +6,13 @@ interface GlobeModeToggleProps {
 }
 
 const modes: Array<{ value: GlobeMode; label: string }> = [
-  { value: "local", label: "Local Gallery" },
-  { value: "international", label: "Art Abroad" },
+  { value: "local", label: "Local" },
+  { value: "international", label: "International" },
 ];
 
 export const GlobeModeToggle = ({ mode, onModeChange }: GlobeModeToggleProps) => {
   const activeCollectionLabel =
-    mode === "local" ? "Proposed Local Gallery" : "Filipino Art Abroad";
+    mode === "local" ? "Local Art" : "International Art";
 
   return (
     <div className="globe-mode-toggle glass-panel curved-card-accent pointer-events-auto w-full max-w-[21rem] overflow-hidden rounded-[1rem] p-2.5 shadow-2xl md:self-start md:rounded-[1.35rem] md:p-3">
@@ -33,7 +33,7 @@ export const GlobeModeToggle = ({ mode, onModeChange }: GlobeModeToggleProps) =>
             aria-selected={mode === item.value}
             aria-pressed={mode === item.value}
             onClick={() => onModeChange(item.value)}
-            className={`rounded-xl px-2 py-1.5 text-xs transition-all duration-300 md:px-3 md:py-2 md:text-sm ${
+            className={`min-h-11 rounded-xl px-2 py-1.5 text-xs transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430] md:px-3 md:py-2 md:text-sm ${
               mode === item.value
                 ? "border border-[#f4c430]/70 bg-[linear-gradient(135deg,rgba(244,196,48,0.26),rgba(29,73,216,0.16))] text-white shadow-[0_0_0_1px_rgba(244,196,48,0.22),0_12px_26px_rgba(0,0,0,0.22)]"
                 : "border border-white/10 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white"

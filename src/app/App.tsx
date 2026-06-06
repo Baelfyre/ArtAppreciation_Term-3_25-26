@@ -6,6 +6,8 @@ import { ArtworkInfoPanel } from "./components/artwork/ArtworkInfoPanel";
 import { FeaturedSection } from "./components/FeaturedSection";
 import { FilipinoArtAbroadPreview } from "./components/FilipinoArtAbroadPreview";
 import { Footer } from "./components/Footer";
+import { LocalArtCurationSection } from "./components/LocalArtCurationSection";
+import { ArtworkSourcesSection } from "./components/ArtworkSourcesSection";
 import { GlobeModeToggle } from "./components/globe/GlobeModeToggle";
 import { GlobeView } from "./components/globe/GlobeView";
 import { PhilippinesMapView } from "./components/map/PhilippinesMapView";
@@ -14,7 +16,7 @@ import { useArtworkSelection } from "./hooks/useArtworkSelection";
 import { useViewMode } from "./hooks/useViewMode";
 import { artworkRepository } from "./services/artworkRepository";
 import type { GlobeMode } from "./domain/GlobeMode";
-import { ProposedGalleryOverview } from "./components/ProposedGalleryOverview";
+import { coffeeMakerArtwork } from "./data/curatedArtworks";
 
 // Suppress THREE.Clock deprecation warning from react-globe.gl
 const originalWarn = console.warn;
@@ -38,7 +40,6 @@ export default function App() {
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
-  const coffeeMaker = useMemo(() => artworkRepository.findById("the-coffee-maker"), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
 
   useEffect(() => {
@@ -86,7 +87,10 @@ export default function App() {
       <main className="relative z-10">
         <Hero />
 
-        <ProposedGalleryOverview />
+        <FeaturedSection
+          artworks={featuredArtworks}
+          onViewArtwork={handleSelectArtwork}
+        />
 
         <section
           id="globe"
@@ -140,19 +144,13 @@ export default function App() {
           </div>
         </section>
 
-        <FeaturedSection
-          artworks={featuredArtworks}
-          onViewArtwork={handleSelectArtwork}
-        />
+        <LocalArtCurationSection />
 
-        {coffeeMaker && (
-          <FilipinoArtAbroadPreview
-            artwork={coffeeMaker}
-            onViewArtwork={handleSelectArtwork}
-          />
-        )}
+        <FilipinoArtAbroadPreview artwork={coffeeMakerArtwork} />
 
         <AboutSection />
+
+        <ArtworkSourcesSection />
       </main>
 
       <Footer />
@@ -162,9 +160,9 @@ export default function App() {
 
 const curationPlaceholders = {
   international: {
-    eyebrow: "International Exhibit Feature",
-    title: "The Coffee Maker",
-    body: 'Renato "Rens" E. Tuzon uses coffee on paper in an international exhibition context in New Jersey, USA.',
+    eyebrow: "Identity Beyond Borders",
+    title: "International Direction",
+    body: "Explore the wider globe, then continue below to the Filipino Art Abroad exhibit feature.",
   },
 } satisfies Record<Extract<GlobeMode, "international">, {
   eyebrow: string;

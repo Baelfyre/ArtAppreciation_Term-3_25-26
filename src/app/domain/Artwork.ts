@@ -4,7 +4,7 @@ import type { Location } from "./Location";
 export interface Artwork {
   id: string;
   scope: GlobeMode;
-  localCategory?: "visualArt" | "performingMedia";
+  localCategory?: "groupMember" | "localArtist";
   markerType?: "groupMember" | "localArtist" | "toVerify";
   markerColor?: "yellow" | "blue" | "red";
   title: string;

@@ -1,7 +1,7 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ArtworkEffectImage } from "./ArtworkEffectImage";
+import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -19,7 +19,9 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         isPlaceholder ? "international-placeholder-card" : ""
       }`}
     >
-      <div className="relative h-52 overflow-hidden md:h-56">
+      <div className="relative h-44 overflow-hidden md:h-48">
+        <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.46))] transition-colors group-hover:bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.34))]" />
+        <div className="pattern-surface absolute inset-0 z-10 opacity-20" />
         {isPlaceholder ? (
           <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_50%_42%,rgba(244,196,48,0.16),transparent_32%),linear-gradient(135deg,rgba(29,73,216,0.18),rgba(5,8,22,0.88))]">
             <div className="flex flex-col items-center text-center">
@@ -32,7 +34,13 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
             </div>
           </div>
         ) : (
-          <ArtworkEffectImage artwork={artwork} compact />
+          <ImageWithFallback
+            src={artwork.imageUrl}
+            alt={artwork.altText ?? artwork.title}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+          />
         )}
         <div className="absolute left-3 top-3 z-20">
           <span className="glass-chip-warm rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white">
@@ -50,7 +58,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
         </p>
         <p className="mb-5 line-clamp-3 flex-grow text-sm font-light leading-relaxed text-slate-300 md:mb-6">
           {isPlaceholder
-            ? "Reserved for a future international exhibit direction."
+            ? "International curation placeholder for Terminal Assessment."
             : artwork.description}
         </p>
 
@@ -61,7 +69,7 @@ export const ArtworkCard = ({ artwork, onSelect, actionTabIndex }: ArtworkCardPr
             document.getElementById("globe")?.scrollIntoView({ behavior: "smooth" });
             onSelect(artwork);
           }}
-          className="mt-auto flex items-center gap-2 text-sm font-medium text-[#f4c430] transition-colors hover:text-white"
+          className="mt-auto flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-[#f4c430] transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f4c430]"
         >
           {isPlaceholder ? "Show Marker" : "View Experience"}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

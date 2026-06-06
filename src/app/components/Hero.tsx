@@ -11,21 +11,21 @@ export const Hero = () => {
         </div>
 
         <h1 className="hero-title section-title mb-6 font-semibold text-white md:mb-8">
-          <span className="hero-title-main">Filipino Art at This Day and Age</span>
-          <span className="hero-title-accent">Content for Our Proposed Local Art Virtual Gallery</span>
+          <span className="hero-title-main">Filipino Art in This Day and Age</span>
+          <span className="hero-title-accent">Identity Beyond Borders</span>
         </h1>
 
         <p className="hero-lede mb-9 max-w-4xl font-light text-slate-300 md:mb-12">
-          Explore selected local artworks that express identity, values, region, family, community,
-          and creative change across different Filipino art forms.
+          Explore a digital exhibition showing how Filipino art continues to evolve through diverse
+          mediums, personal stories, local places, and global cultural connections.
         </p>
 
         <button
-          onClick={() => document.getElementById("gallery-map")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => document.getElementById("globe")?.scrollIntoView({ behavior: "smooth" })}
           className="glass-button hero-cta inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-base font-medium text-white md:gap-3 md:px-8 md:py-4 md:text-lg"
         >
           <Globe2 className="h-5 w-5" />
-          Explore Proposed Gallery
+          Explore the Globe
         </button>
       </div>
     </section>

@@ -1,53 +1,61 @@
-import { ArrowRight, Globe2 } from "lucide-react";
+import { Globe2 } from "lucide-react";
 import type { Artwork } from "../domain/Artwork";
 import { ArtworkEffectImage } from "./artwork/ArtworkEffectImage";
 
 interface FilipinoArtAbroadPreviewProps {
   artwork: Artwork;
-  onViewArtwork: (artwork: Artwork) => void;
 }
 
-export const FilipinoArtAbroadPreview = ({
-  artwork,
-  onViewArtwork,
-}: FilipinoArtAbroadPreviewProps) => (
+export const FilipinoArtAbroadPreview = ({ artwork }: FilipinoArtAbroadPreviewProps) => (
   <section id="filipino-art-abroad" className="relative z-10 py-16 md:py-24">
     <div className="gallery-section">
-      <div className="art-abroad-preview glass-panel curved-card-accent overflow-hidden rounded-[1.5rem] p-5 md:rounded-[2rem] md:p-8">
-        <div className="grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <span className="glass-chip-warm mb-4 inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[11px] uppercase tracking-[0.18em] text-[#f4c430]">
-              <Globe2 className="h-4 w-4" />
-              International Exhibit Feature
-            </span>
-            <h2 className="section-title text-3xl font-semibold leading-tight text-white md:text-4xl">
-              Next Direction: Filipino Art Abroad
-            </h2>
-            <p className="mt-4 max-w-[42rem] text-base font-light leading-relaxed text-slate-300 md:text-lg">
-              Some Filipino artworks also reach international exhibit spaces. One example reserved
-              for the next gallery direction is <strong className="font-medium text-white">The Coffee Maker</strong> by
-              Renato "Rens" E. Tuzon, a coffee-on-paper artwork connected to an international
-              exhibition context.
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              Featured in the Coffee Table Art Book International Exhibition, New Jersey, USA.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                onViewArtwork(artwork);
-                document.getElementById("globe")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="glass-button mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white"
-            >
-              View Filipino Art Abroad
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
+      <div className="mb-9 max-w-[44rem] md:mb-12">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#f4c430]">
+          International Exhibit Feature
+        </p>
+        <h2 className="section-title text-[clamp(2rem,7vw,3rem)] font-semibold leading-tight text-white">
+          Filipino Art Abroad
+        </h2>
+        <p className="mt-4 text-base font-light leading-relaxed text-slate-300">
+          Filipino creativity also reaches international exhibit spaces through distinctive
+          materials, stories, and contemporary practice.
+        </p>
+      </div>
 
-          <div className="art-abroad-effect-frame">
-            <ArtworkEffectImage artwork={artwork} />
-          </div>
+      <div className="art-abroad-preview overflow-hidden rounded-[1.5rem]">
+        <div className="art-abroad-effect-frame">
+          <ArtworkEffectImage artwork={artwork} compact />
+          <span className="international-preview-badge">
+            <Globe2 className="h-4 w-4" />
+            International Exhibit Preview
+          </span>
+        </div>
+
+        <div className="international-wall-label">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#f4c430]">
+            Featured in an International Exhibition
+          </p>
+          <h2 className="section-title mt-2 text-3xl font-semibold text-white">
+            The Coffee Maker
+          </h2>
+          <p className="mt-1 text-sm text-slate-300">Renato "Rens" E. Tuzon</p>
+
+          <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="museum-label-heading">Medium</dt>
+              <dd className="mt-1 text-slate-200">Coffee on Paper</dd>
+            </div>
+            <div>
+              <dt className="museum-label-heading">Context</dt>
+              <dd className="mt-1 text-slate-200">
+                Coffee Table Art Book International Exhibition, New Jersey, USA
+              </dd>
+            </div>
+          </dl>
+
+          <p className="mt-5 max-w-[42rem] text-sm font-light leading-relaxed text-slate-300">
+            {artwork.description}
+          </p>
         </div>
       </div>
     </div>

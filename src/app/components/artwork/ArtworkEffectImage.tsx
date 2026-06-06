@@ -21,7 +21,8 @@ export const ArtworkEffectImage = ({
     return (
       <div
         className={`artwork-visual-effect effect-music-wave ${compact ? "is-compact" : ""}`}
-        tabIndex={0}
+        tabIndex={compact ? -1 : 0}
+        role="img"
         aria-label={alt}
       >
         <div className="music-wave-orbit" aria-hidden="true" />
@@ -42,13 +43,14 @@ export const ArtworkEffectImage = ({
   return (
     <div
       className={`artwork-visual-effect effect-${effect} ${compact ? "is-compact" : ""}`}
-      tabIndex={0}
-      aria-label={`Interactive artwork view: ${artwork.title}`}
+      tabIndex={compact ? -1 : 0}
     >
       <ImageWithFallback
         src={artwork.imageUrl}
         alt={alt}
         className="artwork-visual-effect-image"
+        loading={compact ? "lazy" : "eager"}
+        decoding="async"
       />
 
       {effect === "triangle-fusion" && (
@@ -59,6 +61,8 @@ export const ArtworkEffectImage = ({
               src={artwork.imageUrl}
               alt=""
               className={`triangle-fusion-fragment triangle-fusion-fragment--${fragment}`}
+              loading="lazy"
+              decoding="async"
             />
           ))}
         </div>
