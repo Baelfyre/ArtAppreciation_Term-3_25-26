@@ -23,9 +23,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Group member hometown / artwork origin",
     description:
-      "Pixel Across Borders presents Filipino identity as something rooted in home while remaining connected to a wider world. Viewers can notice repeated square cells, strong warm and cool colors, digital lines, and cultural patterns joining into one image. Using Excel as the art medium turns an everyday digital tool into a precise pixel canvas, showing how personal and cultural expression can travel through technology without losing its Filipino character.",
+      "Pixel Across Borders uses Excel as a digital canvas, turning each spreadsheet cell into a pixel that connects data analytics with visual art. Repeated squares, cultural patterns, and warm-to-cool color contrasts present a Filipino identity rooted at home while reaching toward a wider world.",
     advocacyConnection:
-      "The work connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by placing recognizable cultural energy inside a contemporary digital form. It reflects how Filipinos can carry memory, creativity, and a sense of home across migration and online spaces. Its local origin and globally readable pixel language show that modern Filipino identity can adapt to new tools while remaining connected to community and culture.",
+      "The work links Filipino Art in This Day and Age with Filipino Identity Beyond Borders by expressing culture through an accessible contemporary tool. It shows how Filipino creativity can move through digital spaces and across borders while keeping a clear connection to memory, community, and place.",
     elements:
       "The artwork uses strong colors, repeated square shapes, digital lines, and cultural patterns.",
     principles:
@@ -54,9 +54,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Group member hometown / artwork origin",
     description:
-      "These Pages Contain a Universe presents identity as a collection of memories, interests, places, and small personal details. Viewers can notice overlapping paper layers, photo strips, stickers, typography, travel references, and illustrated panels arranged like pages from a lived experience. The junk journal and mixed-media format gives ordinary fragments new meaning, allowing the work to communicate a personal world that is textured, unfinished, and continually growing.",
+      "These Pages Contain a Universe gathers photos, illustrations, stickers, decorative materials, memories, and emotions into a layered junk journal collage. The mixed-media format turns personal fragments into a visual universe, showing identity as something assembled, remembered, and continually developing.",
     advocacyConnection:
-      "The collage connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by showing that identity can be assembled from local memories and experiences that move with a person. Its contemporary scrapbook language makes Filipino self-expression approachable and personal rather than fixed or distant. The work matters because it shows how individual stories can contribute to a wider Filipino cultural presence wherever those stories are carried and shared.",
+      "The collage connects the project themes by showing that Filipino identity can be carried through personal memories and everyday materials. Its contemporary scrapbook language makes local experience portable, allowing individual stories to contribute to a wider Filipino cultural presence.",
     elements:
       "The work uses layered shapes, contrasting colors, typography, photos, decorative stickers, and paper textures.",
     principles:
@@ -86,9 +86,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Group member hometown / artwork origin",
     description:
-      "Tradition to Vivid Identity presents a movement from a restrained charcoal study toward a bold, expressive portrait. Viewers can notice the change from muted value, hand-drawn texture, and careful line into saturated color, energetic marks, and a face that becomes the visual focus. Pairing charcoal with a vivid neo-expressionist approach allows the medium itself to communicate transformation, linking disciplined traditional practice with a more personal and contemporary identity.",
+      "Tradition to Vivid Identity moves from a disciplined charcoal still life into a vivid, expressive portrait. The shift from careful value and line to saturated color and energetic marks lets the paired media communicate transformation from traditional practice toward a confident modern identity.",
     advocacyConnection:
-      "The paired work connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by showing identity as an evolution rather than a rejection of tradition. The charcoal foundation represents skills and visual memory carried forward, while the vivid portrait expresses the freedom to reinterpret them in the present. It matters to modern Filipino identity because local creative practice can remain recognizable even as artists adopt bolder forms that speak across places and generations.",
+      "The pairing presents Filipino identity as an evolution rather than a rejection of tradition. It shows how inherited skills and visual memory can remain meaningful while artists reinterpret them through contemporary forms that speak across places and generations.",
     elements:
       "The transition highlights charcoal texture, value, line, contrast, vivid color, expressive face structure, and painterly marks.",
     principles:
@@ -117,9 +117,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Group member hometown / artwork origin",
     description:
-      "Work Life Balance presents the tension of a modern worker trying to hold professional demands and personal life together. Viewers can notice a central figure between two contrasting visual worlds, with dark and warm lighting, digital symbols, family scenes, and text clarifying the pressure on each side. The digital poster format organizes these competing experiences clearly, making an everyday struggle visible as one connected but difficult balancing act.",
+      "Work Life Balance uses a split digital composition to place a dark, pressured workspace beside a warm family setting. The central figure, contrasting light, and visual symbols make the tension between professional demands and personal comfort immediately readable.",
     advocacyConnection:
-      "The piece connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by turning a present-day experience of work, family, health, and responsibility into digital visual storytelling. Its local perspective can also speak to Filipinos working across different schedules, cities, and countries. The work matters because modern Filipino identity is shaped not only by heritage, but also by how people negotiate care, livelihood, and personal well-being in contemporary life.",
+      "The work connects contemporary Filipino art to the lived challenge of balancing livelihood, family, health, and responsibility. That experience can resonate with Filipinos across cities and borders, showing that modern identity is also shaped by everyday choices about work and care.",
     elements:
       "The work uses split composition, dark and warm lighting, digital icons, family scenes, text, and a central figure to represent contrast between work and life.",
     principles:
@@ -151,9 +151,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Artist location / regional cultural context",
     description:
-      "Babaye sa Banwa presents a stylized woman through bold color, geometric lines, textile-like patterns, and expressive eyes. Viewers can notice how the figure and surrounding shapes share the same visual rhythm, making the person feel closely connected to place and regional culture. Acrylic on canvas supports strong contrasts and layered patterns, giving local stories and identity a vivid contemporary presence rather than treating them as distant or purely traditional subjects.",
+      "Babaye sa Banwa presents a stylized woman through bold acrylic color, geometric lines, textile-like patterns, and expressive eyes. The figure and surrounding motifs share a strong visual rhythm, giving regional identity and local stories a vivid contemporary presence.",
     advocacyConnection:
-      "The painting connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by showing how regional experience can remain central within a modern visual language. Its Sagay and Visayan context adds a specific local voice to the wider idea of Filipino identity. That specificity matters because Filipino culture becomes more visible beyond borders when contemporary art carries the colors, patterns, people, and stories of distinct communities into broader conversations.",
+      "The painting shows how regional experience can remain central within Filipino art today. By carrying distinct colors, patterns, and community stories into a modern visual language, it strengthens the wider cultural presence of Filipino identity beyond its place of origin.",
     elements: "Bold color, geometric lines, textile-like patterns, and expressive eyes.",
     principles: "Balance and emphasis organize the shapes and focal points.",
     featured: true,
@@ -183,9 +183,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Artist location / regional cultural context",
     description:
-      "Wayfarer presents a child figure moving through a colorful, forest-like environment, suggesting a personal journey shaped by discovery and imagination. Viewers can notice fine lines, soft color, organic patterns, and human forms blending with the surroundings instead of standing apart from them. The mixed-media approach builds a layered visual space, allowing the journey to feel both intimate and open-ended while communicating growth, movement, and a developing sense of self.",
+      "Wayfarer follows a child figure through a colorful environment shaped by fine lines, soft colors, organic plant patterns, and human forms. Mixed media builds a layered, dreamlike space that turns movement through the landscape into a personal journey of growth and discovery.",
     advocacyConnection:
-      "The work connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by treating personal movement and self-discovery as part of a contemporary Filipino story. Its Bacolod context grounds the image locally, while the idea of a wayfarer can speak to Filipinos whose identities develop through travel, change, or new surroundings. It matters because wider cultural presence begins with personal experiences that remain connected to where a person comes from.",
+      "The work connects personal movement and self-discovery with a contemporary Filipino visual language. Its local grounding and open-ended journey can speak to Filipinos whose identities continue to develop through travel, change, and new surroundings.",
     elements: "Fine lines, soft color, organic patterns, and human forms.",
     principles: "Balance and unity connect the figure with the surrounding forms.",
     featured: true,
@@ -214,9 +214,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Public artwork location",
     description:
-      "The Durian presents a familiar Davao symbol as a large public sculpture decorated with repeated human figures and cultural imagery. Viewers can notice its scale, textured surface, rounded sculptural form, and the way many figures become part of one recognizable object. By using durable public sculpture instead of a private gallery format, the work gives regional identity a visible place in everyday space and invites community recognition from many viewing angles.",
+      "The Durian transforms a familiar Davao symbol into a large public sculpture defined by scale, textured form, and repeated human figures. Its durable, walk-around format makes Mindanao cultural identity visible in shared public space rather than limiting it to a gallery.",
     advocacyConnection:
-      "The sculpture connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by turning a regional icon into a shared statement about place, community, and cultural diversity. Its public presence makes Mindanao identity visible to residents and visitors rather than limiting it to a single audience. The work matters in a modern Filipino context because strong local symbols can contribute to a broader national and international understanding of how varied Filipino culture is.",
+      "The sculpture shows how contemporary public art can turn a regional icon into a shared statement about place, community, and cultural diversity. Making Mindanao identity visible to residents and visitors helps a specific local experience contribute to the broader image of Filipino culture.",
     elements: "Scale, texture, sculptural form, and repeated figures.",
     principles: "Emphasis and unity reinforce its public presence.",
     featured: true,
@@ -253,9 +253,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Artist origin / cultural production anchor",
     description:
-      "MAPA presents gratitude, family love, and respect for parents through a contemporary OPM and P-pop ballad. Listeners can notice the emotional vocals, melody, harmony, rhythm, repeated lyrical ideas, and a polished arrangement working toward one family-centered message. The music format makes that message immediate and shareable, allowing a familiar Filipino value to be expressed in a sound associated with the present generation.",
+      "MAPA expresses gratitude, family love, and respect for parents through emotional vocals and a polished modern OPM and P-pop arrangement. Its melody, repetition, and contemporary media format make a familiar Filipino family value immediate and shareable for today's audience.",
     advocacyConnection:
-      "The song connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by carrying a deeply familiar value into contemporary Filipino pop and widely accessible media. It shows that honoring parents can remain meaningful while musical style, production, and audience continue to change. MAPA matters to modern Filipino identity because local family experience can become contemporary expression with a wider cultural presence, without losing the emotion at its center.",
+      "The song carries a deeply familiar Filipino value into contemporary pop and globally accessible media. It demonstrates how local family experience can gain a wider cultural presence while preserving the gratitude and emotional connection at its center.",
     elements:
       "Vocals, melody, harmony, rhythm, lyrics, emotional tone, and contemporary music production.",
     principles:
@@ -286,9 +286,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Philippine cinema / cultural production context",
     description:
-      "Call Me Mother presents a contemporary story of family, care, parenthood, love, and responsibility through Filipino cinema. Viewers can notice how performance, dialogue, humor, emotional contrast, and visual storytelling work together to shape the film's view of modern family life. The comedy-drama medium allows serious questions about belonging and care to remain human and approachable, while the poster and screen presentation give those relationships a visible place in popular culture.",
+      "Call Me Mother uses performance, humor, dialogue, and emotional contrast to explore queer adoptive care, chosen parenthood, love, and responsibility. Its comedy-drama format keeps serious questions about belonging approachable while presenting a modern form of Filipino family life.",
     advocacyConnection:
-      "The film connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders by expanding the ways family and parenthood can be represented in contemporary Philippine cinema. Its focus on care and responsibility speaks from a local cultural context while remaining understandable to audiences in different places. It matters because modern Filipino identity includes changing lived experiences, and film can bring those experiences into a wider Filipino cultural presence through accessible visual storytelling.",
+      "The film expands how family and parenthood can be represented in Philippine cinema today. By centering care and responsibility in a story that can travel to wider audiences, it includes changing lived experiences within a broader and more inclusive Filipino identity.",
     elements: "Performance, dialogue, humor, contrast, and visual storytelling.",
     principles: "Contrast and emotion support a unified view of modern family.",
     featured: true,
@@ -322,9 +322,9 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Composer hometown / cultural anchor",
     description:
-      "Sa Ugoy ng Duyan presents childhood memory, a mother's care, and the emotional comfort of home through a Filipino lullaby. Listeners can notice its gentle melody, rhythm, harmony, vocal phrasing, repeated ideas, and unified emotional tone. The lullaby form keeps the message intimate, allowing music to hold personal memory and family affection in a way that can be remembered, performed, and passed from one generation to another.",
+      "Sa Ugoy ng Duyan uses the gentle form of a Filipino lullaby to hold childhood memory, motherly care, and the comfort of home. Its melody, repetition, and intimate vocal phrasing allow family affection and cultural memory to pass naturally between generations.",
     advocacyConnection:
-      "The song connects Filipino Art in This Day and Age with Filipino Identity Beyond Borders because its family-centered memory can continue to resonate wherever Filipinos live. Paired with MAPA, it shows how musical expression can move from a traditional lullaby to a modern pop ballad while preserving love and respect for parents. It matters to modern Filipino identity because cultural continuity is carried not only through place, but also through songs that remain meaningful across generations and borders.",
+      "The song shows how traditional Filipino music can preserve a sense of home wherever Filipinos live. Paired with MAPA, it traces changing musical expression across generations while keeping love and respect for parents as a continuing part of Filipino identity.",
     elements:
       "Melody, rhythm, harmony, lyrics, vocal phrasing, emotional tone, and lullaby form.",
     principles:

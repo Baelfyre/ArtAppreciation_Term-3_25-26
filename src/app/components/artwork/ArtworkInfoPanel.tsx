@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ArtworkEffectImage } from "./ArtworkEffectImage";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
 import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
 import { AngCollageAssembly } from "./AngCollageAssembly";
@@ -65,7 +65,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </section>
 
           <section className="artwork-panel-section artwork-preview-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
-            <div className="mb-3 min-w-0">
+            <div className="artwork-panel-section-heading mb-3 min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
             </div>
@@ -75,8 +75,8 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </div>
           </section>
 
-          <section className="artwork-panel-section artwork-facts-section custom-scrollbar flex min-h-0 min-w-0 flex-col overflow-y-auto rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
-            <div className="mb-3 min-w-0">
+          <section className="artwork-panel-section artwork-facts-section flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+            <div className="artwork-panel-section-heading mb-3 min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork details</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Context &amp; Composition</h3>
             </div>
@@ -85,9 +85,6 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
               <InfoRow icon={User} label="Creator" value={artwork.creator} />
               <InfoRow icon={MapPin} label="Location" value={locationLabel} />
               <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
-              {artwork.locationBasis && (
-                <InfoRow icon={MapPin} label="Location basis" value={artwork.locationBasis} />
-              )}
             </div>
 
             <div className="mt-4 space-y-4">
@@ -96,8 +93,8 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </div>
           </section>
 
-          <section className="artwork-panel-section artwork-story-section custom-scrollbar flex min-h-0 min-w-0 flex-col overflow-y-auto rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
-            <div className="mb-3 min-w-0">
+          <section className="artwork-panel-section artwork-story-section flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+            <div className="artwork-panel-section-heading mb-3 min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork story</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Meaning &amp; Advocacy</h3>
             </div>
@@ -112,7 +109,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
           </section>
 
           <section className="artwork-panel-section artwork-location-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
-            <div className="mb-3 min-w-0 md:mb-4">
+            <div className="artwork-panel-section-heading mb-3 min-w-0 md:mb-4">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
                 {artwork.scope === "local" ? "Philippines Map" : "Global Marker"}
@@ -193,7 +190,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
     return <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.title} />;
   }
 
-  return <ImageWithFallback src={artwork.imageUrl} alt={artwork.title} className="artwork-focus-image" />;
+  return <ArtworkEffectImage artwork={artwork} />;
 };
 
 interface LocationPreviewProps {
@@ -266,13 +263,13 @@ interface InfoRowProps {
 }
 
 const InfoRow = ({ icon: Icon, label, value }: InfoRowProps) => (
-  <div className="artwork-info-row flex min-w-0 items-start gap-3 text-sm">
-    <div className="glass-chip-warm mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
-      <Icon className="h-4 w-4 text-[#f4c430]" />
+  <div className="artwork-info-row flex min-w-0 items-start gap-2.5 text-[13px]">
+    <div className="glass-chip-warm mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full">
+      <Icon className="h-3.5 w-3.5 text-[#f4c430]" />
     </div>
     <div className="min-w-0">
-      <p className="mb-0.5 text-xs uppercase tracking-wider text-slate-400">{label}</p>
-      <p className="break-words text-slate-200">{value}</p>
+      <p className="mb-0.5 text-[10px] uppercase tracking-[0.12em] text-slate-400">{label}</p>
+      <p className="break-words leading-snug text-slate-200">{value}</p>
     </div>
   </div>
 );
@@ -285,62 +282,33 @@ interface InfoBlockProps {
 
 const InfoBlock = ({ label, value, icon: Icon }: InfoBlockProps) => (
   <div className="artwork-info-block min-w-0">
-    <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
+    <div className="mb-1.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] text-slate-400">
       {Icon && <Icon className="h-3.5 w-3.5 text-[#f4c430]" />}
       <span>{label}</span>
     </div>
-    <p className="break-words text-sm font-light leading-relaxed text-slate-300">{value}</p>
+    <p className="break-words text-[13px] font-light leading-[1.5] text-slate-300">{value}</p>
   </div>
 );
-
-const musicEvolutionItems = [
-  {
-    role: "traditional",
-    label: "Then",
-    title: "Sa Ugoy ng Duyan",
-    creator: "Lucio San Pedro and Levi Celerio",
-    medium: "Traditional Filipino lullaby / earlier OPM",
-  },
-  {
-    role: "contemporary",
-    label: "Now",
-    title: "MAPA",
-    creator: "SB19",
-    medium: "Modern OPM / P-pop ballad",
-  },
-] as const;
 
 const MusicEvolutionComparison = ({
   activeRole,
 }: {
   activeRole?: "traditional" | "contemporary";
 }) => (
-  <div className="artwork-info-block min-w-0">
-    <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
+  <div className="artwork-info-block artwork-music-comparison min-w-0">
+    <div className="mb-1.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] text-slate-400">
       <Music2 className="h-3.5 w-3.5 text-[#f4c430]" />
-      <span>Music Evolution: Sa Ugoy ng Duyan -&gt; MAPA</span>
+      <span>Music evolution</span>
     </div>
-    <p className="mb-3 text-sm font-light leading-relaxed text-slate-300">
-      Sa Ugoy ng Duyan and MAPA both honor parents, but they show how Filipino music has evolved across generations.
-      Sa Ugoy ng Duyan reflects parental love through a traditional lullaby, while MAPA expresses the same Filipino
-      value through modern OPM and P-pop.
+    <p className="flex flex-wrap items-center gap-1.5 text-[11px] leading-snug text-slate-300">
+      <span className={activeRole === "traditional" ? "font-semibold text-[#f4c430]" : ""}>
+        Sa Ugoy ng Duyan
+      </span>
+      <span aria-hidden="true" className="text-slate-500">-&gt;</span>
+      <span className={activeRole === "contemporary" ? "font-semibold text-[#f4c430]" : ""}>
+        MAPA
+      </span>
+      <span className="text-slate-400">Traditional lullaby to modern OPM and P-pop.</span>
     </p>
-    <div className="grid gap-2">
-      {musicEvolutionItems.map((item) => (
-        <div
-          key={item.role}
-          className={`rounded-[0.85rem] border p-3 ${
-            activeRole === item.role
-              ? "border-[#f4c430]/55 bg-[#f4c430]/10"
-              : "border-white/10 bg-black/15"
-          }`}
-        >
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f4c430]">{item.label}</p>
-          <p className="mt-1 text-sm font-semibold leading-snug text-white">{item.title}</p>
-          <p className="mt-0.5 text-xs leading-snug text-slate-300">{item.creator}</p>
-          <p className="mt-1 text-xs leading-snug text-slate-400">{item.medium}</p>
-        </div>
-      ))}
-    </div>
   </div>
 );
