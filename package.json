@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/prepare-theme-css.js",
     "build": "vite build",
+    "predev": "node scripts/prepare-theme-css.js",
     "dev": "vite",
     "import:dataset": "node scripts/import-map-dataset.js"
   },
