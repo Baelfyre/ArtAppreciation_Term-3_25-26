@@ -1,5 +1,6 @@
 .artwork-modal-backdrop {
   z-index: 100;
+  background: rgba(3, 5, 18, 0.42);
 }
 
 .artwork-info-panel {
@@ -25,6 +26,44 @@
   z-index: 60;
 }
 
+.effect-music-wave::before,
+.music-wave-orbit,
+.music-wave-icon,
+.music-wave-kicker,
+.music-wave-bars,
+.music-wave-copy {
+  pointer-events: none;
+}
+
+.effect-music-wave.is-compact {
+  align-items: stretch;
+  min-height: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 26% 24%, rgba(244, 196, 48, 0.08), transparent 32%),
+    radial-gradient(circle at 72% 54%, rgba(29, 73, 216, 0.18), transparent 48%),
+    linear-gradient(145deg, rgba(7, 20, 49, 0.7), rgba(20, 11, 40, 0.68) 58%, rgba(8, 12, 29, 0.72));
+}
+
+.effect-music-wave.is-compact .artwork-media-embed {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.effect-music-wave.is-compact .spotify-media-frame {
+  height: 152px;
+  min-height: 152px;
+  max-height: 170px;
+}
+
+.effect-music-wave.is-compact iframe {
+  position: relative;
+  z-index: 4;
+  pointer-events: auto;
+}
+
 @media (min-width: 768px) {
   .artwork-panel-floating-close {
     right: 2rem;
@@ -32,14 +71,54 @@
 }
 
 @media (min-width: 1180px) {
+  .artwork-modal-backdrop {
+    background: rgba(3, 5, 18, 0.32);
+  }
+
   .artwork-info-panel {
     top: clamp(5.25rem, 8svh, 6rem);
+    right: auto;
+    bottom: 1.5rem;
+    left: 50%;
+    width: min(70rem, calc(100vw - 4rem));
     max-height: calc(100svh - 6.75rem);
+    translate: -50% 0;
+  }
+
+  .artwork-panel-layout {
+    grid-template-columns: minmax(0, 1.12fr) minmax(20rem, 0.88fr);
+    grid-template-areas:
+      "heading heading"
+      "preview details"
+      "preview location";
+    align-items: start;
+  }
+
+  .artwork-panel-heading {
+    grid-area: heading;
+  }
+
+  .artwork-preview-section {
+    grid-area: preview;
+  }
+
+  .artwork-details-section {
+    grid-area: details;
+  }
+
+  .artwork-location-section {
+    grid-area: location;
+  }
+
+  .artwork-focus-frame.is-playable {
+    align-items: stretch;
+    justify-content: center;
+    min-height: 0;
   }
 
   .artwork-panel-floating-close {
     top: clamp(5.6rem, 8.5svh, 6.25rem);
-    right: 2rem;
+    right: max(2rem, calc((100vw - 70rem) / 2 + 1rem));
   }
 }
 
