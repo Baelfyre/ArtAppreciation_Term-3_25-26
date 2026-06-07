@@ -59,7 +59,72 @@
   min-height: 0;
   max-height: 100%;
   overflow-y: auto;
-  padding-right: 0.45rem;
+  padding: 0.7rem 0.45rem 0.7rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+  scrollbar-color: rgba(244, 196, 48, 0.5) rgba(255, 255, 255, 0.055);
+  scrollbar-width: thin;
+}
+
+.local-map-side-list::-webkit-scrollbar {
+  width: 0.55rem;
+}
+
+.local-map-side-list::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.local-map-side-list::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(8, 12, 29, 0.86);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(244, 196, 48, 0.72), rgba(134, 167, 255, 0.52));
+  box-shadow: 0 0 14px rgba(244, 196, 48, 0.22);
+}
+
+.local-map-side-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(244, 196, 48, 0.9), rgba(134, 167, 255, 0.68));
+}
+
+.local-map-list-heading {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.65rem;
+  border: 1px solid rgba(244, 196, 48, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.32rem 0.75rem;
+  color: #f4c430;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 24px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.local-map-list-heading::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.local-map-list-left .local-map-list-heading {
+  border-color: rgba(244, 196, 48, 0.28);
+}
+
+.local-map-list-right .local-map-list-heading {
+  border-color: rgba(134, 167, 255, 0.28);
+  color: #86a7ff;
 }
 
 .local-map-list-row {
