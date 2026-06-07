@@ -43,20 +43,19 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   return (
     <>
       <div className="artwork-modal-backdrop" onClick={onClose} />
-      <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed z-[100] overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close artwork panel"
+        className="artwork-panel-floating-close glass-chip rounded-full p-2.5 text-white shadow-lg transition-colors hover:bg-black/[0.35] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430]"
+      >
+        <X className="h-4 w-4" />
+      </button>
+      <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
-        <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-12 md:gap-4 md:p-4 md:pt-14 lg:p-5 lg:pt-14">
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close artwork panel"
-            className="glass-chip absolute right-3 top-3 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35] md:right-5 md:top-5"
-          >
-            <X className="h-4 w-4" />
-          </button>
-
-          <section className="artwork-panel-heading min-w-0">
+        <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-4 md:gap-4 md:p-4 md:pt-5 lg:p-5 lg:pt-5">
+          <section className="artwork-panel-heading min-w-0 pr-12">
             <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
               {collectionLabel}
             </span>
