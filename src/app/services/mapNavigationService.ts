@@ -55,11 +55,11 @@ const localMarkerColors = {
 const localMarkerCollisionThreshold = 6;
 const localMarkerDisplayOffsets = [
   { x: 0, y: 0 },
-  { x: -5, y: -4 },
-  { x: 5, y: 4 },
-  { x: -5, y: 4 },
-  { x: 5, y: -4 },
-  { x: 0, y: 5.5 },
+  { x: -2.2, y: -1.8 },
+  { x: 2.2, y: 1.8 },
+  { x: -2.2, y: 1.8 },
+  { x: 2.2, y: -1.8 },
+  { x: 0, y: 2.6 },
 ];
 
 const clampMapPercent = (value: number) => Math.min(96, Math.max(4, value));

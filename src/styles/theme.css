@@ -777,7 +777,7 @@ body::after {
   }
 
   .local-map-content {
-    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
   }
 
   .local-map-stage {
@@ -789,8 +789,8 @@ body::after {
   }
 
   .local-map-zoom-stage {
-    height: 128%;
-    max-height: 42rem;
+    height: 100%;
+    max-height: none;
   }
 
   .local-map-leader {
@@ -829,6 +829,7 @@ body::after {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
     gap: 0.55rem;
+    min-height: 2.75rem;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.85rem;
@@ -889,18 +890,81 @@ body::after {
     position: relative;
     z-index: 3;
     display: grid;
-    max-height: 13rem;
     gap: 0.7rem;
-    overflow-y: auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    background: rgba(5, 8, 22, 0.52);
-    padding: 0.75rem;
-    scrollbar-width: thin;
+    overflow: visible;
   }
 
   .local-map-mobile-group {
     min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.9rem;
+    background: rgba(5, 8, 22, 0.58);
+  }
+
+  .local-map-mobile-toggle {
+    display: flex;
+    min-height: 2.75rem;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 0.8rem;
+    color: #f6f4ee;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .local-map-mobile-toggle:hover,
+  .local-map-mobile-toggle:focus-visible {
+    background: rgba(255, 255, 255, 0.055);
+    outline: none;
+  }
+
+  .local-map-mobile-toggle:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(244, 196, 48, 0.72);
+  }
+
+  .local-map-mobile-toggle-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .local-map-mobile-count {
+    display: inline-flex;
+    min-width: 1.65rem;
+    height: 1.35rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    font-size: 0.68rem;
+    letter-spacing: 0;
+  }
+
+  .local-map-mobile-chevron {
+    width: 1rem;
+    height: 1rem;
+    color: #f4c430;
+    transition: transform 180ms ease;
+  }
+
+  .local-map-mobile-group.is-open .local-map-mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .local-map-mobile-content {
+    max-height: 18rem;
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.65rem;
+    scrollbar-width: thin;
   }
 
   .artwork-panel-slide {
@@ -929,8 +993,8 @@ body::after {
   }
 
   .local-map-marker-icon {
-    width: clamp(0.72rem, 1.05vw, 0.88rem);
-    height: clamp(0.72rem, 1.05vw, 0.88rem);
+    width: clamp(0.875rem, 1.1vw, 1.05rem);
+    height: clamp(0.875rem, 1.1vw, 1.05rem);
     display: block;
     background: currentColor;
     filter: drop-shadow(0 0 4px currentColor);
@@ -1114,6 +1178,41 @@ body::after {
     animation-delay: -3.4s;
   }
 
+  @media (max-width: 1023px) {
+    .globe-workspace:has(.local-map-panel) {
+      height: clamp(58rem, 120svh, 68rem);
+      min-height: 58rem;
+    }
+
+    .local-map-panel {
+      overflow: hidden;
+    }
+
+    .local-map-body {
+      flex: 1 1 auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .local-map-content {
+      height: auto;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .local-map-content {
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .local-map-zoom-stage {
+      height: 128%;
+      max-height: 42rem;
+    }
+  }
+
   @media (max-width: 767px) {
     .section-container,
     .gallery-section,
@@ -1197,8 +1296,13 @@ body::after {
     }
 
     .local-map-zoom-stage {
-      height: 108%;
-      max-height: 28rem;
+      height: 100%;
+      max-height: none;
+    }
+
+    .local-map-marker-icon {
+      width: clamp(0.7rem, 3.2vw, 0.82rem);
+      height: clamp(0.7rem, 3.2vw, 0.82rem);
     }
 
     .local-map-marker-dot {
@@ -1214,6 +1318,18 @@ body::after {
       max-width: 6.75rem;
       padding: 0.2rem 0.45rem;
       font-size: 0.62rem;
+    }
+
+    .local-map-marker:hover .local-map-marker-label,
+    .local-map-marker.is-highlighted .local-map-marker-label {
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+
+    .local-map-marker:focus-visible .local-map-marker-label,
+    .local-map-marker.is-selected .local-map-marker-label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0.1rem);
     }
 
     .spotify-media-frame {

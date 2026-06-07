@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type MouseEvent } from "react";
+import { ChevronDown } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import {
   prepareLocalMapMarkers,
@@ -19,6 +20,10 @@ export const PhilippinesMapView = ({
 }: PhilippinesMapViewProps) => {
   const markers = prepareLocalMapMarkers(artworks);
   const [highlightedMarkerId, setHighlightedMarkerId] = useState<string | null>(null);
+  const [openMobileGroups, setOpenMobileGroups] = useState<Record<string, boolean>>({
+    groupArtwork: false,
+    localArtist: false,
+  });
   const activeMarkerId = highlightedMarkerId ?? selectedArtwork?.id ?? null;
   const groupMemberMarkers = markers.filter((marker) => marker.artwork.localCategory !== "localArtist");
   const localArtistMarkers = markers.filter((marker) => marker.artwork.localCategory === "localArtist");
@@ -36,6 +41,18 @@ export const PhilippinesMapView = ({
     setHighlightedMarkerId((currentMarkerId) =>
       currentMarkerId === marker.id ? null : currentMarkerId,
     );
+  };
+
+  const toggleMobileGroup = (groupKey: string) => {
+    setOpenMobileGroups((currentGroups) => {
+      const isOpening = !currentGroups[groupKey];
+
+      return {
+        groupArtwork: false,
+        localArtist: false,
+        [groupKey]: isOpening,
+      };
+    });
   };
 
   const handleMapClickCapture = (event: MouseEvent<HTMLDivElement>) => {
@@ -96,7 +113,7 @@ export const PhilippinesMapView = ({
         </span>
       </div>
 
-      <div className="relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
+      <div className="local-map-body relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
         <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,11rem)_minmax(18rem,1fr)_minmax(0,11rem)]">
           <LocalArtworkList
@@ -109,7 +126,7 @@ export const PhilippinesMapView = ({
             onClearIntent={handleClearMarkerIntent}
           />
 
-          <div className="local-map-stage relative min-h-[18rem] overflow-visible md:min-h-[22rem] lg:min-h-0">
+          <div className="local-map-stage relative min-h-[clamp(24rem,72vh,34rem)] overflow-visible lg:min-h-0">
             <div
               className="local-map-zoom-stage relative mx-auto aspect-[702/1209] max-w-full overflow-visible"
               onClickCapture={handleMapClickCapture}
@@ -144,17 +161,23 @@ export const PhilippinesMapView = ({
 
           <div className="local-map-mobile-list lg:hidden">
             <LocalArtworkMobileGroup
+              groupKey="groupArtwork"
               title="Group Artwork"
               markers={groupMemberMarkers}
               activeMarkerId={activeMarkerId}
+              isOpen={openMobileGroups.groupArtwork}
+              onToggle={toggleMobileGroup}
               onSelect={handleSelectMarker}
               onIntent={handleMarkerIntent}
               onClearIntent={handleClearMarkerIntent}
             />
             <LocalArtworkMobileGroup
+              groupKey="localArtist"
               title="Local Artist"
               markers={localArtistMarkers}
               activeMarkerId={activeMarkerId}
+              isOpen={openMobileGroups.localArtist}
+              onToggle={toggleMobileGroup}
               onSelect={handleSelectMarker}
               onIntent={handleMarkerIntent}
               onClearIntent={handleClearMarkerIntent}
@@ -202,32 +225,57 @@ const LocalArtworkList = ({
   </section>
 );
 
-interface LocalArtworkMobileGroupProps extends LocalArtworkListProps {}
+interface LocalArtworkMobileGroupProps extends LocalArtworkListProps {
+  groupKey: string;
+  isOpen: boolean;
+  onToggle: (groupKey: string) => void;
+}
 
 const LocalArtworkMobileGroup = ({
+  groupKey,
   title,
   markers,
   activeMarkerId,
+  isOpen,
+  onToggle,
   onSelect,
   onIntent,
   onClearIntent,
-}: LocalArtworkMobileGroupProps) => (
-  <section className="local-map-mobile-group" aria-label={title}>
-    <p className="local-map-list-heading">{title}</p>
-    <div className="grid gap-2">
-      {markers.map((marker) => (
-        <LocalArtworkListItem
-          key={`${marker.id}-mobile`}
-          marker={marker}
-          isActive={activeMarkerId === marker.id}
-          onSelect={onSelect}
-          onIntent={onIntent}
-          onClearIntent={onClearIntent}
-        />
-      ))}
-    </div>
-  </section>
-);
+}: LocalArtworkMobileGroupProps) => {
+  const contentId = `local-map-mobile-${groupKey}`;
+
+  return (
+    <section className={`local-map-mobile-group ${isOpen ? "is-open" : ""}`} aria-label={title}>
+      <button
+        type="button"
+        className="local-map-mobile-toggle"
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+        onClick={() => onToggle(groupKey)}
+      >
+        <span>{title}</span>
+        <span className="local-map-mobile-toggle-meta">
+          <span className="local-map-mobile-count">{markers.length}</span>
+          <ChevronDown className="local-map-mobile-chevron" aria-hidden="true" />
+        </span>
+      </button>
+      <div id={contentId} className="local-map-mobile-content" hidden={!isOpen}>
+        <div className="grid gap-2">
+          {markers.map((marker) => (
+            <LocalArtworkListItem
+              key={`${marker.id}-mobile`}
+              marker={marker}
+              isActive={activeMarkerId === marker.id}
+              onSelect={onSelect}
+              onIntent={onIntent}
+              onClearIntent={onClearIntent}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 interface LocalArtworkListItemProps {
   marker: LocalMapMarker;
