@@ -26,7 +26,7 @@ export const PhilippinesMarker = ({
         event.stopPropagation();
         onSelect(marker);
       }}
-      className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+      className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 ${
         isSelected ? "is-selected" : ""
       } ${isHighlighted ? "is-highlighted" : ""}`}
       style={{
@@ -35,7 +35,12 @@ export const PhilippinesMarker = ({
         "--local-marker-color": marker.color,
       } as CSSProperties}
     >
-      <span className="local-map-marker-dot" />
+      <img
+        src="/resources/Pin_loc.svg"
+        alt=""
+        aria-hidden="true"
+        className="local-map-marker-icon"
+      />
       <span className="local-map-marker-label">{displayLabel}</span>
     </button>
   );

@@ -882,6 +882,22 @@ body::after {
     border-radius: 1.25rem;
   }
 
+  .artwork-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 5, 18, 0.72);
+    backdrop-filter: blur(14px);
+    z-index: 90;
+  }
+
+  .local-map-marker-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.28));
+  }
+
   .artwork-panel-layout {
     grid-template-columns: minmax(0, 1fr);
     align-content: start;

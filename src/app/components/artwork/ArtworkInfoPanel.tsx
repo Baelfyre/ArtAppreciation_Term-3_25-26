@@ -1,3 +1,4 @@
+import { useEffect, type CSSProperties } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
@@ -14,6 +15,25 @@ interface ArtworkInfoPanelProps {
 }
 
 export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) => {
+  useEffect(() => {
+    if (!artwork) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [artwork, onClose]);
+
   if (!artwork || (artwork.isPlaceholder && artwork.scope === "international")) return null;
 
   const locationLabel = formatArtworkLocation(artwork.location);
@@ -21,7 +41,9 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   const hasPlayableMusic = artwork.mediaType === "music" && Boolean(artwork.embedUrl);
 
   return (
-    <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed z-30 overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
+    <>
+      <div className="artwork-modal-backdrop" onClick={onClose} />
+      <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed z-[100] overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
       <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
       <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-12 md:gap-4 md:p-4 md:pt-14 lg:p-5 lg:pt-14">
@@ -97,6 +119,19 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
   if (artwork.mediaType === "music" && artwork.embedUrl) {
+    if (artwork.effect === "music-wave") {
+      return (
+        <div className="artwork-visual-effect effect-music-wave is-compact">
+          <ArtworkMediaEmbed
+            embedUrl={artwork.embedUrl}
+            title={artwork.title}
+            provider={artwork.mediaProvider}
+            embedHeight={artwork.embedHeight}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="flex h-full w-full items-center justify-center p-2 md:p-3">
         <ArtworkMediaEmbed
@@ -167,16 +202,23 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
             className="h-full w-full object-contain opacity-90 [filter:invert(94%)_sepia(13%)_saturate(620%)_hue-rotate(351deg)_brightness(103%)_contrast(94%)_drop-shadow(0_0_22px_rgba(244,196,48,0.18))]"
           />
           {hasLocalMarker && (
-            <span
-              className="local-map-marker is-selected absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            <button
+              type="button"
+              aria-label={`View location for ${artwork.title}`}
+              className="local-map-marker is-selected absolute z-20 -translate-x-1/2 -translate-y-1/2"
               style={{
                 left: `${artwork.location.mapX}%`,
                 top: `${artwork.location.mapY}%`,
               }}
             >
-              <span className="local-map-marker-dot" />
+              <img
+                src="/resources/Pin_loc.svg"
+                alt=""
+                aria-hidden="true"
+                className="local-map-marker-icon"
+              />
               <span className="local-map-marker-label">{artwork.location.city ?? artwork.location.label}</span>
-            </span>
+            </button>
           )}
         </div>
       </div>

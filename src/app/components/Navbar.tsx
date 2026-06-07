@@ -6,7 +6,6 @@ export const Navbar = () => {
     { href: "#", label: "Home" },
     { href: "#featured", label: "Featured" },
     { href: "#globe", label: "Globe", accent: true },
-    { href: "#filipino-art-abroad", label: "Art Abroad" },
     { href: "#about", label: "About" },
     { href: "#group-information", label: "Group" },
     { href: "#sources", label: "Sources" },

@@ -40,10 +40,10 @@ export const getArtworkCollectionLabel = (
   artwork: Pick<Artwork, "scope" | "isPlaceholder" | "localCategory">,
 ) => {
   if (artwork.scope === "local" && artwork.localCategory === "localArtist") {
-    return "Local Artist Research";
+    return "Local Artist";
   }
 
-  if (artwork.scope === "local") return "Group Members' Art";
+  if (artwork.scope === "local") return "Group Artwork";
 
-  return artwork.isPlaceholder ? "International Art" : "International Feature";
+  return artwork.isPlaceholder ? "International Art" : "Art Abroad";
 };

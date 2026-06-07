@@ -41,9 +41,16 @@ export const AboutSection = () => (
       </div>
 
       <div className="identity-hub compact-identity-hub relative mx-auto flex aspect-square w-full max-w-[15rem] items-center justify-center">
-        <div className="absolute inset-0 rounded-full border border-white/8 bg-[radial-gradient(circle_at_center,rgba(29,73,216,0.12),transparent_65%)]" />
-        <div className="absolute inset-[12%] rounded-full border border-dashed border-[#f4c430]/20" />
-        <div className="absolute inset-[28%] rounded-full border border-white/8" />
+        <div className="identity-starfield absolute inset-0">
+          <span className="identity-star" style={{ top: "12%", left: "24%", width: "0.28rem", height: "0.28rem", '--particle-duration': '28s', '--particle-delay': '0s' } as React.CSSProperties} />
+          <span className="identity-star" style={{ top: "38%", left: "72%", width: "0.32rem", height: "0.32rem", '--particle-duration': '32s', '--particle-delay': '4s' } as React.CSSProperties} />
+          <span className="identity-star" style={{ top: "70%", left: "18%", width: "0.24rem", height: "0.24rem", '--particle-duration': '30s', '--particle-delay': '2s' } as React.CSSProperties} />
+          <span className="identity-star" style={{ top: "82%", left: "58%", width: "0.2rem", height: "0.2rem", '--particle-duration': '36s', '--particle-delay': '6s' } as React.CSSProperties} />
+        </div>
+        <div className="identity-particle-orbit orbit-spin absolute inset-[14%] rounded-full" />
+        <div className="identity-particle-orbit orbit-counter absolute inset-[24%] rounded-full" />
+        <div className="identity-core absolute inset-[36%] rounded-full" />
+        <div className="identity-core-glow absolute inset-[30%] rounded-full" />
         <img
           src="/resources/philippines.svg"
           alt=""

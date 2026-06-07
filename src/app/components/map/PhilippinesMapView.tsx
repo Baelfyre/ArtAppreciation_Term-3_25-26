@@ -74,10 +74,10 @@ export const PhilippinesMapView = ({
           <p className="globe-local-status-label mb-2 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
             Zooming Into the Philippines
           </p>
-          <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Art</p>
+          <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Artist</p>
           <h3 className="section-title text-xl font-semibold text-white md:text-2xl">Philippines Map</h3>
           <p className="mt-1 max-w-[18rem] text-xs leading-snug text-slate-300">
-            Group Members' Art and researched Filipino art
+            Group artworks and local artist research anchored to the Philippines.
           </p>
         </div>
         <span className="glass-chip shrink-0 rounded-full px-2.5 py-1 text-[11px] text-slate-200 md:px-3 md:text-xs">
@@ -88,11 +88,11 @@ export const PhilippinesMapView = ({
       <div className="mb-3 grid grid-cols-2 gap-2 text-[10px] leading-tight text-slate-200 md:mb-4 md:text-xs">
         <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
           <span className="h-2 w-2 shrink-0 rounded-full bg-[#f4c430]" />
-          Group Members' Art
+          Group Artwork
         </span>
         <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
           <span className="h-2 w-2 shrink-0 rounded-full bg-[#86a7ff]" />
-          Local Artist Research
+          Local Artist
         </span>
       </div>
 
@@ -100,7 +100,7 @@ export const PhilippinesMapView = ({
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
         <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,13rem)_minmax(14rem,1fr)_minmax(0,13rem)]">
           <LocalArtworkList
-            title="Group Members' Art"
+            title="Group Artwork"
             markers={groupMemberMarkers}
             activeMarkerId={activeMarkerId}
             className="hidden lg:flex"
@@ -155,7 +155,7 @@ export const PhilippinesMapView = ({
           </div>
 
           <LocalArtworkList
-            title="Local Artist Research"
+            title="Local Artist"
             markers={localArtistMarkers}
             activeMarkerId={activeMarkerId}
             className="hidden lg:flex"
@@ -166,7 +166,7 @@ export const PhilippinesMapView = ({
 
           <div className="local-map-mobile-list lg:hidden">
             <LocalArtworkMobileGroup
-              title="Group Members' Art"
+              title="Group Artwork"
               markers={groupMemberMarkers}
               activeMarkerId={activeMarkerId}
               onSelect={handleSelectMarker}
@@ -174,7 +174,7 @@ export const PhilippinesMapView = ({
               onClearIntent={handleClearMarkerIntent}
             />
             <LocalArtworkMobileGroup
-              title="Local Artist Research"
+              title="Local Artist"
               markers={localArtistMarkers}
               activeMarkerId={activeMarkerId}
               onSelect={handleSelectMarker}

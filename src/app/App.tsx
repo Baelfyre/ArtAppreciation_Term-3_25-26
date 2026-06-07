@@ -4,7 +4,6 @@ import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
 import { ArtworkInfoPanel } from "./components/artwork/ArtworkInfoPanel";
 import { FeaturedSection } from "./components/FeaturedSection";
-import { FilipinoArtAbroadPreview } from "./components/FilipinoArtAbroadPreview";
 import { Footer } from "./components/Footer";
 import { ArtworkSourcesSection } from "./components/ArtworkSourcesSection";
 import { GlobeModeToggle } from "./components/globe/GlobeModeToggle";
@@ -38,7 +37,6 @@ export default function App() {
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
-  const coffeeMaker = useMemo(() => artworkRepository.findById("the-coffee-maker"), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
 
   useEffect(() => {
@@ -143,8 +141,6 @@ export default function App() {
           </div>
         </section>
 
-        {coffeeMaker && <FilipinoArtAbroadPreview artwork={coffeeMaker} />}
-
         <AboutSection />
 
         <Footer />
@@ -159,7 +155,7 @@ const curationPlaceholders = {
   international: {
     eyebrow: "Identity Beyond Borders",
     title: "International Direction",
-    body: "Explore the wider globe, then continue below to the Filipino Art Abroad exhibit feature.",
+    body: "Explore the wider globe, then continue below to the main exhibition collection.",
   },
 } satisfies Record<Extract<GlobeMode, "international">, {
   eyebrow: string;
