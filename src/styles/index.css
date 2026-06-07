@@ -3,4 +3,5 @@
 @import './theme.generated.css';
 @import './local-map-responsive.css';
 @import './modal-navigation-fixes.css';
+@import './modal-navigation-responsive.css';
 @import './artwork-focus-quadrants.css';
