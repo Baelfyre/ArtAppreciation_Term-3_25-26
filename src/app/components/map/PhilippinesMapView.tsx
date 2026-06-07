@@ -96,9 +96,9 @@ export const PhilippinesMapView = ({
         </span>
       </div>
 
-      <div className="local-map-body relative min-h-0 flex-1 rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
+      <div className="local-map-body relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
-        <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3">
+        <div className="local-map-content relative grid h-full min-h-0 gap-3 overflow-hidden p-2 md:p-3">
           <LocalArtworkList
             title="Group Artwork"
             markers={groupMemberMarkers}
@@ -109,15 +109,15 @@ export const PhilippinesMapView = ({
             onClearIntent={handleClearMarkerIntent}
           />
 
-          <div className="local-map-stage relative min-h-[clamp(22rem,60vh,48rem)] overflow-visible lg:min-h-0">
+          <div className="local-map-stage relative min-h-0 overflow-hidden rounded-[0.875rem]">
             <div
-              className="local-map-zoom-stage relative mx-auto aspect-[702/1209] max-w-full overflow-visible"
+              className="local-map-zoom-stage relative mx-auto aspect-[702/1209] overflow-hidden"
               onClickCapture={handleMapClickCapture}
             >
               <img
                 src="/resources/philippines.svg"
                 alt="Philippines map"
-                className="h-full w-full object-contain opacity-90 [filter:invert(94%)_sepia(13%)_saturate(620%)_hue-rotate(351deg)_brightness(103%)_contrast(94%)_drop-shadow(0_0_22px_rgba(244,196,48,0.18))]"
+                className="block h-full w-full max-h-full max-w-full object-contain object-center opacity-90 [filter:invert(94%)_sepia(13%)_saturate(620%)_hue-rotate(351deg)_brightness(103%)_contrast(94%)_drop-shadow(0_0_22px_rgba(244,196,48,0.18))]"
               />
 
               {markers.map((marker) => (
