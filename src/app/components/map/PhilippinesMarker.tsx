@@ -26,7 +26,7 @@ export const PhilippinesMarker = ({
         event.stopPropagation();
         onSelect(marker);
       }}
-      className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-1/2 ${
+      className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-full ${
         isSelected ? "is-selected" : ""
       } ${isHighlighted ? "is-highlighted" : ""}`}
       style={{

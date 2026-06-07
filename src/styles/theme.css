@@ -669,7 +669,7 @@ body::after {
 
   .local-map-marker {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     width: clamp(1.35rem, 1.8vw, 1.55rem);
     height: clamp(1.35rem, 1.8vw, 1.55rem);
@@ -747,8 +747,8 @@ body::after {
   .local-map-marker:hover .local-map-marker-icon,
   .local-map-marker:focus-visible .local-map-marker-icon,
   .local-map-marker.is-highlighted .local-map-marker-icon {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 7px currentColor);
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 4px currentColor);
   }
 
   .local-map-marker.is-selected {
@@ -756,10 +756,10 @@ body::after {
   }
 
   .local-map-marker.is-selected .local-map-marker-icon {
-    transform: scale(1.12);
+    transform: scale(1.08);
     filter:
-      drop-shadow(0 0 5px rgba(246, 244, 238, 0.72))
-      drop-shadow(0 0 10px rgba(244, 196, 48, 0.62));
+      drop-shadow(0 0 3px rgba(246, 244, 238, 0.72))
+      drop-shadow(0 0 6px rgba(244, 196, 48, 0.62));
   }
 
   .local-map-marker.is-highlighted .local-map-marker-dot,
@@ -791,7 +791,8 @@ body::after {
   }
 
   .local-map-zoom-stage {
-    height: 100%;
+    width: 100%;
+    height: auto;
     max-height: none;
   }
 
@@ -916,14 +917,21 @@ body::after {
   }
 
   .local-map-marker-icon {
-    width: clamp(0.875rem, 1.1vw, 1.05rem);
-    height: clamp(0.875rem, 1.1vw, 1.05rem);
+    width: 0.7rem;
+    height: 0.7rem;
     display: block;
     background: currentColor;
-    filter: drop-shadow(0 0 4px currentColor);
+    filter: drop-shadow(0 0 2px currentColor);
     -webkit-mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
     mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
     transition: filter 180ms ease, transform 180ms ease;
+  }
+
+  @media (min-width: 768px) {
+    .local-map-marker-icon {
+      width: 0.85rem;
+      height: 0.85rem;
+    }
   }
 
   .artwork-panel-layout {
@@ -1140,6 +1148,7 @@ body::after {
     }
 
     .local-map-zoom-stage {
+      width: auto;
       height: 128%;
       max-height: 42rem;
     }
@@ -1228,13 +1237,14 @@ body::after {
     }
 
     .local-map-zoom-stage {
-      height: 100%;
+      width: 100%;
+      height: auto;
       max-height: none;
     }
 
     .local-map-marker-icon {
-      width: clamp(0.7rem, 3.2vw, 0.82rem);
-      height: clamp(0.7rem, 3.2vw, 0.82rem);
+      width: 0.7rem;
+      height: 0.7rem;
     }
 
     .local-map-marker-dot {
