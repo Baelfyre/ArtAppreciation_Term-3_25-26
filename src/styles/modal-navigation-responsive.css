@@ -1,0 +1,47 @@
+.artwork-modal-backdrop {
+  z-index: 120;
+}
+
+.artwork-info-panel {
+  z-index: 130;
+}
+
+.artwork-panel-floating-close {
+  position: fixed;
+  top: calc(1rem + env(safe-area-inset-top));
+  right: calc(1rem + env(safe-area-inset-right));
+  z-index: 150;
+}
+
+.navbar-shell {
+  max-width: min(80rem, calc(100vw - 1.5rem));
+}
+
+.navbar-mobile-menu {
+  max-width: min(80rem, calc(100vw - 1.5rem));
+}
+
+@media (min-width: 768px) {
+  .artwork-panel-floating-close {
+    top: calc(1.5rem + env(safe-area-inset-top));
+    right: calc(1.5rem + env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1180px) {
+  .artwork-panel-floating-close {
+    top: calc(1.5rem + env(safe-area-inset-top));
+    right: calc(1.5rem + env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 430px) {
+  .navbar-mobile-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .artwork-panel-floating-close {
+    top: calc(0.75rem + env(safe-area-inset-top));
+    right: calc(0.75rem + env(safe-area-inset-right));
+  }
+}
