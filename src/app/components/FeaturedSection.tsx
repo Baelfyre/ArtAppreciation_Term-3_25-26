@@ -72,7 +72,7 @@ export const FeaturedSection = ({ artworks, onViewArtwork }: FeaturedSectionProp
                 {featured.map((artwork) => (
                   <div
                     key={`${artwork.id}-${groupIndex}`}
-                    className="featured-carousel-card w-[min(19rem,82vw)] shrink-0 md:w-[20rem]"
+                    className="featured-carousel-card w-[min(21rem,88vw)] shrink-0 md:w-[20rem]"
                   >
                     <ArtworkCard
                       artwork={artwork}
