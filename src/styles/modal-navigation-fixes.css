@@ -1,0 +1,63 @@
+.artwork-modal-backdrop {
+  z-index: 100;
+}
+
+.artwork-info-panel {
+  z-index: 120;
+  top: clamp(5.25rem, 8svh, 6rem);
+  max-height: calc(100svh - 6.5rem);
+}
+
+.artwork-panel-floating-close {
+  position: fixed;
+  top: clamp(5.6rem, 8.5svh, 6.25rem);
+  right: 1.35rem;
+  z-index: 140;
+  pointer-events: auto;
+}
+
+.navbar-shell {
+  min-width: 0;
+}
+
+.navbar-mobile-menu {
+  position: relative;
+  z-index: 60;
+}
+
+@media (min-width: 768px) {
+  .artwork-panel-floating-close {
+    right: 2rem;
+  }
+}
+
+@media (min-width: 1180px) {
+  .artwork-info-panel {
+    top: clamp(5.25rem, 8svh, 6rem);
+    max-height: calc(100svh - 6.75rem);
+  }
+
+  .artwork-panel-floating-close {
+    top: clamp(5.6rem, 8.5svh, 6.25rem);
+    right: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .artwork-info-panel {
+    top: clamp(5.75rem, 13svh, 7rem);
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    max-height: calc(100svh - 6.75rem);
+  }
+
+  .artwork-panel-floating-close {
+    top: clamp(6.05rem, 14svh, 7.25rem);
+    right: 1.05rem;
+  }
+
+  .navbar-mobile-menu {
+    grid-template-columns: 1fr;
+  }
+}
