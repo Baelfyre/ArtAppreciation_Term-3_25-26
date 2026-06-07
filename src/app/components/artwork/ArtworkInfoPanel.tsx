@@ -44,76 +44,77 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
     <>
       <div className="artwork-modal-backdrop" onClick={onClose} />
       <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed z-[100] overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
-      <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
+        <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
-      <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-12 md:gap-4 md:p-4 md:pt-14 lg:p-5 lg:pt-14">
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close artwork panel"
-          className="glass-chip absolute right-3 top-3 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35] md:right-5 md:top-5"
-        >
-          <X className="h-4 w-4" />
-        </button>
+        <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-12 md:gap-4 md:p-4 md:pt-14 lg:p-5 lg:pt-14">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close artwork panel"
+            className="glass-chip absolute right-3 top-3 z-20 rounded-full p-2 text-white transition-colors hover:bg-black/[0.35] md:right-5 md:top-5"
+          >
+            <X className="h-4 w-4" />
+          </button>
 
-        <section className="artwork-panel-heading min-w-0">
-          <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
-            {collectionLabel}
-          </span>
-          <h2 className="section-title break-words text-xl font-medium leading-tight text-white md:text-2xl">
-            {artwork.title}
-          </h2>
-        </section>
+          <section className="artwork-panel-heading min-w-0">
+            <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
+              {collectionLabel}
+            </span>
+            <h2 className="section-title break-words text-xl font-medium leading-tight text-white md:text-2xl">
+              {artwork.title}
+            </h2>
+          </section>
 
-        <section className="artwork-preview-section flex min-w-0 flex-col">
-          <div className="mb-3 min-w-0">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
-            <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
-          </div>
+          <section className="artwork-preview-section flex min-w-0 flex-col">
+            <div className="mb-3 min-w-0">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
+              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
+            </div>
 
-          <div className={`artwork-focus-frame ${hasPlayableMusic ? "is-playable" : "is-visual"}`}>
-            <ArtworkPreview artwork={artwork} />
-          </div>
-        </section>
+            <div className={`artwork-focus-frame ${hasPlayableMusic ? "is-playable" : "is-visual"}`}>
+              <ArtworkPreview artwork={artwork} />
+            </div>
+          </section>
 
-        <section className="artwork-panel-section artwork-details-section flex min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5">
-          <div className="grid gap-3">
-            <InfoRow icon={User} label="Creator" value={artwork.creator} />
-            <InfoRow icon={MapPin} label="Location" value={locationLabel} />
-            <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
-            {artwork.locationBasis && (
-              <InfoRow icon={MapPin} label="Location basis" value={artwork.locationBasis} />
-            )}
-          </div>
+          <section className="artwork-panel-section artwork-details-section flex min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5">
+            <div className="grid gap-3">
+              <InfoRow icon={User} label="Creator" value={artwork.creator} />
+              <InfoRow icon={MapPin} label="Location" value={locationLabel} />
+              <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
+              {artwork.locationBasis && (
+                <InfoRow icon={MapPin} label="Location basis" value={artwork.locationBasis} />
+              )}
+            </div>
 
-          <div className="mt-5 space-y-4">
-            <InfoBlock label="Description" value={artwork.description} />
-            <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
-            <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
-            <InfoBlock label="Principles" value={artwork.principles} />
-            {artwork.comparisonGroupId === "music-evolution" && (
-              <MusicEvolutionComparison activeRole={artwork.comparisonRole} />
-            )}
-          </div>
-        </section>
+            <div className="mt-5 space-y-4">
+              <InfoBlock label="Description" value={artwork.description} />
+              <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
+              <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
+              <InfoBlock label="Principles" value={artwork.principles} />
+              {artwork.comparisonGroupId === "music-evolution" && (
+                <MusicEvolutionComparison activeRole={artwork.comparisonRole} />
+              )}
+            </div>
+          </section>
 
-        <section className="artwork-panel-section artwork-location-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
-          <div className="mb-3 min-w-0 md:mb-4">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
-            <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
-              {artwork.scope === "local" ? "Philippines Map" : "Global Marker"}
-            </h3>
-          </div>
+          <section className="artwork-panel-section artwork-location-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+            <div className="mb-3 min-w-0 md:mb-4">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Location</p>
+              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">
+                {artwork.scope === "local" ? "Philippines Map" : "Global Marker"}
+              </h3>
+            </div>
 
-          <LocationPreview artwork={artwork} />
+            <LocationPreview artwork={artwork} />
 
-          <div className="artwork-selected-place mt-3 rounded-[1rem] p-3 md:mt-4 md:p-4">
-            <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
-            <p className="break-words text-sm leading-relaxed text-slate-200">{locationLabel}</p>
-          </div>
-        </section>
-      </div>
-    </aside>
+            <div className="artwork-selected-place mt-3 rounded-[1rem] p-3 md:mt-4 md:p-4">
+              <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
+              <p className="break-words text-sm leading-relaxed text-slate-200">{locationLabel}</p>
+            </div>
+          </section>
+        </div>
+      </aside>
+    </>
   );
 };
 
