@@ -11,9 +11,12 @@
 }
 
 .artwork-focus-frame {
+  display: flex;
   flex: 1 1 auto;
   min-height: 0;
   width: 100%;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border-radius: 1rem;
   background:
@@ -30,37 +33,42 @@
   padding: 0.5rem;
 }
 
-.artwork-focus-image {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.artwork-focus-frame .pixel-across-reveal-stage {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.artwork-focus-frame .artwork-effect-stage {
-  width: auto;
-  height: calc(100% - 1rem);
-  max-width: calc(100% - 1rem);
-  max-height: calc(100% - 1rem);
-}
-
+.artwork-focus-frame .pixel-across-reveal,
 .artwork-focus-frame .artwork-effect-shell,
-.artwork-focus-frame .artwork-visual-effect {
+.artwork-focus-frame .artwork-visual-effect,
+.artwork-focus-frame .artwork-effect-stage,
+.artwork-focus-frame .viloria-split-stage,
+.artwork-focus-frame .jadloc-transition-stage,
+.artwork-focus-frame .pixel-across-reveal-stage {
   width: 100%;
   height: 100%;
   min-height: 0;
-  border-radius: 0.9rem;
+  max-width: 100%;
+  max-height: 100%;
 }
 
+.artwork-focus-frame .pixel-across-reveal,
+.artwork-focus-frame .artwork-effect-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artwork-focus-image,
+.artwork-focus-frame .pixel-across-reveal-image,
+.artwork-focus-frame .artwork-effect-image,
 .artwork-focus-frame .artwork-visual-effect-image,
+.artwork-focus-frame .viloria-base-image,
 .artwork-focus-frame .triangle-fusion-fragment {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+}
+
+.artwork-focus-frame .artwork-visual-effect {
+  border-radius: 0.9rem;
 }
 
 .artwork-focus-frame .effect-slow-zoom .artwork-visual-effect-image {
@@ -190,8 +198,8 @@
   .artwork-panel-layout {
     height: 100%;
     min-height: 0;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1.08fr) minmax(0, 0.92fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    grid-template-rows: auto minmax(0, 1.35fr) minmax(0, 0.65fr);
     grid-template-areas:
       "heading heading"
       "preview facts"
@@ -235,21 +243,25 @@
   .artwork-story-section,
   .artwork-location-section {
     min-height: 0;
-    padding: 0.8rem;
+    padding: 0.75rem;
   }
 
   .artwork-facts-section,
   .artwork-story-section {
-    overflow: visible;
+    overflow: hidden;
   }
 
   .artwork-panel-section-heading {
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .artwork-panel-section-heading p {
+    font-size: 0.58rem;
   }
 
   .artwork-panel-section-heading h3 {
-    font-size: 1.08rem;
-    line-height: 1.2;
+    font-size: 1.02rem;
+    line-height: 1.15;
   }
 
   .artwork-facts-section > .grid {
@@ -257,48 +269,53 @@
   }
 
   .artwork-facts-section > .mt-4 {
-    margin-top: 0.45rem;
+    margin-top: 0.35rem;
   }
 
   .artwork-facts-section .artwork-info-row {
-    padding: 0.42rem 0;
+    padding: 0.32rem 0;
   }
 
   .artwork-facts-section .artwork-info-block,
   .artwork-story-section .artwork-info-block {
-    padding-top: 0.52rem;
+    padding-top: 0.42rem;
   }
 
   .artwork-facts-section .artwork-info-block + .artwork-info-block,
-  .artwork-story-section .artwork-info-block + .artwork-info-block {
-    margin-top: 0.52rem;
-  }
-
+  .artwork-story-section .artwork-info-block + .artwork-info-block,
   .artwork-story-section > .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 0.52rem;
+    margin-top: 0.42rem;
   }
 
-  .artwork-story-section .artwork-music-comparison {
-    padding-top: 0.48rem;
+  .artwork-info-row {
+    gap: 0.55rem;
+    font-size: 0.74rem;
   }
 
-  .artwork-focus-frame.is-visual {
-    min-height: 19rem;
-    height: 100%;
+  .artwork-info-row .glass-chip-warm {
+    width: 1.65rem;
+    height: 1.65rem;
   }
 
+  .artwork-info-block p {
+    font-size: 0.73rem;
+    line-height: 1.38;
+  }
+
+  .artwork-focus-frame.is-visual,
   .artwork-focus-frame.is-playable {
     height: 100%;
+    min-height: 0;
   }
 
   .artwork-location-map-shell {
     flex: 1 1 auto;
-    min-height: 15rem;
+    min-height: 0;
     height: 100%;
   }
 
   .artwork-location-map-frame {
-    height: min(100%, 19rem);
+    height: min(100%, 17.5rem);
   }
 
   .artwork-location-section .artwork-selected-place {
@@ -306,14 +323,14 @@
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: 0.7rem;
-    margin-top: 0.5rem;
-    padding: 0.5rem 0.7rem;
+    margin-top: 0.45rem;
+    padding: 0.45rem 0.65rem;
   }
 
   .artwork-location-section .artwork-selected-place p {
     margin-bottom: 0;
-    font-size: 0.72rem;
-    line-height: 1.35;
+    font-size: 0.68rem;
+    line-height: 1.3;
   }
 
   .artwork-panel-floating-close {
