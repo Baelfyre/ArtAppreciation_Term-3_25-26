@@ -1,4 +1,4 @@
-import { useEffect, type CSSProperties } from "react";
+import { useEffect } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
@@ -64,7 +64,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </h2>
           </section>
 
-          <section className="artwork-preview-section flex min-w-0 flex-col">
+          <section className="artwork-panel-section artwork-preview-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
             <div className="mb-3 min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
@@ -75,7 +75,12 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </div>
           </section>
 
-          <section className="artwork-panel-section artwork-details-section flex min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-5">
+          <section className="artwork-panel-section artwork-facts-section custom-scrollbar flex min-h-0 min-w-0 flex-col overflow-y-auto rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+            <div className="mb-3 min-w-0">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork details</p>
+              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Context &amp; Composition</h3>
+            </div>
+
             <div className="grid gap-3">
               <InfoRow icon={User} label="Creator" value={artwork.creator} />
               <InfoRow icon={MapPin} label="Location" value={locationLabel} />
@@ -85,11 +90,21 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
               )}
             </div>
 
-            <div className="mt-5 space-y-4">
-              <InfoBlock label="Description" value={artwork.description} />
-              <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
+            <div className="mt-4 space-y-4">
               <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
               <InfoBlock label="Principles" value={artwork.principles} />
+            </div>
+          </section>
+
+          <section className="artwork-panel-section artwork-story-section custom-scrollbar flex min-h-0 min-w-0 flex-col overflow-y-auto rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+            <div className="mb-3 min-w-0">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork story</p>
+              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Meaning &amp; Advocacy</h3>
+            </div>
+
+            <div className="space-y-4">
+              <InfoBlock label="Description" value={artwork.description} />
+              <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
               {artwork.comparisonGroupId === "music-evolution" && (
                 <MusicEvolutionComparison activeRole={artwork.comparisonRole} />
               )}
@@ -193,9 +208,9 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
 
   if (artwork.scope === "local") {
     return (
-      <div className="relative min-h-[13.5rem] flex-1 overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:min-h-[17rem] lg:min-h-0">
+      <div className="artwork-location-map-shell relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
-        <div className="relative mx-auto aspect-[702/1209] h-full max-h-[28rem] max-w-full">
+        <div className="artwork-location-map-frame relative">
           <img
             src="/resources/philippines.svg"
             alt="Philippines map"
@@ -226,7 +241,7 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
   }
 
   return (
-    <div className="relative flex min-h-[13.5rem] flex-1 items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_42%,rgba(29,73,216,0.28),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(244,196,48,0.12),transparent_48%),rgba(255,255,255,0.04)] md:min-h-[17rem] lg:min-h-0">
+    <div className="artwork-location-map-shell relative flex items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_42%,rgba(29,73,216,0.28),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(244,196,48,0.12),transparent_48%),rgba(255,255,255,0.04)]">
       <div className="absolute h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_35%_28%,rgba(246,244,238,0.16),transparent_18%),linear-gradient(135deg,rgba(29,73,216,0.42),rgba(5,8,22,0.9)_58%,rgba(185,22,44,0.22))] shadow-[0_0_48px_rgba(29,73,216,0.22)]" />
       <div className="absolute h-40 w-40 rounded-full border border-[#f4c430]/20" />
       <div className="relative flex max-w-[13rem] flex-col items-center text-center">
