@@ -8,6 +8,12 @@ interface PhilippinesMarkerProps {
   onSelect: (marker: LocalMapMarker) => void;
 }
 
+const getLabelAlignmentClass = (marker: LocalMapMarker) => {
+  if (marker.displayMapX >= 72) return "local-map-marker--label-left";
+  if (marker.displayMapX <= 28) return "local-map-marker--label-right";
+  return "";
+};
+
 export const PhilippinesMarker = ({
   marker,
   isSelected,
@@ -15,6 +21,7 @@ export const PhilippinesMarker = ({
   onSelect,
 }: PhilippinesMarkerProps) => {
   const displayLabel = marker.artwork.location.city ?? marker.label;
+  const labelAlignmentClass = getLabelAlignmentClass(marker);
 
   return (
     <button
@@ -28,7 +35,7 @@ export const PhilippinesMarker = ({
       }}
       className={`local-map-marker absolute z-20 -translate-x-1/2 -translate-y-full ${
         isSelected ? "is-selected" : ""
-      } ${isHighlighted ? "is-highlighted" : ""}`}
+      } ${isHighlighted ? "is-highlighted" : ""} ${labelAlignmentClass}`}
       style={{
         left: `${marker.displayMapX}%`,
         top: `${marker.displayMapY}%`,
