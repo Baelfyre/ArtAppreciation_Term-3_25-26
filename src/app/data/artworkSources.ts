@@ -14,6 +14,7 @@ export const artworkSources: ArtworkSource[] = [
     artist: "Maestro Nunelucio Alvarado",
     label: "Nunelucio Alvarado and the courtship of 'Babaye' | Lifestyle.INQ",
     type: "Article / Artwork Reference",
+    url: "https://lifestyle.inquirer.net/131247/nunelucio-alvarado-and-the-courtship-of-babaye/",
   },
   {
     artworkId: "wayfarer",
@@ -21,6 +22,7 @@ export const artworkSources: ArtworkSource[] = [
     artist: "Dary Feril",
     label: "Wayfarer - Orange Project",
     type: "Gallery / Artwork Reference",
+    url: "https://orangeproject.ph/wayfarer/",
   },
   {
     artworkId: "the-durian",

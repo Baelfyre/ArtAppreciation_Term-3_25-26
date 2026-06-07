@@ -1,3 +1,4 @@
+import { type CSSProperties } from "react";
 import { Compass, Fingerprint, Globe2, Landmark, MapPin } from "lucide-react";
 
 const aboutPoints = [
@@ -40,23 +41,55 @@ export const AboutSection = () => (
         </ul>
       </div>
 
-      <div className="identity-hub compact-identity-hub relative mx-auto flex aspect-square w-full max-w-[15rem] items-center justify-center">
-        <div className="identity-starfield absolute inset-0">
-          <span className="identity-star" style={{ top: "12%", left: "24%", width: "0.28rem", height: "0.28rem", '--particle-duration': '28s', '--particle-delay': '0s' } as React.CSSProperties} />
-          <span className="identity-star" style={{ top: "38%", left: "72%", width: "0.32rem", height: "0.32rem", '--particle-duration': '32s', '--particle-delay': '4s' } as React.CSSProperties} />
-          <span className="identity-star" style={{ top: "70%", left: "18%", width: "0.24rem", height: "0.24rem", '--particle-duration': '30s', '--particle-delay': '2s' } as React.CSSProperties} />
-          <span className="identity-star" style={{ top: "82%", left: "58%", width: "0.2rem", height: "0.2rem", '--particle-duration': '36s', '--particle-delay': '6s' } as React.CSSProperties} />
+      <div className="relative mx-auto flex aspect-square w-full max-w-[15rem] items-center justify-center">
+        <div className="absolute inset-0 rounded-full border border-white/6 opacity-40" />
+        <div className="absolute inset-[10%] rounded-full border border-white/6 opacity-25" />
+        <div className="absolute inset-[22%] rounded-full border border-white/5 border-dashed opacity-40" />
+        <div className="absolute inset-[36%] rounded-full border border-[#f4c430]/10 opacity-60" />
+        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(29,73,216,0.06),transparent_62%)]" />
+
+        <div
+          className="orbit-spin absolute inset-[3%]"
+          style={{ ["--orbit-duration" as "--orbit-duration"]: "24s" } as CSSProperties}
+        >
+          <div className="absolute left-[8%] top-[18%] -translate-x-1/2 -translate-y-1/2">
+            <div className="orbit-counter" style={{ ["--orbit-duration" as "--orbit-duration"]: "24s" } as CSSProperties}>
+              <div className="glass-chip rounded-3xl p-4 shadow-xl">
+                <Landmark className="h-6 w-6 text-[#f4c430]" />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="identity-particle-orbit orbit-spin absolute inset-[14%] rounded-full" />
-        <div className="identity-particle-orbit orbit-counter absolute inset-[24%] rounded-full" />
-        <div className="identity-core absolute inset-[36%] rounded-full" />
-        <div className="identity-core-glow absolute inset-[30%] rounded-full" />
-        <img
-          src="/resources/philippines.svg"
-          alt=""
-          aria-hidden="true"
-          className="philippines-hub-icon relative z-10 h-32 w-32 object-contain opacity-95"
-        />
+
+        <div
+          className="orbit-spin-reverse absolute inset-[11%]"
+          style={{ ["--orbit-duration" as "--orbit-duration"]: "20s" } as CSSProperties}
+        >
+          <div className="absolute right-[2%] top-[24%] translate-x-1/2 -translate-y-1/2">
+            <div className="orbit-counter-reverse" style={{ ["--orbit-duration" as "--orbit-duration"]: "20s" } as CSSProperties}>
+              <div className="glass-chip rounded-3xl p-4 shadow-xl">
+                <MapPin className="h-5 w-5 text-[#b9162c]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="orbit-spin absolute inset-[18%]"
+          style={{ ["--orbit-duration" as "--orbit-duration"]: "18s" } as CSSProperties}
+        >
+          <div className="absolute bottom-[8%] right-[7%] translate-x-1/2 translate-y-1/2">
+            <div className="orbit-counter" style={{ ["--orbit-duration" as "--orbit-duration"]: "18s" } as CSSProperties}>
+              <div className="glass-chip rounded-3xl p-4 shadow-xl">
+                <Fingerprint className="h-6 w-6 text-[#1d49d8]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),rgba(255,255,255,0.02)_55%,transparent_100%)] shadow-[0_0_80px_rgba(255,255,255,0.04)]">
+          <Globe2 className="h-14 w-14 text-slate-100 stroke-[1.5]" />
+        </div>
       </div>
     </div>
   </section>

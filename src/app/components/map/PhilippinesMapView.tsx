@@ -77,7 +77,7 @@ export const PhilippinesMapView = ({
           <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Artist</p>
           <h3 className="section-title text-xl font-semibold text-white md:text-2xl">Philippines Map</h3>
           <p className="mt-1 max-w-[18rem] text-xs leading-snug text-slate-300">
-            Group artworks and local artist research anchored to the Philippines.
+            Group artworks and local artists anchored to the Philippines.
           </p>
         </div>
         <span className="glass-chip shrink-0 rounded-full px-2.5 py-1 text-[11px] text-slate-200 md:px-3 md:text-xs">
