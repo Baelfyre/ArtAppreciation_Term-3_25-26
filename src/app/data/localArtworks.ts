@@ -230,7 +230,7 @@ export const localArtworks: Artwork[] = [
     title: "MAPA",
     creator: "SB19",
     medium: "Music / OPM / P-pop ballad",
-    imageUrl: "",
+    imageUrl: "/resources/Mapa.jpg",
     altText:
       "Music visualization for MAPA by SB19, representing modern OPM and Filipino gratitude toward parents.",
     effect: "music-wave",
@@ -286,7 +286,7 @@ export const localArtworks: Artwork[] = [
     },
     locationBasis: "Philippine cinema / cultural production context",
     description:
-      "Call Me Mother uses performance, humor, dialogue, and emotional contrast to explore queer adoptive care, chosen parenthood, love, and responsibility. Its comedy-drama format keeps serious questions about belonging approachable while presenting a modern form of Filipino family life.",
+      "Call Me Mother uses performance, humor, dialogue, and emotional contrast to explore queer adoptive care, chosen parenthood, love, and responsibility. Its comedy-drama format makes serious themes of identity, inclusivity, and family acceptance easier to engage with while presenting a modern flair of Filipino family life.",
     advocacyConnection:
       "The film expands how family and parenthood can be represented in Philippine cinema today. By centering care and responsibility in a story that can travel to wider audiences, it includes changing lived experiences within a broader and more inclusive Filipino identity.",
     elements: "Performance, dialogue, humor, contrast, and visual storytelling.",

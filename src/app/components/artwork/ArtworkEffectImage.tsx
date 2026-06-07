@@ -17,6 +17,23 @@ export const ArtworkEffectImage = ({
   const effect = artwork.effect ?? "slow-zoom";
   const alt = artwork.altText ?? artwork.title;
 
+  if (effect === "music-wave" && artwork.imageUrl) {
+    return (
+      <div
+        className={`artwork-visual-effect effect-music-wave ${compact ? "is-compact" : ""}`}
+        tabIndex={compact ? -1 : 0}
+      >
+        <ImageWithFallback
+          src={artwork.imageUrl}
+          alt={alt}
+          className="artwork-visual-effect-image"
+          loading={compact ? "lazy" : "eager"}
+          decoding="async"
+        />
+      </div>
+    );
+  }
+
   if (effect === "music-wave" || !artwork.imageUrl) {
     const musicKicker = artwork.id === "local-mapa-sb19" ? "Modern OPM" : "Filipino Music";
 
