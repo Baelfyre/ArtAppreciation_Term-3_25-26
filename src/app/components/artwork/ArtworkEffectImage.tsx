@@ -18,6 +18,8 @@ export const ArtworkEffectImage = ({
   const alt = artwork.altText ?? artwork.title;
 
   if (effect === "music-wave" || !artwork.imageUrl) {
+    const musicKicker = artwork.id === "local-mapa-sb19" ? "Modern OPM" : "Filipino Music";
+
     return (
       <div
         className={`artwork-visual-effect effect-music-wave ${compact ? "is-compact" : ""}`}
@@ -27,6 +29,7 @@ export const ArtworkEffectImage = ({
       >
         <div className="music-wave-orbit" aria-hidden="true" />
         <Music2 className="music-wave-icon" aria-hidden="true" />
+        <span className="music-wave-kicker">{musicKicker}</span>
         <div className="music-wave-bars" aria-hidden="true">
           {musicBars.map((height, index) => (
             <span key={index} style={{ height: `${height}%`, animationDelay: `${index * -0.08}s` }} />

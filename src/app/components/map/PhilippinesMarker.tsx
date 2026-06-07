@@ -35,12 +35,7 @@ export const PhilippinesMarker = ({
         "--local-marker-color": marker.color,
       } as CSSProperties}
     >
-      <img
-        src="/resources/Pin_loc.svg"
-        alt=""
-        aria-hidden="true"
-        className="local-map-marker-icon"
-      />
+      <span className="local-map-marker-icon" aria-hidden="true" />
       <span className="local-map-marker-label">{displayLabel}</span>
     </button>
   );

@@ -68,7 +68,7 @@ export const PhilippinesMapView = ({
   };
 
   return (
-    <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto flex min-h-0 w-full max-w-[34rem] flex-1 flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:rounded-[1.75rem] md:p-5 lg:max-w-[66rem]">
+    <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto flex min-h-0 w-full max-w-[34rem] flex-1 flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:rounded-[1.75rem] md:p-5 lg:max-w-[72rem]">
       <div className="mb-3 flex items-start justify-between gap-3 md:mb-4 md:gap-4">
         <div>
           <p className="globe-local-status-label mb-2 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
@@ -98,7 +98,7 @@ export const PhilippinesMapView = ({
 
       <div className="relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
-        <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,13rem)_minmax(14rem,1fr)_minmax(0,13rem)]">
+        <div className="local-map-content relative grid h-full min-h-0 gap-3 p-2 md:p-3 lg:grid-cols-[minmax(0,11rem)_minmax(18rem,1fr)_minmax(0,11rem)]">
           <LocalArtworkList
             title="Group Artwork"
             markers={groupMemberMarkers}
@@ -109,9 +109,9 @@ export const PhilippinesMapView = ({
             onClearIntent={handleClearMarkerIntent}
           />
 
-          <div className="local-map-stage relative min-h-[14rem] overflow-visible lg:min-h-0">
+          <div className="local-map-stage relative min-h-[18rem] overflow-visible md:min-h-[22rem] lg:min-h-0">
             <div
-              className="relative mx-auto aspect-[702/1209] h-full max-h-[560px] max-w-full overflow-visible"
+              className="local-map-zoom-stage relative mx-auto aspect-[702/1209] max-w-full overflow-visible"
               onClickCapture={handleMapClickCapture}
             >
               <img
@@ -119,28 +119,6 @@ export const PhilippinesMapView = ({
                 alt="Philippines map"
                 className="h-full w-full object-contain opacity-90 [filter:invert(94%)_sepia(13%)_saturate(620%)_hue-rotate(351deg)_brightness(103%)_contrast(94%)_drop-shadow(0_0_22px_rgba(244,196,48,0.18))]"
               />
-
-              <svg
-                className="local-map-leaders pointer-events-none absolute inset-0 z-10 hidden overflow-visible lg:block"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                {markers.map((marker) => (
-                  <line
-                    key={`${marker.id}-leader`}
-                    className={`local-map-leader ${activeMarkerId === marker.id ? "is-active" : ""}`}
-                    x1={marker.displayMapX}
-                    y1={marker.displayMapY}
-                    x2={marker.artwork.localCategory === "localArtist" ? 96 : 4}
-                    y2={marker.displayMapY}
-                    stroke={marker.color}
-                    strokeWidth={activeMarkerId === marker.id ? "0.55" : "0.26"}
-                    strokeLinecap="round"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                ))}
-              </svg>
 
               {markers.map((marker) => (
                 <PhilippinesMarker

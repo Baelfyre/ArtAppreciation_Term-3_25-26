@@ -671,12 +671,23 @@ body::after {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: clamp(1.35rem, 2.5vw, 1.75rem);
-    height: clamp(1.35rem, 2.5vw, 1.75rem);
+    width: clamp(1.35rem, 1.8vw, 1.55rem);
+    height: clamp(1.35rem, 1.8vw, 1.55rem);
     border: 0;
     background: transparent;
     color: var(--local-marker-color, var(--heritage-gold));
+    overflow: visible;
     touch-action: manipulation;
+  }
+
+  .local-map-marker::after {
+    content: "";
+    position: absolute;
+    inset: 0.3rem;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+    opacity: 0.32;
+    animation: marker-pulse 2.2s ease-out infinite;
   }
 
   .local-map-marker-dot {
@@ -727,9 +738,28 @@ body::after {
 
   .local-map-marker:hover .local-map-marker-label,
   .local-map-marker:focus-visible .local-map-marker-label,
+  .local-map-marker.is-highlighted .local-map-marker-label,
   .local-map-marker.is-selected .local-map-marker-label {
     opacity: 1;
     transform: translateX(-50%) translateY(0.1rem);
+  }
+
+  .local-map-marker:hover .local-map-marker-icon,
+  .local-map-marker:focus-visible .local-map-marker-icon,
+  .local-map-marker.is-highlighted .local-map-marker-icon {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 7px currentColor);
+  }
+
+  .local-map-marker.is-selected {
+    color: #f6f4ee;
+  }
+
+  .local-map-marker.is-selected .local-map-marker-icon {
+    transform: scale(1.12);
+    filter:
+      drop-shadow(0 0 5px rgba(246, 244, 238, 0.72))
+      drop-shadow(0 0 10px rgba(244, 196, 48, 0.62));
   }
 
   .local-map-marker.is-highlighted .local-map-marker-dot,
@@ -756,6 +786,11 @@ body::after {
     justify-content: center;
     position: relative;
     z-index: 1;
+  }
+
+  .local-map-zoom-stage {
+    height: 128%;
+    max-height: 42rem;
   }
 
   .local-map-leader {
@@ -894,11 +929,14 @@ body::after {
   }
 
   .local-map-marker-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: clamp(0.72rem, 1.05vw, 0.88rem);
+    height: clamp(0.72rem, 1.05vw, 0.88rem);
     display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.28));
+    background: currentColor;
+    filter: drop-shadow(0 0 4px currentColor);
+    -webkit-mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
+    mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
+    transition: filter 180ms ease, transform 180ms ease;
   }
 
   .artwork-panel-layout {
@@ -1154,8 +1192,13 @@ body::after {
     }
 
     .local-map-marker {
-      width: 2.75rem;
-      height: 2.75rem;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .local-map-zoom-stage {
+      height: 108%;
+      max-height: 28rem;
     }
 
     .local-map-marker-dot {
@@ -1399,6 +1442,10 @@ body::after {
   .identity-travel-light {
     display: none;
   }
+
+  .local-map-marker::after {
+    animation: none;
+  }
 }
 
 /* Integrated artwork and reference sections */
@@ -1527,8 +1574,19 @@ body::after {
   gap: 1.25rem;
   color: white;
   background:
-    radial-gradient(circle at center, rgba(29, 73, 216, 0.3), transparent 48%),
-    linear-gradient(145deg, #071431, #140b28);
+    radial-gradient(circle at 28% 30%, rgba(244, 196, 48, 0.14), transparent 34%),
+    radial-gradient(circle at 70% 54%, rgba(29, 73, 216, 0.38), transparent 48%),
+    linear-gradient(145deg, #071431, #140b28 58%, #080c1d);
+}
+
+.effect-music-wave::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(110deg, transparent 0 46%, rgba(255, 255, 255, 0.035) 46% 47%, transparent 47% 100%),
+    repeating-linear-gradient(90deg, transparent 0 1.75rem, rgba(134, 167, 255, 0.045) 1.75rem calc(1.75rem + 1px));
+  opacity: 0.7;
 }
 
 .music-wave-orbit {
@@ -1546,6 +1604,15 @@ body::after {
   width: 3rem;
   height: 3rem;
   color: #f4c430;
+}
+
+.music-wave-kicker {
+  z-index: 1;
+  color: rgba(134, 167, 255, 0.92);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .music-wave-bars {
@@ -1582,6 +1649,57 @@ body::after {
   font-size: 0.8rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.effect-music-wave.is-compact {
+  gap: 0.55rem;
+  padding: 0.9rem 1rem;
+}
+
+.effect-music-wave.is-compact .music-wave-orbit {
+  width: 8.5rem;
+  height: 8.5rem;
+  border-color: rgba(244, 196, 48, 0.24);
+}
+
+.effect-music-wave.is-compact .music-wave-icon {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  opacity: 0.9;
+}
+
+.effect-music-wave.is-compact .music-wave-kicker {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.58rem;
+}
+
+.effect-music-wave.is-compact .music-wave-bars {
+  height: 3.4rem;
+  gap: 0.24rem;
+  margin-top: 0.65rem;
+}
+
+.effect-music-wave.is-compact .music-wave-bars span {
+  width: 0.24rem;
+  background: linear-gradient(#f4c430, #86a7ff);
+}
+
+.effect-music-wave.is-compact .music-wave-copy {
+  gap: 0.1rem;
+}
+
+.effect-music-wave.is-compact .music-wave-copy strong {
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+}
+
+.effect-music-wave.is-compact .music-wave-copy span {
+  font-size: 0.66rem;
 }
 
 .effect-lively-poster .artwork-visual-effect-image {
