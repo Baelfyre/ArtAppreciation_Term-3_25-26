@@ -1,0 +1,96 @@
+.local-map-panel,
+.local-map-body,
+.local-map-content,
+.local-map-stage {
+  max-width: 100%;
+}
+
+.local-map-body {
+  min-height: clamp(32rem, 64svh, 46rem);
+}
+
+.local-map-content {
+  grid-template-columns: minmax(12rem, 0.82fr) minmax(0, 1.9fr) minmax(12rem, 0.82fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.local-map-stage {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding: clamp(0.75rem, 2vw, 1.35rem);
+}
+
+.local-map-zoom-stage {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  contain: layout paint;
+}
+
+.local-map-zoom-stage > img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 1023px) {
+  .local-map-body {
+    min-height: auto;
+  }
+
+  .local-map-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .local-map-stage {
+    order: 1;
+    min-height: clamp(26rem, 66svh, 36rem);
+    height: clamp(26rem, 66svh, 36rem);
+    grid-column: 1 / -1;
+  }
+
+  .local-map-list-left {
+    order: 2;
+  }
+
+  .local-map-list-right {
+    order: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .local-map-content {
+    overflow: visible;
+  }
+
+  .local-map-stage {
+    min-height: clamp(22rem, 92vw, 30rem);
+    height: clamp(22rem, 92vw, 30rem);
+    padding: 0.75rem;
+  }
+
+  .local-map-side-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 430px) {
+  .local-map-panel {
+    max-width: 100%;
+  }
+
+  .local-map-stage {
+    min-height: clamp(21rem, 98vw, 27rem);
+    height: clamp(21rem, 98vw, 27rem);
+    padding: 0.5rem;
+  }
+}
