@@ -85,17 +85,6 @@ export const PhilippinesMapView = ({
         </span>
       </div>
 
-      <div className="mb-3 grid grid-cols-2 gap-2 text-[10px] leading-tight text-slate-200 md:mb-4 md:text-xs">
-        <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
-          <span className="h-2 w-2 shrink-0 rounded-full bg-[#f4c430]" />
-          Group Artwork
-        </span>
-        <span className="glass-chip flex items-center gap-2 rounded-full px-2.5 py-1.5">
-          <span className="h-2 w-2 shrink-0 rounded-full bg-[#86a7ff]" />
-          Local Artist
-        </span>
-      </div>
-
       <div className="local-map-body relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-white/10 bg-[radial-gradient(circle_at_50%_20%,rgba(244,196,48,0.08),transparent_34%),rgba(255,255,255,0.04)] md:rounded-[1.25rem]">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
         <div className="local-map-content relative grid h-full min-h-0 gap-3 overflow-hidden p-2 md:p-3">
