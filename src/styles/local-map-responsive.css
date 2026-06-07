@@ -59,6 +59,59 @@
   min-height: 0;
   max-height: 100%;
   overflow-y: auto;
+  padding-right: 0.45rem;
+}
+
+.local-map-list-row {
+  min-height: auto;
+  height: auto;
+  align-items: start;
+  padding-block: 0.62rem;
+}
+
+.local-map-list-row > span:last-child {
+  min-width: 0;
+}
+
+.local-map-list-title {
+  -webkit-line-clamp: 3;
+  line-height: 1.12;
+}
+
+.local-map-list-meta,
+.local-map-list-place {
+  line-height: 1.15;
+}
+
+.local-map-marker-label {
+  max-width: min(8.5rem, 34vw);
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.local-map-marker--label-left .local-map-marker-label {
+  left: auto;
+  right: 50%;
+  transform: translateX(0);
+}
+
+.local-map-marker--label-left:hover .local-map-marker-label,
+.local-map-marker--label-left:focus-visible .local-map-marker-label,
+.local-map-marker--label-left.is-highlighted .local-map-marker-label,
+.local-map-marker--label-left.is-selected .local-map-marker-label {
+  transform: translateX(0) translateY(0.1rem);
+}
+
+.local-map-marker--label-right .local-map-marker-label {
+  left: 50%;
+  transform: translateX(0);
+}
+
+.local-map-marker--label-right:hover .local-map-marker-label,
+.local-map-marker--label-right:focus-visible .local-map-marker-label,
+.local-map-marker--label-right.is-highlighted .local-map-marker-label,
+.local-map-marker--label-right.is-selected .local-map-marker-label {
+  transform: translateX(0) translateY(0.1rem);
 }
 
 @media (max-width: 1023px) {
