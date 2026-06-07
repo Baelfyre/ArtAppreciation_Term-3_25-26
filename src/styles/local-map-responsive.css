@@ -5,22 +5,35 @@
   max-width: 100%;
 }
 
+.local-map-panel,
+.local-map-body,
+.local-map-content,
+.local-map-stage,
+.local-map-zoom-stage {
+  box-sizing: border-box;
+}
+
 .local-map-body {
-  min-height: clamp(32rem, 64svh, 46rem);
+  height: clamp(32rem, 64svh, 46rem);
+  min-height: 0;
 }
 
 .local-map-content {
+  height: 100%;
   grid-template-columns: minmax(12rem, 0.82fr) minmax(0, 1.9fr) minmax(12rem, 0.82fr);
   grid-template-rows: minmax(0, 1fr);
   align-items: stretch;
 }
 
 .local-map-stage {
+  display: flex;
   width: 100%;
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  padding: clamp(0.75rem, 2vw, 1.35rem);
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.6rem, 1.6vw, 1rem);
 }
 
 .local-map-zoom-stage {
@@ -29,9 +42,11 @@
   max-width: 100%;
   max-height: 100%;
   contain: layout paint;
+  flex: 0 1 auto;
 }
 
 .local-map-zoom-stage > img {
+  display: block;
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -40,21 +55,37 @@
   object-position: center;
 }
 
+.local-map-side-list {
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
 @media (max-width: 1023px) {
+  .local-map-panel {
+    max-height: none;
+    overflow-y: auto;
+  }
+
   .local-map-body {
-    min-height: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 
   .local-map-content {
+    height: auto;
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: auto auto auto;
+    overflow: visible;
   }
 
   .local-map-stage {
     order: 1;
-    min-height: clamp(26rem, 66svh, 36rem);
-    height: clamp(26rem, 66svh, 36rem);
     grid-column: 1 / -1;
+    height: clamp(28rem, 68svh, 38rem);
+    min-height: 0;
+    padding: clamp(0.6rem, 2vw, 1rem);
   }
 
   .local-map-list-left {
@@ -64,17 +95,21 @@
   .local-map-list-right {
     order: 3;
   }
+
+  .local-map-side-list {
+    max-height: 18rem;
+    overflow-y: auto;
+  }
 }
 
 @media (max-width: 767px) {
-  .local-map-content {
-    overflow: visible;
+  .local-map-panel {
+    overflow-y: auto;
   }
 
   .local-map-stage {
-    min-height: clamp(22rem, 92vw, 30rem);
     height: clamp(22rem, 92vw, 30rem);
-    padding: 0.75rem;
+    padding: 0.65rem;
   }
 
   .local-map-side-list {
@@ -89,7 +124,6 @@
   }
 
   .local-map-stage {
-    min-height: clamp(21rem, 98vw, 27rem);
     height: clamp(21rem, 98vw, 27rem);
     padding: 0.5rem;
   }
