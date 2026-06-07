@@ -777,9 +777,18 @@ body::after {
   }
 
   .local-map-content {
-    grid-template-columns: minmax(10rem, 0.85fr) minmax(18rem, 1.25fr) minmax(10rem, 0.85fr);
+    grid-template-columns: minmax(220px, 0.8fr) minmax(460px, 1.6fr) minmax(220px, 0.8fr);
     grid-template-rows: minmax(0, 1fr);
     align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 1023px) {
+    .local-map-content {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      gap: 0.5rem;
+    }
   }
 
   .local-map-stage {
@@ -788,6 +797,20 @@ body::after {
     justify-content: center;
     position: relative;
     z-index: 1;
+    min-height: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .local-map-stage {
+      min-height: 26rem;
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .local-map-stage {
+      min-height: 22rem;
+    }
   }
 
   .local-map-zoom-stage {
@@ -809,23 +832,46 @@ body::after {
   .local-map-side-list {
     display: flex;
     min-height: 0;
-    max-height: 28rem;
+    max-height: 32rem;
     flex-direction: column;
     overflow-y: auto;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     background: rgba(5, 8, 22, 0.42);
-    padding: 0.75rem;
+    padding: 0.6rem;
     scrollbar-width: thin;
   }
 
+  @media (max-width: 1023px) {
+    .local-map-side-list {
+      max-height: 18rem;
+      padding: 0.5rem;
+      grid-column: 1 / -1;
+    }
+
+    .local-map-list-left {
+      order: 2;
+    }
+
+    .local-map-list-right {
+      order: 3;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .local-map-side-list {
+      max-height: none;
+      overflow-y: visible;
+    }
+  }
+
   .local-map-list-heading {
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.4rem;
     color: #f4c430;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
-    line-height: 1.2;
+    letter-spacing: 0.12em;
+    line-height: 1.15;
     text-transform: uppercase;
   }
 
@@ -833,13 +879,13 @@ body::after {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
-    gap: 0.55rem;
-    min-height: 2.75rem;
+    gap: 0.45rem;
+    min-height: 2.5rem;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.85rem;
+    border-radius: 0.75rem;
     background: rgba(5, 8, 22, 0.58);
-    padding: 0.58rem 0.65rem;
+    padding: 0.45rem 0.5rem;
     text-align: left;
     color: #f6f4ee;
     transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
@@ -872,23 +918,38 @@ body::after {
 
   .local-map-list-title {
     color: #ffffff;
-    font-size: 0.82rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    line-height: 1.18;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .local-map-list-meta {
-    margin-top: 0.12rem;
+    margin-top: 0.08rem;
     color: #cbd5e1;
-    font-size: 0.7rem;
-    line-height: 1.2;
+    font-size: 0.65rem;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   .local-map-list-place {
-    margin-top: 0.18rem;
+    margin-top: 0.08rem;
     color: var(--list-accent, var(--heritage-gold));
-    font-size: 0.68rem;
-    line-height: 1.2;
+    font-size: 0.63rem;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   .artwork-panel-slide {
@@ -1144,13 +1205,13 @@ body::after {
   @media (min-width: 1024px) {
     .local-map-content {
       min-width: 0;
-      grid-template-columns: minmax(0, 11rem) minmax(18rem, 1fr) minmax(0, 11rem);
+      grid-template-columns: minmax(220px, 0.8fr) minmax(460px, 1.6fr) minmax(220px, 0.8fr);
     }
 
     .local-map-zoom-stage {
       width: auto;
-      height: 128%;
-      max-height: 42rem;
+      height: auto;
+      max-height: none;
     }
   }
 

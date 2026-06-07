@@ -109,7 +109,7 @@ export const PhilippinesMapView = ({
             onClearIntent={handleClearMarkerIntent}
           />
 
-          <div className="local-map-stage relative min-h-[clamp(24rem,72vh,34rem)] overflow-visible lg:min-h-0">
+          <div className="local-map-stage relative min-h-[clamp(22rem,60vh,48rem)] overflow-visible lg:min-h-0">
             <div
               className="local-map-zoom-stage relative mx-auto aspect-[702/1209] max-w-full overflow-visible"
               onClickCapture={handleMapClickCapture}
