@@ -16,11 +16,12 @@ export const ArtworkEffectImage = ({
 }: ArtworkEffectImageProps) => {
   const effect = artwork.effect ?? "slow-zoom";
   const alt = artwork.altText ?? artwork.title;
+  const artworkEffectClass = `artwork-effect-${artwork.id}`;
 
   if (effect === "music-wave" && artwork.imageUrl) {
     return (
       <div
-        className={`artwork-visual-effect effect-music-wave ${compact ? "is-compact" : ""}`}
+        className={`artwork-visual-effect effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
         tabIndex={compact ? -1 : 0}
       >
         <ImageWithFallback
@@ -39,7 +40,7 @@ export const ArtworkEffectImage = ({
 
     return (
       <div
-        className={`artwork-visual-effect effect-music-wave ${compact ? "is-compact" : ""}`}
+        className={`artwork-visual-effect effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
         tabIndex={compact ? -1 : 0}
         role="img"
         aria-label={alt}
@@ -62,7 +63,7 @@ export const ArtworkEffectImage = ({
 
   return (
     <div
-      className={`artwork-visual-effect effect-${effect} ${compact ? "is-compact" : ""}`}
+      className={`artwork-visual-effect effect-${effect} ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
       tabIndex={compact ? -1 : 0}
     >
       <ImageWithFallback
