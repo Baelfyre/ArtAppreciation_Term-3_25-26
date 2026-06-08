@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { AngCollageAssembly } from "./AngCollageAssembly";
 import { ArtworkEffectImage } from "./ArtworkEffectImage";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
@@ -39,7 +38,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
   const locationLabel = formatArtworkLocation(artwork.location);
   const collectionLabel = getArtworkCollectionLabel(artwork);
-  const hasPlayableMusic = artwork.mediaType === "music" && Boolean(artwork.embedUrl);
+  const hasPlayableMedia = Boolean(artwork.embedUrl) && (artwork.mediaType === "music" || artwork.mediaType === "video");
 
   return (
     <>
@@ -71,7 +70,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
             </div>
 
-            <div className={`artwork-focus-frame ${hasPlayableMusic ? "is-playable" : "is-visual"}`}>
+            <div className={`artwork-focus-frame ${hasPlayableMedia ? "is-playable" : "is-visual"}`}>
               <ArtworkPreview artwork={artwork} />
             </div>
           </section>
@@ -126,7 +125,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 };
 
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
-  if (artwork.mediaType === "music" && artwork.embedUrl) {
+  if ((artwork.mediaType === "music" || artwork.mediaType === "video") && artwork.embedUrl) {
     return (
       <div className="focused-media-preview flex w-full items-center justify-center p-2 md:p-3">
         <ArtworkMediaEmbed
@@ -134,6 +133,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
           title={artwork.title}
           provider={artwork.mediaProvider}
           embedHeight={artwork.embedHeight}
+          autoPlay={artwork.mediaType === "video"}
         />
       </div>
     );
@@ -195,15 +195,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
     );
   }
 
-  return (
-    <ImageWithFallback
-      src={artwork.imageUrl}
-      alt={artwork.altText ?? artwork.title}
-      className="focused-artwork-image"
-      loading="eager"
-      decoding="async"
-    />
-  );
+  return null;
 };
 
 interface LocationPreviewProps {
