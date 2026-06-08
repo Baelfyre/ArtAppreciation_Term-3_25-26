@@ -20,9 +20,9 @@ export const internationalArtworks: Artwork[] = [
     },
     locationBasis: "Featured in an International Exhibition",
     description:
-      "The Coffee Maker shows how a Filipino artist can transform an everyday material, coffee, into contemporary art within an international exhibition context.",
+      "The Coffee Maker shows how a Filipino artist can turn an ordinary material like coffee into a meaningful contemporary artwork. Instead of using coffee only as a drink or everyday object, the artist uses it as a visual medium to create tone, texture, and emotion on paper. This makes the artwork feel grounded in daily life while also showing experimentation, resourcefulness, and creative transformation.",
     advocacyConnection:
-      "The work presents Filipino experimentation and material creativity in an international exhibit space.",
+      "The work supports Filipino Identity Beyond Borders by showing that Filipino creativity can be recognized in international spaces through unique materials and personal artistic choices. By using coffee as the medium, the artwork presents Filipino art as innovative, adaptable, and capable of transforming simple everyday experiences into cultural expression that can connect with audiences beyond the Philippines.",
     elements: "Value, contrast, texture, balance, and emphasis.",
     principles: "Coffee tones and paper texture create contrast and a clear focal point.",
     featured: true,
