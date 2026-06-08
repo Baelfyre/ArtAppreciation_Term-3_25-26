@@ -64,6 +64,14 @@ export const artworkSources: ArtworkSource[] = [
     type: "International Exhibition Reference",
     url: "https://www.coffeetableartbook.com/shopprints-HvJzJ/p/coffeemaker-by-renato-rens-e-tuzon",
   },
+  {
+    artworkId: "diaspora-migration",
+    title: "Diaspora (Migration)",
+    artist: 'Antipas "Biboy" Delotavo',
+    label: "Filipino Workers' Lives in Paintings by Antipas 'Biboy' Delotavo | Global Voices",
+    type: "Article / Artwork Reference",
+    url: "https://globalvoices.org/2015/05/01/filipino-workers-lives-in-paintings-by-antipas-biboy-delotavo/",
+  },
 ];
 
 export const findArtworkSource = (artworkId: string) =>
