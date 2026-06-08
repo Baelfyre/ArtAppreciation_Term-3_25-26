@@ -2,12 +2,8 @@ import { useEffect } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
-import { ArtworkEffectImage } from "./ArtworkEffectImage";
+import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
-import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
-import { AngCollageAssembly } from "./AngCollageAssembly";
-import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
-import { ViloriaSplitCombine } from "./ViloriaSplitCombine";
 
 interface ArtworkInfoPanelProps {
   artwork: Artwork | null;
@@ -126,21 +122,8 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
   if (artwork.mediaType === "music" && artwork.embedUrl) {
-    if (artwork.effect === "music-wave") {
-      return (
-        <div className="artwork-visual-effect effect-music-wave is-compact">
-          <ArtworkMediaEmbed
-            embedUrl={artwork.embedUrl}
-            title={artwork.title}
-            provider={artwork.mediaProvider}
-            embedHeight={artwork.embedHeight}
-          />
-        </div>
-      );
-    }
-
     return (
-      <div className="flex h-full w-full items-center justify-center p-2 md:p-3">
+      <div className="focused-media-preview flex w-full items-center justify-center p-2 md:p-3">
         <ArtworkMediaEmbed
           embedUrl={artwork.embedUrl}
           title={artwork.title}
@@ -151,7 +134,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
     );
   }
 
-  if (artwork.mediaType === "music" && !artwork.imageUrl) {
+  if (!artwork.imageUrl) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center p-6 text-center">
         <span className="glass-chip-warm mb-4 flex h-14 w-14 items-center justify-center rounded-full">
@@ -163,29 +146,15 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
     );
   }
 
-  if (artwork.id === "pixel-across-borders") {
-    return <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  if (artwork.id === "ang-these-pages-contain-a-universe") {
-    return <AngCollageAssembly src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  if (artwork.id === "jadloc-tradition-to-vivid-identity" && artwork.transitionImageUrl) {
-    return (
-      <JadlocTraditionToIdentity
-        traditionSrc={artwork.imageUrl}
-        vividSrc={artwork.transitionImageUrl}
-        alt={artwork.title}
-      />
-    );
-  }
-
-  if (artwork.id === "viloria-work-life-balance") {
-    return <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.title} />;
-  }
-
-  return <ArtworkEffectImage artwork={artwork} />;
+  return (
+    <ImageWithFallback
+      src={artwork.imageUrl}
+      alt={artwork.altText ?? artwork.title}
+      className="focused-artwork-image"
+      loading="eager"
+      decoding="async"
+    />
+  );
 };
 
 interface LocationPreviewProps {
