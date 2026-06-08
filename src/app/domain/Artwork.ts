@@ -21,7 +21,7 @@ export interface Artwork {
     | "coffee-ripple";
   transitionImageUrl?: string;
   mediaProvider?: "youtube" | "spotify";
-  mediaType?: "music";
+  mediaType?: "music" | "video";
   embedUrl?: string;
   embedHeight?: number;
   comparisonGroupId?: string;
