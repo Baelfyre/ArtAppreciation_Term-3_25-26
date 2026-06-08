@@ -107,12 +107,13 @@
   .artwork-panel-layout {
     height: auto;
     min-height: min-content;
-    grid-template-columns: minmax(0, 1.18fr) minmax(21rem, 0.82fr);
-    grid-template-rows: auto auto auto;
+    grid-template-columns: minmax(0, 1.28fr) minmax(22rem, 0.72fr);
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "heading heading"
       "preview facts"
-      "story location";
+      "preview story"
+      "preview location";
     align-items: start;
     gap: clamp(0.9rem, 1.5vw, 1.35rem);
   }
@@ -150,17 +151,18 @@
   }
 
   .artwork-facts-section,
-  .artwork-story-section {
+  .artwork-story-section,
+  .artwork-location-section {
     overflow: visible;
   }
 
   .artwork-preview-section {
-    align-self: start;
+    align-self: stretch;
   }
 
   .artwork-focus-frame {
-    height: auto;
-    min-height: clamp(24rem, 42vh, 36rem);
+    height: 100%;
+    min-height: clamp(38rem, calc(100svh - 16rem), 60rem);
     overflow: hidden;
     border-radius: 1rem;
     background:
@@ -170,8 +172,8 @@
 
   .artwork-focus-frame.is-visual,
   .artwork-focus-frame.is-playable {
-    height: auto;
-    min-height: clamp(24rem, 42vh, 36rem);
+    height: 100%;
+    min-height: clamp(38rem, calc(100svh - 16rem), 60rem);
   }
 
   .artwork-focus-frame .pixel-across-reveal,
@@ -205,8 +207,8 @@
   }
 
   .artwork-location-map-frame {
-    height: clamp(13rem, 28vh, 20rem);
-    max-height: 20rem;
+    height: clamp(12rem, 22vh, 16rem);
+    max-height: 16rem;
     overflow: visible;
   }
 
