@@ -154,7 +154,7 @@ export default function App() {
 const curationPlaceholders = {
   international: {
     eyebrow: "Identity Beyond Borders",
-    title: "International Direction",
+    title: "Global Filipino Art",
     body: "Explore the wider globe, then continue below to the main exhibition collection.",
   },
 } satisfies Record<Extract<GlobeMode, "international">, {
