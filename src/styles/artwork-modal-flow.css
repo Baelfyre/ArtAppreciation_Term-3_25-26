@@ -47,6 +47,74 @@
   width: min(100%, 40rem);
 }
 
+.focused-effect-preview {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.focused-effect-preview .artwork-effect-shell,
+.focused-effect-preview .pixel-across-reveal {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.focused-effect-preview .artwork-effect-stage,
+.focused-effect-preview .pixel-across-reveal-stage {
+  width: min(100%, 42rem);
+  max-width: 100%;
+  max-height: min(68svh, 42rem);
+  margin: 0 auto;
+}
+
+.focused-effect-preview--pixel .pixel-across-reveal-stage {
+  width: min(100%, 52rem) !important;
+  height: auto !important;
+  aspect-ratio: 1635 / 1556;
+}
+
+.focused-effect-preview--ang .artwork-effect-stage {
+  width: min(100%, 48rem);
+  aspect-ratio: 1277 / 902;
+}
+
+.focused-effect-preview--jadloc .artwork-effect-stage,
+.focused-effect-preview--viloria .artwork-effect-stage {
+  width: min(100%, 34rem);
+  max-height: min(68svh, 42rem);
+}
+
+.focused-effect-preview--slow-zoom .artwork-visual-effect,
+.focused-effect-preview--brush-stroke .artwork-visual-effect,
+.focused-effect-preview--triangle-fusion .artwork-visual-effect,
+.focused-effect-preview--lively-poster .artwork-visual-effect,
+.focused-effect-preview--coffee-ripple .artwork-visual-effect {
+  width: fit-content;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  background: transparent;
+}
+
+.focused-effect-preview--slow-zoom .artwork-visual-effect-image,
+.focused-effect-preview--brush-stroke .artwork-visual-effect-image,
+.focused-effect-preview--triangle-fusion .artwork-visual-effect-image,
+.focused-effect-preview--lively-poster .artwork-visual-effect-image,
+.focused-effect-preview--coffee-ripple .artwork-visual-effect-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(68svh, 42rem);
+  object-fit: contain;
+}
+
 .artwork-preview-section,
 .artwork-facts-section,
 .artwork-story-section,
@@ -232,7 +300,9 @@
     background: transparent;
   }
 
-  .artwork-focus-frame .focused-artwork-image {
+  .artwork-focus-frame .focused-artwork-image,
+  .focused-effect-preview .artwork-effect-stage,
+  .focused-effect-preview .pixel-across-reveal-stage {
     max-width: 100%;
     max-height: min(72svh, 34rem);
   }
