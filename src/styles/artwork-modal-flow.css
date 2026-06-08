@@ -27,6 +27,26 @@
   background: transparent;
 }
 
+.focused-artwork-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(70svh, 44rem);
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+}
+
+.focused-media-preview {
+  min-height: 16rem;
+}
+
+.focused-media-preview .artwork-media-embed {
+  width: min(100%, 40rem);
+}
+
 .artwork-preview-section,
 .artwork-facts-section,
 .artwork-story-section,
@@ -67,28 +87,10 @@
   overflow: hidden;
 }
 
-.artwork-effect-diaspora-migration .artwork-visual-effect-image {
-  transform-origin: center;
-  animation: diaspora-slow-expand 12s ease-in-out infinite alternate;
-  will-change: transform, filter;
-}
-
 .artwork-card:hover .artwork-effect-diaspora-migration .artwork-visual-effect-image,
 .artwork-focus-frame:hover .artwork-effect-diaspora-migration .artwork-visual-effect-image,
 .artwork-focus-frame:focus-within .artwork-effect-diaspora-migration .artwork-visual-effect-image {
   animation-duration: 7s;
-}
-
-@keyframes diaspora-slow-expand {
-  from {
-    transform: scale(1);
-    filter: saturate(0.96) contrast(1);
-  }
-
-  to {
-    transform: scale(1.08);
-    filter: saturate(1.05) contrast(1.04);
-  }
 }
 
 @media (min-width: 1024px) {
@@ -163,8 +165,12 @@
   .artwork-focus-frame,
   .artwork-focus-frame.is-visual,
   .artwork-focus-frame.is-playable {
+    display: flex;
+    width: 100%;
     height: auto;
     min-height: 0;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     border-radius: 1rem;
     background:
@@ -176,33 +182,11 @@
     min-height: 16rem;
   }
 
-  .artwork-focus-frame .pixel-across-reveal,
-  .artwork-focus-frame .artwork-effect-shell,
-  .artwork-focus-frame .artwork-visual-effect,
-  .artwork-focus-frame .artwork-effect-stage,
-  .artwork-focus-frame .viloria-split-stage,
-  .artwork-focus-frame .jadloc-transition-stage,
-  .artwork-focus-frame .pixel-across-reveal-stage {
-    width: 100%;
+  .artwork-focus-frame .focused-artwork-image {
+    width: auto;
     height: auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .artwork-focus-frame .pixel-across-reveal-image,
-  .artwork-focus-frame .artwork-effect-image,
-  .artwork-focus-frame .artwork-visual-effect-image,
-  .artwork-focus-frame .viloria-base-image,
-  .artwork-focus-frame .triangle-fusion-fragment {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: min(68vh, 42rem);
-    object-fit: contain;
-  }
-
-  .artwork-focus-frame .artwork-effect-diaspora-migration .artwork-visual-effect-image {
-    max-height: min(58vh, 32rem);
+    max-width: min(100%, 64rem);
+    max-height: min(68svh, 42rem);
   }
 
   .artwork-location-map-shell {
@@ -242,7 +226,15 @@
   }
 
   .artwork-focus-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
+  }
+
+  .artwork-focus-frame .focused-artwork-image {
+    max-width: 100%;
+    max-height: min(72svh, 34rem);
   }
 
   .artwork-location-map-frame {
