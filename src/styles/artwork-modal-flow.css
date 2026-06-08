@@ -1,0 +1,147 @@
+.artwork-panel-section {
+  background: rgba(5, 8, 22, 0.28);
+}
+
+.artwork-focus-frame {
+  background: transparent;
+}
+
+.artwork-preview-section,
+.artwork-facts-section,
+.artwork-story-section,
+.artwork-location-section {
+  overflow: visible;
+}
+
+.artwork-facts-section,
+.artwork-story-section {
+  min-height: fit-content;
+}
+
+.artwork-location-map-shell {
+  background: transparent !important;
+}
+
+@media (min-width: 1024px) {
+  .artwork-info-panel {
+    top: clamp(5.25rem, 8svh, 6rem);
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: auto;
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+    translate: none;
+  }
+
+  .artwork-panel-layout {
+    height: auto;
+    min-height: min-content;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "heading heading"
+      "preview facts"
+      "story location";
+    align-items: start;
+  }
+
+  .artwork-preview-section,
+  .artwork-facts-section,
+  .artwork-story-section,
+  .artwork-location-section {
+    min-height: 0;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .artwork-facts-section,
+  .artwork-story-section {
+    overflow: visible;
+  }
+
+  .artwork-focus-frame {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .artwork-focus-frame.is-visual,
+  .artwork-focus-frame.is-playable {
+    height: auto;
+    min-height: 0;
+  }
+
+  .artwork-focus-frame .pixel-across-reveal,
+  .artwork-focus-frame .artwork-effect-shell,
+  .artwork-focus-frame .artwork-visual-effect,
+  .artwork-focus-frame .artwork-effect-stage,
+  .artwork-focus-frame .viloria-split-stage,
+  .artwork-focus-frame .jadloc-transition-stage,
+  .artwork-focus-frame .pixel-across-reveal-stage {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .artwork-focus-frame .pixel-across-reveal-image,
+  .artwork-focus-frame .artwork-effect-image,
+  .artwork-focus-frame .artwork-visual-effect-image,
+  .artwork-focus-frame .viloria-base-image,
+  .artwork-focus-frame .triangle-fusion-fragment {
+    width: 100%;
+    height: auto;
+    max-height: min(58vh, 34rem);
+    object-fit: contain;
+  }
+
+  .artwork-location-map-shell {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .artwork-location-map-frame {
+    height: clamp(11rem, 26vh, 18rem);
+    max-height: 18rem;
+  }
+
+  .artwork-location-section .artwork-selected-place {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.75rem;
+  }
+
+  .artwork-panel-floating-close {
+    top: clamp(6rem, 9svh, 6.75rem);
+    right: 2.25rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .artwork-info-panel {
+    overflow-y: auto;
+  }
+
+  .artwork-panel-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    align-items: start;
+  }
+
+  .artwork-preview-section,
+  .artwork-facts-section,
+  .artwork-story-section,
+  .artwork-location-section {
+    overflow: visible;
+  }
+
+  .artwork-focus-frame {
+    background: transparent;
+  }
+}
