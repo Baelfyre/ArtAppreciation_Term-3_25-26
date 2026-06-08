@@ -203,7 +203,17 @@
     grid-column: 1 / -1;
     height: clamp(28rem, 68svh, 38rem);
     min-height: 0;
+    align-items: center;
+    justify-content: center;
     padding: clamp(0.6rem, 2vw, 1rem);
+  }
+
+  .local-map-zoom-stage {
+    width: min(76vw, 22rem);
+    height: auto;
+    aspect-ratio: 702 / 1209;
+    max-height: 100%;
+    margin-inline: auto;
   }
 
   .local-map-list-left {
@@ -226,8 +236,13 @@
   }
 
   .local-map-stage {
-    height: clamp(22rem, 92vw, 30rem);
+    height: clamp(27rem, 122vw, 36rem);
     padding: 0.65rem;
+  }
+
+  .local-map-zoom-stage {
+    width: min(70vw, 20rem);
+    max-width: 100%;
   }
 
   .local-map-side-list {
@@ -242,7 +257,11 @@
   }
 
   .local-map-stage {
-    height: clamp(21rem, 98vw, 27rem);
+    height: clamp(27rem, 122vw, 34rem);
     padding: 0.5rem;
+  }
+
+  .local-map-zoom-stage {
+    width: min(70vw, 19rem);
   }
 }
