@@ -133,7 +133,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
           title={artwork.title}
           provider={artwork.mediaProvider}
           embedHeight={artwork.embedHeight}
-          autoPlay={artwork.mediaType === "video"}
+          autoPlay={artwork.mediaType === "video" || artwork.id === "local-mapa-sb19"}
         />
       </div>
     );
