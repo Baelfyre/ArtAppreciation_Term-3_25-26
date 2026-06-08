@@ -38,6 +38,7 @@ export default function App() {
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
+  const modeLayoutClass = mode === "local" ? "is-local-mode" : "is-international-mode";
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -91,7 +92,7 @@ export default function App() {
 
         <section
           id="globe"
-          className="globe-section-inner curved-card-accent relative my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)]"
+          className={`globe-section-inner ${modeLayoutClass} curved-card-accent relative my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)]`}
         >
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-0 top-0 h-40 w-40 bg-[rgba(244,196,48,0.10)] blur-3xl" />
@@ -99,7 +100,7 @@ export default function App() {
           </div>
 
           {/* Main 3D Globe Workspace */}
-          <div className="globe-workspace relative">
+          <div className={`globe-workspace ${modeLayoutClass} relative`}>
             <GlobeView
               mode={mode}
               artworks={modeArtworks}
@@ -108,7 +109,7 @@ export default function App() {
             />
             
             {/* Overlay UI Panels */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className={`globe-overlay-host ${modeLayoutClass} absolute inset-0 pointer-events-none`}>
               <div
                 className={`globe-overlay-shell relative mx-auto h-full w-full max-w-[1200px] pointer-events-none ${
                   selectedArtwork ? "has-selected-artwork" : ""
