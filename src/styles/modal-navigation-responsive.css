@@ -8,9 +8,10 @@
 
 .artwork-panel-floating-close {
   position: fixed;
-  top: calc(1rem + env(safe-area-inset-top));
-  right: calc(1rem + env(safe-area-inset-right));
+  top: clamp(5.6rem, 8.5svh, 6.25rem);
+  right: calc(1.35rem + env(safe-area-inset-right));
   z-index: 150;
+  pointer-events: auto;
 }
 
 .navbar-shell {
@@ -21,17 +22,17 @@
   max-width: min(80rem, calc(100vw - 1.5rem));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1180px) {
   .artwork-panel-floating-close {
     top: calc(1.5rem + env(safe-area-inset-top));
     right: calc(1.5rem + env(safe-area-inset-right));
   }
 }
 
-@media (min-width: 1180px) {
+@media (max-width: 767px) {
   .artwork-panel-floating-close {
-    top: calc(1.5rem + env(safe-area-inset-top));
-    right: calc(1.5rem + env(safe-area-inset-right));
+    top: clamp(6.05rem, 14svh, 7.25rem);
+    right: calc(1.05rem + env(safe-area-inset-right));
   }
 }
 
@@ -41,7 +42,7 @@
   }
 
   .artwork-panel-floating-close {
-    top: calc(0.75rem + env(safe-area-inset-top));
-    right: calc(0.75rem + env(safe-area-inset-right));
+    top: clamp(6.05rem, 14svh, 7.25rem);
+    right: calc(1.05rem + env(safe-area-inset-right));
   }
 }
