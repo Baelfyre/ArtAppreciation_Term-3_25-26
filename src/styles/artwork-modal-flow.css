@@ -157,12 +157,14 @@
   }
 
   .artwork-preview-section {
-    align-self: stretch;
+    align-self: start;
   }
 
-  .artwork-focus-frame {
-    height: 100%;
-    min-height: clamp(38rem, calc(100svh - 16rem), 60rem);
+  .artwork-focus-frame,
+  .artwork-focus-frame.is-visual,
+  .artwork-focus-frame.is-playable {
+    height: auto;
+    min-height: 0;
     overflow: hidden;
     border-radius: 1rem;
     background:
@@ -170,10 +172,8 @@
       rgba(2, 5, 16, 0.34);
   }
 
-  .artwork-focus-frame.is-visual,
   .artwork-focus-frame.is-playable {
-    height: 100%;
-    min-height: clamp(38rem, calc(100svh - 16rem), 60rem);
+    min-height: 16rem;
   }
 
   .artwork-focus-frame .pixel-across-reveal,
@@ -184,8 +184,8 @@
   .artwork-focus-frame .jadloc-transition-stage,
   .artwork-focus-frame .pixel-across-reveal-stage {
     width: 100%;
-    height: 100%;
-    min-height: inherit;
+    height: auto;
+    min-height: 0;
     max-height: none;
   }
 
@@ -194,10 +194,15 @@
   .artwork-focus-frame .artwork-visual-effect-image,
   .artwork-focus-frame .viloria-base-image,
   .artwork-focus-frame .triangle-fusion-fragment {
+    display: block;
     width: 100%;
-    height: 100%;
-    max-height: none;
+    height: auto;
+    max-height: min(68vh, 42rem);
     object-fit: contain;
+  }
+
+  .artwork-focus-frame .artwork-effect-diaspora-migration .artwork-visual-effect-image {
+    max-height: min(58vh, 32rem);
   }
 
   .artwork-location-map-shell {
@@ -210,16 +215,6 @@
     height: clamp(12rem, 22vh, 16rem);
     max-height: 16rem;
     overflow: visible;
-  }
-
-  .artwork-location-section .artwork-selected-place {
-    position: relative;
-    z-index: 20;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 0.8rem;
   }
 
   .artwork-panel-floating-close {
