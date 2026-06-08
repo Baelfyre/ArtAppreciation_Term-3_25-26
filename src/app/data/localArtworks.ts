@@ -294,6 +294,39 @@ export const localArtworks: Artwork[] = [
     featured: true,
   },
   {
+    id: "diaspora-migration",
+    scope: "local",
+    localCategory: "localArtist",
+    markerType: "localArtist",
+    markerColor: "red",
+    title: "Diaspora (Migration)",
+    creator: 'Antipas "Biboy" Delotavo',
+    medium: "Oil on canvas triptych",
+    imageUrl: "/resources/Diaspora.jpg",
+    altText:
+      "Diaspora by Antipas Biboy Delotavo, an oil on canvas triptych showing Filipino workers walking with bags and luggage.",
+    effect: "slow-zoom",
+    location: {
+      label: "Philippine Social Realism / OFW Migration",
+      city: "Filipino Diaspora",
+      country: "Philippines",
+      lat: 14.5995,
+      lng: 120.9842,
+      mapX: 41.9,
+      mapY: 38.5,
+    },
+    locationBasis: "Philippine social realist context / OFW migration theme",
+    description:
+      "Diaspora (Migration) uses a wide triptych format to show figures moving forward with bags and luggage, turning migration into a shared visual journey. The repeated bodies, muted colors, and directional movement communicate the scale of Filipino labor migration while also showing the quiet emotional weight carried by workers who leave home for survival and opportunity.",
+    advocacyConnection:
+      "The work connects to Filipino Identity Beyond Borders by making the OFW experience visible as both a personal sacrifice and a national reality. It reminds viewers that Filipino presence abroad is not only about work and remittances, but also about distance, family separation, resilience, and the search for dignity across borders.",
+    elements:
+      "The artwork uses line, movement, muted color, repeated figures, luggage, scale, and a long horizontal composition.",
+    principles:
+      "The triptych uses repetition to show collective movement, balance across the three panels, emphasis through the walking figures, and unity through the shared direction of travel.",
+    featured: true,
+  },
+  {
     id: "local-sa-ugoy-ng-duyan",
     scope: "local",
     localCategory: "localArtist",
