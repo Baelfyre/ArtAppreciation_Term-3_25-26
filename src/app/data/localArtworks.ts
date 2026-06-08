@@ -275,6 +275,9 @@ export const localArtworks: Artwork[] = [
     altText:
       "Poster for Call Me Mother, a Filipino film by Jun Robles Lana featuring family, care, and parenthood.",
     effect: "lively-poster",
+    mediaProvider: "youtube",
+    mediaType: "video",
+    embedUrl: "https://www.youtube.com/embed/cSz3TmOmTC0",
     location: {
       label: "Philippine Cinema",
       city: "Philippine Cinema",
