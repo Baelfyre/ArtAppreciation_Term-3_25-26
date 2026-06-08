@@ -3,7 +3,12 @@ import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } fro
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { AngCollageAssembly } from "./AngCollageAssembly";
+import { ArtworkEffectImage } from "./ArtworkEffectImage";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
+import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
+import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
+import { ViloriaSplitCombine } from "./ViloriaSplitCombine";
 
 interface ArtworkInfoPanelProps {
   artwork: Artwork | null;
@@ -142,6 +147,50 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
         </span>
         <p className="section-title text-xl font-semibold text-white">{artwork.title}</p>
         <p className="mt-2 text-sm text-slate-300">{artwork.creator}</p>
+      </div>
+    );
+  }
+
+  if (artwork.id === "pixel-across-borders") {
+    return (
+      <div className="focused-effect-preview focused-effect-preview--pixel">
+        <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
+      </div>
+    );
+  }
+
+  if (artwork.id === "ang-these-pages-contain-a-universe") {
+    return (
+      <div className="focused-effect-preview focused-effect-preview--ang">
+        <AngCollageAssembly src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
+      </div>
+    );
+  }
+
+  if (artwork.id === "jadloc-tradition-to-vivid-identity" && artwork.transitionImageUrl) {
+    return (
+      <div className="focused-effect-preview focused-effect-preview--jadloc">
+        <JadlocTraditionToIdentity
+          traditionSrc={artwork.imageUrl}
+          vividSrc={artwork.transitionImageUrl}
+          alt={artwork.altText ?? artwork.title}
+        />
+      </div>
+    );
+  }
+
+  if (artwork.id === "viloria-work-life-balance") {
+    return (
+      <div className="focused-effect-preview focused-effect-preview--viloria">
+        <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
+      </div>
+    );
+  }
+
+  if (artwork.effect) {
+    return (
+      <div className={`focused-effect-preview focused-effect-preview--${artwork.effect}`}>
+        <ArtworkEffectImage artwork={artwork} />
       </div>
     );
   }
