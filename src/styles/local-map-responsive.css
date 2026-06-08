@@ -19,6 +19,8 @@
 }
 
 .local-map-content {
+  width: 100%;
+  min-width: 0;
   height: 100%;
   grid-template-columns: minmax(12rem, 0.82fr) minmax(0, 1.9fr) minmax(12rem, 0.82fr);
   grid-template-rows: minmax(0, 1fr);
@@ -182,38 +184,56 @@
 @media (max-width: 1023px) {
   .local-map-panel {
     max-height: none;
+    overflow-x: hidden;
     overflow-y: auto;
   }
 
   .local-map-body {
+    width: 100%;
     height: auto;
     min-height: 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .local-map-content {
+    width: 100%;
+    min-width: 0 !important;
+    max-width: 100%;
     height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto auto;
+    align-items: start;
+    justify-items: stretch;
     overflow: visible;
   }
 
   .local-map-stage {
     order: 1;
     grid-column: 1 / -1;
-    height: clamp(28rem, 68svh, 38rem);
+    width: 100%;
+    min-width: 0;
+    height: clamp(24rem, 112vw, 38rem);
     min-height: 0;
     align-items: center;
     justify-content: center;
-    padding: clamp(0.6rem, 2vw, 1rem);
+    overflow: hidden;
+    padding: clamp(0.5rem, 2vw, 0.85rem);
   }
 
   .local-map-zoom-stage {
-    width: min(76vw, 22rem);
-    height: auto;
+    width: auto;
+    height: 100%;
     aspect-ratio: 702 / 1209;
+    max-width: 100%;
     max-height: 100%;
     margin-inline: auto;
+  }
+
+  .local-map-zoom-stage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .local-map-list-left {
@@ -232,17 +252,20 @@
 
 @media (max-width: 767px) {
   .local-map-panel {
+    overflow-x: hidden;
     overflow-y: auto;
   }
 
   .local-map-stage {
-    height: clamp(27rem, 122vw, 36rem);
-    padding: 0.65rem;
+    height: clamp(23rem, 108vw, 34rem);
+    padding: 0.6rem;
   }
 
   .local-map-zoom-stage {
-    width: min(70vw, 20rem);
+    width: auto;
+    height: 100%;
     max-width: 100%;
+    max-height: 100%;
   }
 
   .local-map-side-list {
@@ -257,11 +280,13 @@
   }
 
   .local-map-stage {
-    height: clamp(27rem, 122vw, 34rem);
+    height: clamp(22rem, 106vw, 32rem);
     padding: 0.5rem;
   }
 
   .local-map-zoom-stage {
-    width: min(70vw, 19rem);
+    width: auto;
+    height: 100%;
+    max-width: 100%;
   }
 }
