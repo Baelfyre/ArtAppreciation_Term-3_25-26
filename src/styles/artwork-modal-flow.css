@@ -1,5 +1,26 @@
+.artwork-info-panel.glass-panel-strong {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.artwork-info-panel.curved-card-accent::before,
+.artwork-info-panel > .pattern-surface {
+  display: none;
+}
+
 .artwork-panel-section {
-  background: rgba(5, 8, 22, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    rgba(5, 8, 22, 0.58);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
 }
 
 .artwork-focus-frame {
@@ -19,7 +40,27 @@
 }
 
 .artwork-location-map-shell {
+  overflow: visible !important;
   background: transparent !important;
+}
+
+.artwork-location-map-shell .local-map-marker {
+  z-index: 30;
+}
+
+.artwork-location-map-shell .local-map-marker-label {
+  top: auto;
+  bottom: calc(100% + 0.35rem);
+  transform: translateX(-50%) translateY(-0.1rem);
+  z-index: 40;
+}
+
+.artwork-location-map-shell .local-map-marker:hover .local-map-marker-label,
+.artwork-location-map-shell .local-map-marker:focus-visible .local-map-marker-label,
+.artwork-location-map-shell .local-map-marker.is-highlighted .local-map-marker-label,
+.artwork-location-map-shell .local-map-marker.is-selected .local-map-marker-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-0.2rem);
 }
 
 .artwork-effect-diaspora-migration {
@@ -66,13 +107,37 @@
   .artwork-panel-layout {
     height: auto;
     min-height: min-content;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-columns: minmax(0, 1.18fr) minmax(21rem, 0.82fr);
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "heading heading"
       "preview facts"
       "story location";
     align-items: start;
+    gap: clamp(0.9rem, 1.5vw, 1.35rem);
+  }
+
+  .artwork-panel-heading {
+    grid-area: heading;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .artwork-preview-section {
+    grid-area: preview;
+  }
+
+  .artwork-facts-section {
+    grid-area: facts;
+  }
+
+  .artwork-story-section {
+    grid-area: story;
+  }
+
+  .artwork-location-section {
+    grid-area: location;
   }
 
   .artwork-preview-section,
@@ -81,7 +146,7 @@
   .artwork-location-section {
     min-height: 0;
     height: auto;
-    padding: 1rem;
+    padding: clamp(1rem, 1.5vw, 1.35rem);
   }
 
   .artwork-facts-section,
@@ -89,18 +154,24 @@
     overflow: visible;
   }
 
+  .artwork-preview-section {
+    align-self: start;
+  }
+
   .artwork-focus-frame {
     height: auto;
-    min-height: 0;
-    overflow: visible;
-    border-radius: 0;
-    background: transparent;
+    min-height: clamp(24rem, 42vh, 36rem);
+    overflow: hidden;
+    border-radius: 1rem;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(244, 196, 48, 0.06), transparent 36%),
+      rgba(2, 5, 16, 0.34);
   }
 
   .artwork-focus-frame.is-visual,
   .artwork-focus-frame.is-playable {
     height: auto;
-    min-height: 0;
+    min-height: clamp(24rem, 42vh, 36rem);
   }
 
   .artwork-focus-frame .pixel-across-reveal,
@@ -110,8 +181,9 @@
   .artwork-focus-frame .viloria-split-stage,
   .artwork-focus-frame .jadloc-transition-stage,
   .artwork-focus-frame .pixel-across-reveal-stage {
-    height: auto;
-    min-height: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
     max-height: none;
   }
 
@@ -121,28 +193,31 @@
   .artwork-focus-frame .viloria-base-image,
   .artwork-focus-frame .triangle-fusion-fragment {
     width: 100%;
-    height: auto;
-    max-height: min(58vh, 34rem);
+    height: 100%;
+    max-height: none;
     object-fit: contain;
   }
 
   .artwork-location-map-shell {
     height: auto;
     min-height: 0;
-    padding: 0;
+    padding: 0 0 0.25rem;
   }
 
   .artwork-location-map-frame {
-    height: clamp(11rem, 26vh, 18rem);
-    max-height: 18rem;
+    height: clamp(13rem, 28vh, 20rem);
+    max-height: 20rem;
+    overflow: visible;
   }
 
   .artwork-location-section .artwork-selected-place {
+    position: relative;
+    z-index: 20;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: 0.7rem;
-    margin-top: 0.75rem;
+    margin-top: 0.8rem;
   }
 
   .artwork-panel-floating-close {
@@ -171,5 +246,9 @@
 
   .artwork-focus-frame {
     background: transparent;
+  }
+
+  .artwork-location-map-frame {
+    overflow: visible;
   }
 }
