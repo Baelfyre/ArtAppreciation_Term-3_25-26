@@ -117,11 +117,6 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </div>
 
             <LocationPreview artwork={artwork} />
-
-            <div className="artwork-selected-place mt-3 rounded-[1rem] p-3 md:mt-4 md:p-4">
-              <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-slate-400 md:text-xs md:tracking-[0.2em]">Selected place</p>
-              <p className="break-words text-sm leading-relaxed text-slate-200">{locationLabel}</p>
-            </div>
           </section>
         </div>
       </aside>
