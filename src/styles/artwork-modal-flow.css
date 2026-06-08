@@ -22,6 +22,34 @@
   background: transparent !important;
 }
 
+.artwork-effect-diaspora-migration {
+  overflow: hidden;
+}
+
+.artwork-effect-diaspora-migration .artwork-visual-effect-image {
+  transform-origin: center;
+  animation: diaspora-slow-expand 12s ease-in-out infinite alternate;
+  will-change: transform, filter;
+}
+
+.artwork-card:hover .artwork-effect-diaspora-migration .artwork-visual-effect-image,
+.artwork-focus-frame:hover .artwork-effect-diaspora-migration .artwork-visual-effect-image,
+.artwork-focus-frame:focus-within .artwork-effect-diaspora-migration .artwork-visual-effect-image {
+  animation-duration: 7s;
+}
+
+@keyframes diaspora-slow-expand {
+  from {
+    transform: scale(1);
+    filter: saturate(0.96) contrast(1);
+  }
+
+  to {
+    transform: scale(1.08);
+    filter: saturate(1.05) contrast(1.04);
+  }
+}
+
 @media (min-width: 1024px) {
   .artwork-info-panel {
     top: clamp(5.25rem, 8svh, 6rem);
