@@ -170,7 +170,7 @@ export const AboutSection = () => (
         >
           <div className="absolute left-[8%] top-[18%] -translate-x-1/2 -translate-y-1/2">
             <div className="orbit-counter" style={{ ["--orbit-duration" as "--orbit-duration"]: "24s" } as CSSProperties}>
-              <div className="identity-support-icon glass-chip rounded-2xl shadow-xl">
+              <div className="identity-support-icon identity-support-icon--gold">
                 <Landmark className="h-5 w-5 text-[#f4c430]" />
               </div>
             </div>
@@ -183,7 +183,7 @@ export const AboutSection = () => (
         >
           <div className="absolute right-[2%] top-[24%] translate-x-1/2 -translate-y-1/2">
             <div className="orbit-counter-reverse" style={{ ["--orbit-duration" as "--orbit-duration"]: "20s" } as CSSProperties}>
-              <div className="identity-support-icon glass-chip rounded-2xl shadow-xl">
+              <div className="identity-support-icon identity-support-icon--red">
                 <MapPin className="h-[1.15rem] w-[1.15rem] text-[#b9162c]" />
               </div>
             </div>
@@ -196,7 +196,7 @@ export const AboutSection = () => (
         >
           <div className="absolute bottom-[8%] right-[7%] translate-x-1/2 translate-y-1/2">
             <div className="orbit-counter" style={{ ["--orbit-duration" as "--orbit-duration"]: "18s" } as CSSProperties}>
-              <div className="identity-support-icon glass-chip rounded-2xl shadow-xl">
+              <div className="identity-support-icon identity-support-icon--blue">
                 <Fingerprint className="h-5 w-5 text-[#1d49d8]" />
               </div>
             </div>
