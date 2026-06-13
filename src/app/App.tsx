@@ -33,7 +33,7 @@ console.error = (...args) => {
 };
 
 export default function App() {
-  const { mode, selectMode } = useViewMode("local");
+  const { mode, selectMode } = useViewMode("international");
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
@@ -83,12 +83,14 @@ export default function App() {
       <Navbar />
       
       <main className="relative z-10">
-        <Hero />
+        <div className="museum-intro">
+          <Hero />
 
-        <FeaturedSection
-          artworks={featuredArtworks}
-          onViewArtwork={handleSelectArtwork}
-        />
+          <FeaturedSection
+            artworks={featuredArtworks}
+            onViewArtwork={handleSelectArtwork}
+          />
+        </div>
 
         <section
           id="globe"
@@ -106,6 +108,7 @@ export default function App() {
               artworks={modeArtworks}
               selectedArtwork={selectedArtwork}
               onSelectArtwork={handleSelectArtwork}
+              onSelectPhilippines={() => handleModeChange("local")}
             />
             
             {/* Overlay UI Panels */}

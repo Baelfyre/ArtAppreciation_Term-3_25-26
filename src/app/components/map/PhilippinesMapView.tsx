@@ -1,10 +1,10 @@
-import { useState, type CSSProperties, type MouseEvent } from "react";
+import { useState, type CSSProperties } from "react";
 import type { Artwork } from "../../domain/Artwork";
 import {
   prepareLocalMapMarkers,
   type LocalMapMarker,
 } from "../../services/mapNavigationService";
-import { PhilippinesMarker } from "./PhilippinesMarker";
+import { PhilippinesMapPanel } from "./PhilippinesMapPanel";
 
 interface PhilippinesMapViewProps {
   artworks: Artwork[];
@@ -38,55 +38,28 @@ export const PhilippinesMapView = ({
     );
   };
 
-  const handleMapClickCapture = (event: MouseEvent<HTMLDivElement>) => {
-    if ((event.target as HTMLElement).closest(".local-map-marker")) return;
-
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const clickX = event.clientX - bounds.left;
-    const clickY = event.clientY - bounds.top;
-
-    const nearestMarker = markers.reduce<{
-      marker: LocalMapMarker;
-      distance: number;
-    } | null>((nearest, marker) => {
-      const markerX = (marker.displayMapX / 100) * bounds.width;
-      const markerY = (marker.displayMapY / 100) * bounds.height;
-      const distance = Math.hypot(clickX - markerX, clickY - markerY);
-
-      if (!nearest || distance < nearest.distance) {
-        return { marker, distance };
-      }
-
-      return nearest;
-    }, null);
-
-    if (nearestMarker && nearestMarker.distance <= 24) {
-      event.preventDefault();
-      event.stopPropagation();
-      handleSelectMarker(nearestMarker.marker);
-    }
-  };
-
   return (
     <div className="local-map-panel local-map-fade curved-card-accent pointer-events-auto flex min-h-0 w-full max-w-[34rem] flex-1 flex-col overflow-hidden rounded-[1.25rem] border border-white/14 bg-[rgba(5,8,22,0.54)] p-3 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl md:rounded-[1.75rem] md:p-5 lg:max-w-[72rem]">
-      <div className="mb-3 flex items-start justify-between gap-3 md:mb-4 md:gap-4">
-        <div>
-          <p className="globe-local-status-label mb-2 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
+      <div className="philippines-map-header mb-3 md:mb-4">
+        <div className="philippines-map-header-context">
+          <p className="globe-local-status-label inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-200 md:px-3 md:text-[11px] md:tracking-[0.22em]">
             Zooming Into the Philippines
           </p>
           <p className="text-[10px] uppercase tracking-[0.18em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Local Artist</p>
+        </div>
+        <div className="philippines-map-header-copy">
           <h3 className="section-title text-xl font-semibold text-white md:text-2xl">Philippines Map</h3>
-          <p className="mt-1 max-w-[18rem] text-xs leading-snug text-slate-300">
+          <p className="mt-1 text-xs leading-snug text-slate-300">
             Group artworks and local artists anchored to the Philippines.
           </p>
         </div>
-        <span className="glass-chip shrink-0 rounded-full px-2.5 py-1 text-[11px] text-slate-200 md:px-3 md:text-xs">
+        <span className="philippines-map-header-count glass-chip shrink-0 rounded-full px-2.5 py-1 text-[11px] text-slate-200 md:px-3 md:text-xs">
           {markers.length} {markers.length === 1 ? "marker" : "markers"}
         </span>
       </div>
 
       <div className="local-map-body relative min-h-0 flex-1 overflow-hidden">
-        <div className="local-map-content relative grid h-full min-h-0 gap-3 overflow-hidden">
+        <div className="local-map-content philippines-map-layout relative grid h-full min-h-0 gap-3 overflow-hidden">
           <LocalArtworkList
             title="Group Artwork"
             markers={groupMemberMarkers}
@@ -97,31 +70,12 @@ export const PhilippinesMapView = ({
             onClearIntent={handleClearMarkerIntent}
           />
 
-          <section className="local-map-card local-map-map-card" aria-label="Philippines map markers">
-            <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
-            <div className="local-map-stage relative min-h-0 overflow-hidden rounded-[0.875rem]">
-              <div
-                className="local-map-zoom-stage relative mx-auto aspect-[702/1209] overflow-hidden"
-                onClickCapture={handleMapClickCapture}
-              >
-                <img
-                  src="/resources/philippines.svg"
-                  alt="Philippines map"
-                  className="block h-full w-full max-h-full max-w-full object-contain object-center opacity-90 [filter:invert(94%)_sepia(13%)_saturate(620%)_hue-rotate(351deg)_brightness(103%)_contrast(94%)_drop-shadow(0_0_22px_rgba(244,196,48,0.18))]"
-                />
-
-                {markers.map((marker) => (
-                  <PhilippinesMarker
-                    key={marker.id}
-                    marker={marker}
-                    isSelected={selectedArtwork?.id === marker.artwork.id}
-                    isHighlighted={activeMarkerId === marker.id}
-                    onSelect={handleSelectMarker}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
+          <PhilippinesMapPanel
+            markers={markers}
+            activeMarkerId={activeMarkerId}
+            selectedArtworkId={selectedArtwork?.id ?? null}
+            onSelectMarker={handleSelectMarker}
+          />
 
           <LocalArtworkList
             title="Local Artist"

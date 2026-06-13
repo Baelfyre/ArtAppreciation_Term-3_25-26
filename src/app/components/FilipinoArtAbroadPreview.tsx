@@ -24,7 +24,7 @@ export const FilipinoArtAbroadPreview = ({ artwork }: FilipinoArtAbroadPreviewPr
 
       <div className="art-abroad-preview overflow-hidden rounded-[1.5rem]">
         <div className="art-abroad-effect-frame">
-          <ArtworkEffectImage artwork={artwork} compact />
+          <ArtworkEffectImage artwork={artwork} compact variant="detailView" />
           <span className="international-preview-badge">
             <Globe2 className="h-4 w-4" />
             International Exhibit Preview

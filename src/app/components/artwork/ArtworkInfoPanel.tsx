@@ -3,7 +3,7 @@ import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } fro
 import type { Artwork } from "../../domain/Artwork";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { AngCollageAssembly } from "./AngCollageAssembly";
-import { ArtworkEffectImage } from "./ArtworkEffectImage";
+import { ArtworkMedia } from "./ArtworkMedia";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
 import { JadlocTraditionToIdentity } from "./JadlocTraditionToIdentity";
 import { PixelAcrossBordersReveal } from "./PixelAcrossBordersReveal";
@@ -51,7 +51,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
       >
         <X className="h-4 w-4" />
       </button>
-      <aside className="artwork-info-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
+      <aside className="artwork-info-panel artwork-card--focused-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
         <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-4 md:gap-4 md:p-4 md:pt-5 lg:p-5 lg:pt-5">
@@ -127,7 +127,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
   if ((artwork.mediaType === "music" || artwork.mediaType === "video") && artwork.embedUrl) {
     return (
-      <div className="focused-media-preview flex w-full items-center justify-center p-2 md:p-3">
+      <div className="focused-artwork-media-frame focused-artwork-media-frame--embed p-2 md:p-3">
         <ArtworkMediaEmbed
           embedUrl={artwork.embedUrl}
           title={artwork.title}
@@ -141,7 +141,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
 
   if (!artwork.imageUrl) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center p-6 text-center">
+      <div className="focused-artwork-media-frame flex-col p-6 text-center">
         <span className="glass-chip-warm mb-4 flex h-14 w-14 items-center justify-center rounded-full">
           <Music2 className="h-6 w-6 text-[#f4c430]" />
         </span>
@@ -153,7 +153,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
 
   if (artwork.id === "pixel-across-borders") {
     return (
-      <div className="focused-effect-preview focused-effect-preview--pixel">
+      <div className="focused-artwork-media-frame focused-effect-preview focused-effect-preview--pixel">
         <PixelAcrossBordersReveal src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
       </div>
     );
@@ -161,7 +161,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
 
   if (artwork.id === "ang-these-pages-contain-a-universe") {
     return (
-      <div className="focused-effect-preview focused-effect-preview--ang">
+      <div className="focused-artwork-media-frame focused-effect-preview focused-effect-preview--ang">
         <AngCollageAssembly src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
       </div>
     );
@@ -169,7 +169,7 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
 
   if (artwork.id === "jadloc-tradition-to-vivid-identity" && artwork.transitionImageUrl) {
     return (
-      <div className="focused-effect-preview focused-effect-preview--jadloc">
+      <div className="focused-artwork-media-frame focused-effect-preview focused-effect-preview--jadloc">
         <JadlocTraditionToIdentity
           traditionSrc={artwork.imageUrl}
           vividSrc={artwork.transitionImageUrl}
@@ -181,21 +181,13 @@ const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
 
   if (artwork.id === "viloria-work-life-balance") {
     return (
-      <div className="focused-effect-preview focused-effect-preview--viloria">
+      <div className="focused-artwork-media-frame focused-effect-preview focused-effect-preview--viloria">
         <ViloriaSplitCombine src={artwork.imageUrl} alt={artwork.altText ?? artwork.title} />
       </div>
     );
   }
 
-  if (artwork.effect) {
-    return (
-      <div className={`focused-effect-preview focused-effect-preview--${artwork.effect}`}>
-        <ArtworkEffectImage artwork={artwork} />
-      </div>
-    );
-  }
-
-  return null;
+  return <ArtworkMedia artwork={artwork} variant="focusedPanel" />;
 };
 
 interface LocationPreviewProps {

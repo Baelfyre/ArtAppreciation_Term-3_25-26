@@ -5,23 +5,38 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 interface ArtworkEffectImageProps {
   artwork: Artwork;
   compact?: boolean;
+  variant?: ArtworkMediaVariant;
 }
+
+export type ArtworkMediaVariant =
+  | "featuredPreview"
+  | "focusedPanel"
+  | "galleryCard"
+  | "detailView";
 
 const triangleFragments = ["left", "center", "right"] as const;
 const musicBars = [42, 68, 52, 82, 58, 74, 46, 88, 62, 50, 76, 44];
+const variantClasses: Record<ArtworkMediaVariant, string> = {
+  featuredPreview: "artwork-visual-effect--featured-preview",
+  focusedPanel: "artwork-visual-effect--focused-panel",
+  galleryCard: "artwork-visual-effect--gallery",
+  detailView: "artwork-visual-effect--detail",
+};
 
 export const ArtworkEffectImage = ({
   artwork,
   compact = false,
+  variant = "galleryCard",
 }: ArtworkEffectImageProps) => {
   const effect = artwork.effect ?? "slow-zoom";
   const alt = artwork.altText ?? artwork.title;
   const artworkEffectClass = `artwork-effect-${artwork.id}`;
+  const variantClass = variantClasses[variant];
 
   if (effect === "music-wave" && artwork.imageUrl) {
     return (
       <div
-        className={`artwork-visual-effect effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
+        className={`artwork-visual-effect ${variantClass} effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
         tabIndex={compact ? -1 : 0}
       >
         <ImageWithFallback
@@ -40,7 +55,7 @@ export const ArtworkEffectImage = ({
 
     return (
       <div
-        className={`artwork-visual-effect effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
+        className={`artwork-visual-effect ${variantClass} effect-music-wave ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
         tabIndex={compact ? -1 : 0}
         role="img"
         aria-label={alt}
@@ -63,7 +78,7 @@ export const ArtworkEffectImage = ({
 
   return (
     <div
-      className={`artwork-visual-effect effect-${effect} ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
+      className={`artwork-visual-effect ${variantClass} effect-${effect} ${artworkEffectClass} ${compact ? "is-compact" : ""}`}
       tabIndex={compact ? -1 : 0}
     >
       <ImageWithFallback

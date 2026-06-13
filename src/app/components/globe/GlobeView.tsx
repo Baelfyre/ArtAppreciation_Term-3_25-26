@@ -13,6 +13,7 @@ interface GlobeViewProps {
   artworks: Artwork[];
   selectedArtwork: Artwork | null;
   onSelectArtwork: (artwork: Artwork) => void;
+  onSelectPhilippines: () => void;
 }
 
 export const GlobeView = ({
@@ -20,6 +21,7 @@ export const GlobeView = ({
   artworks,
   selectedArtwork,
   onSelectArtwork,
+  onSelectPhilippines,
 }: GlobeViewProps) => {
   const globeRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -147,6 +149,19 @@ export const GlobeView = ({
               label.style.background = "rgba(5, 8, 22, 0.55)";
               label.style.borderColor = "rgba(244, 196, 48, 0.28)";
               el.appendChild(label);
+
+              el.classList.add("cursor-pointer");
+              el.setAttribute("role", "button");
+              el.setAttribute("tabindex", "0");
+              el.setAttribute("aria-label", "Open Philippines local art map");
+              el.title = "Open Philippines local art map";
+              el.onclick = onSelectPhilippines;
+              el.onkeydown = (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onSelectPhilippines();
+                }
+              };
             }
 
             el.appendChild(dot);

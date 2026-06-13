@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Noto Sans Tagalog";
+  src: url("/resources/fonts/NotoSansTagalog-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+1700-171F;
+}
