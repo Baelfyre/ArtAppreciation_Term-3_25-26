@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project is an interactive web application developed for MO-HUM034 Art Appreciation. It presents a digital exhibition of original artworks created by Group 15, showing how Filipino art continues to evolve through diverse mediums, personal stories, local places, and global cultural connections.
+This project is an interactive web application developed for MO-HUM034 Art Appreciation. It presents a digital exhibition of original artworks created by Group 16, showing how Filipino art continues to evolve through diverse mediums, personal stories, local places, and global cultural connections.
 
 The project combines the group advocacy **Filipino Art in This Day and Age: Diversity, Evolution, and Identity** with the concept of **Filipino Identity Beyond Borders**. Through an interactive globe, moving artwork cards, and hover-based artwork effects, the exhibition highlights how Filipino identity can be expressed through modern, traditional, digital, and personal forms of art.
 
@@ -22,7 +22,7 @@ The exhibition emphasizes:
 
 ## Featured Artworks
 
-The project includes original artworks by members of Group 15:
+The project includes original artworks by members of Group 16:
 
 * **Pixel Across Borders** by Ongo, James
 * **Ang Original Artwork** by Ang, Monica
@@ -141,4 +141,4 @@ Build output directory: dist
 
 ## Author
 
-Developed by Group 15 for MO-HUM034 Art Appreciation, Section A1101.
+Developed by Group 16 for MO-HUM034 Art Appreciation, Section A1101.

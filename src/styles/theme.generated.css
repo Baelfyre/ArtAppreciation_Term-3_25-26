@@ -1566,10 +1566,10 @@ body::after {
     perspective-origin: 50% 48%;
     touch-action: pan-y;
 
-    --preview-card-width: clamp(16.5rem, 20vw, 18.25rem);
-    --preview-card-height: clamp(22rem, 26vw, 25rem);
-    --preview-stage-height: clamp(27rem, 34vw, 32rem);
-    --preview-card-offset: clamp(9rem, 12vw, 13rem);
+    --preview-card-width: clamp(13.25rem, 16vw, 14.75rem);
+    --preview-card-height: clamp(17.5rem, 21vw, 20rem);
+    --preview-stage-height: clamp(21rem, 27vw, 25rem);
+    --preview-card-offset: clamp(7rem, 9vw, 10rem);
   }
 
   .featured-preview-floor {

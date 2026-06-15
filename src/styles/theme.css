@@ -1566,10 +1566,10 @@ body::after {
     perspective-origin: 50% 48%;
     touch-action: pan-y;
 
-    --preview-card-width: clamp(16.5rem, 20vw, 18.25rem);
-    --preview-card-height: clamp(22rem, 26vw, 25rem);
-    --preview-stage-height: clamp(27rem, 34vw, 32rem);
-    --preview-card-offset: clamp(9rem, 12vw, 13rem);
+    --preview-card-width: clamp(13.25rem, 16vw, 14.75rem);
+    --preview-card-height: clamp(17.5rem, 21vw, 20rem);
+    --preview-stage-height: clamp(21rem, 27vw, 25rem);
+    --preview-card-offset: clamp(7rem, 9vw, 10rem);
   }
 
   .featured-preview-floor {
@@ -1751,7 +1751,7 @@ body::after {
   }
 
   .featured-artwork-preview-media {
-    flex: 0 0 56%;
+    flex: 0 0 52%;
     min-height: 0;
   }
 
@@ -1980,10 +1980,10 @@ body::after {
       margin-left: -0.5rem;
       perspective: 1050px;
 
-      --preview-card-width: min(72vw, 15.5rem);
-      --preview-card-height: clamp(19.5rem, 78vw, 22rem);
-      --preview-stage-height: clamp(23rem, 92vw, 26rem);
-      --preview-card-offset: clamp(5.5rem, 24vw, 7rem);
+      --preview-card-width: min(64vw, 13rem);
+      --preview-card-height: clamp(16rem, 68vw, 18.5rem);
+      --preview-stage-height: clamp(19rem, 78vw, 22rem);
+      --preview-card-offset: clamp(4.5rem, 19vw, 5.75rem);
     }
 
     .featured-preview-panel {
@@ -2783,8 +2783,9 @@ body::after {
   align-items: end;
   justify-content: space-between;
   gap: 1.5rem;
-    padding: 1.5rem 1.35rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.5rem 1.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
 
 .source-list-row {
   display: grid;
