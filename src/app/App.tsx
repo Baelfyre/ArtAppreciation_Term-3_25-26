@@ -86,64 +86,64 @@ export default function App() {
         <div className="museum-intro">
           <Hero />
 
+          <section
+            id="globe"
+            className={`globe-section-inner ${modeLayoutClass} curved-card-accent relative my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)]`}
+          >
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute left-0 top-0 h-40 w-40 bg-[rgba(244,196,48,0.10)] blur-3xl" />
+              <div className="absolute inset-y-0 right-0 w-[35%] bg-[linear-gradient(180deg,rgba(29,73,216,0.18),transparent_42%,rgba(185,22,44,0.16))]" />
+            </div>
+
+            {/* Main 3D Globe Workspace */}
+            <div className={`globe-workspace ${modeLayoutClass} relative`}>
+              <GlobeView
+                mode={mode}
+                artworks={modeArtworks}
+                selectedArtwork={selectedArtwork}
+                onSelectArtwork={handleSelectArtwork}
+                onSelectPhilippines={() => handleModeChange("local")}
+              />
+
+              {/* Overlay UI Panels */}
+              <div className={`globe-overlay-host ${modeLayoutClass} absolute inset-0 pointer-events-none`}>
+                <div
+                  className={`globe-overlay-shell relative mx-auto h-full w-full max-w-[1200px] pointer-events-none ${
+                    selectedArtwork ? "has-selected-artwork" : ""
+                  }`}
+                >
+                  <div className="globe-control-stack pointer-events-none">
+                    <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
+
+                    {mode === "local" && (
+                      <PhilippinesMapView
+                        artworks={modeArtworks}
+                        selectedArtwork={selectedArtwork}
+                        onSelectArtwork={handleSelectArtwork}
+                      />
+                    )}
+                  </div>
+
+                  {mode === "international" && (
+                    <CurationPlaceholderPanel />
+                  )}
+
+                  <div className="artwork-panel-layer pointer-events-none">
+                    <ArtworkInfoPanel
+                      artwork={selectedArtwork}
+                      onClose={clearSelection}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <FeaturedSection
             artworks={featuredArtworks}
             onViewArtwork={handleSelectArtwork}
           />
         </div>
-
-        <section
-          id="globe"
-          className={`globe-section-inner ${modeLayoutClass} curved-card-accent relative my-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/30 shadow-[0_32px_120px_rgba(0,0,0,0.45)]`}
-        >
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-0 top-0 h-40 w-40 bg-[rgba(244,196,48,0.10)] blur-3xl" />
-            <div className="absolute inset-y-0 right-0 w-[35%] bg-[linear-gradient(180deg,rgba(29,73,216,0.18),transparent_42%,rgba(185,22,44,0.16))]" />
-          </div>
-
-          {/* Main 3D Globe Workspace */}
-          <div className={`globe-workspace ${modeLayoutClass} relative`}>
-            <GlobeView
-              mode={mode}
-              artworks={modeArtworks}
-              selectedArtwork={selectedArtwork}
-              onSelectArtwork={handleSelectArtwork}
-              onSelectPhilippines={() => handleModeChange("local")}
-            />
-            
-            {/* Overlay UI Panels */}
-            <div className={`globe-overlay-host ${modeLayoutClass} absolute inset-0 pointer-events-none`}>
-              <div
-                className={`globe-overlay-shell relative mx-auto h-full w-full max-w-[1200px] pointer-events-none ${
-                  selectedArtwork ? "has-selected-artwork" : ""
-                }`}
-              >
-                <div className="globe-control-stack pointer-events-none">
-                  <GlobeModeToggle mode={mode} onModeChange={handleModeChange} />
-
-                  {mode === "local" && (
-                    <PhilippinesMapView
-                      artworks={modeArtworks}
-                      selectedArtwork={selectedArtwork}
-                      onSelectArtwork={handleSelectArtwork}
-                    />
-                  )}
-                </div>
-
-                {mode === "international" && (
-                  <CurationPlaceholderPanel />
-                )}
-
-                <div className="artwork-panel-layer pointer-events-none">
-                  <ArtworkInfoPanel
-                    artwork={selectedArtwork}
-                    onClose={clearSelection}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <AboutSection />
 

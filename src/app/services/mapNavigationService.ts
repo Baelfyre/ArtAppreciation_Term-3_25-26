@@ -190,8 +190,8 @@ export const getGlobePointOfView = (
   }
 
   return {
-    lat: 20,
-    lng: 90,
+    lat: PHILIPPINES_ORIGIN.lat,
+    lng: PHILIPPINES_ORIGIN.lng,
     altitude: 2,
   };
 };
