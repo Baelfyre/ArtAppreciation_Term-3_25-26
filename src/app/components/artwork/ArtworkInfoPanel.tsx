@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, type LucideIcon } from "lucide-react";
+import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, ExternalLink, Link as LinkIcon, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
+import { findArtworkSource } from "../../data/artworkSources";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
 import { AngCollageAssembly } from "./AngCollageAssembly";
 import { ArtworkMedia } from "./ArtworkMedia";
@@ -39,6 +40,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   const locationLabel = formatArtworkLocation(artwork.location);
   const collectionLabel = getArtworkCollectionLabel(artwork);
   const hasPlayableMedia = Boolean(artwork.embedUrl) && (artwork.mediaType === "music" || artwork.mediaType === "video");
+  const source = findArtworkSource(artwork.id);
 
   return (
     <>
@@ -64,7 +66,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             </h2>
           </section>
 
-          <section className="artwork-panel-section artwork-preview-section flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
+          <section className="artwork-panel-section artwork-preview-section md:sticky md:top-6 self-start flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
             <div className="artwork-panel-section-heading mb-3 min-w-0">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork preview</p>
               <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Focused Artwork</h3>
@@ -90,6 +92,9 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
             <div className="mt-4 space-y-4">
               <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
               <InfoBlock label="Principles" value={artwork.principles} />
+              {artwork.dateCreated && <InfoBlock label="Date Created" value={artwork.dateCreated} />}
+              {artwork.caption && <InfoBlock label="Caption" value={artwork.caption} />}
+              {artwork.creditLine && <InfoBlock label="Credit" value={artwork.creditLine} />}
             </div>
           </section>
 
@@ -104,6 +109,38 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
               <InfoBlock label="Advocacy Connection" value={artwork.advocacyConnection} icon={Globe2} />
               {artwork.comparisonGroupId === "music-evolution" && (
                 <MusicEvolutionComparison activeRole={artwork.comparisonRole} />
+              )}
+              {artwork.mediaType === "video" && artwork.embedUrl && (
+                <div className="artwork-info-block min-w-0">
+                  <div className="mb-1.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] text-slate-400">
+                    <ExternalLink className="h-3.5 w-3.5 text-[#f4c430]" />
+                    <span>Watch Trailer</span>
+                  </div>
+                  <a
+                    href={artwork.embedUrl.replace("embed/", "watch?v=")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#f4c430] hover:text-white transition-colors"
+                  >
+                    Open Trailer in YouTube <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              )}
+              {source && source.url && (
+                <div className="artwork-info-block min-w-0">
+                  <div className="mb-1.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] text-slate-400">
+                    <LinkIcon className="h-3.5 w-3.5 text-[#f4c430]" />
+                    <span>Sources / Resources</span>
+                  </div>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex break-words text-[13px] font-light leading-[1.5] text-slate-300 hover:text-[#f4c430] transition-colors"
+                  >
+                    {source.label || source.title}
+                  </a>
+                </div>
               )}
             </div>
           </section>
@@ -127,14 +164,29 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 const ArtworkPreview = ({ artwork }: { artwork: Artwork }) => {
   if ((artwork.mediaType === "music" || artwork.mediaType === "video") && artwork.embedUrl) {
     return (
-      <div className="focused-artwork-media-frame focused-artwork-media-frame--embed p-2 md:p-3">
-        <ArtworkMediaEmbed
-          embedUrl={artwork.embedUrl}
-          title={artwork.title}
-          provider={artwork.mediaProvider}
-          embedHeight={artwork.embedHeight}
-          autoPlay={artwork.mediaType === "video" || artwork.id === "local-mapa-sb19"}
-        />
+      <div className="flex w-full flex-col gap-4">
+        <div className="focused-artwork-media-frame w-full focused-artwork-media-frame--embed p-2 md:p-3">
+          <ArtworkMediaEmbed
+            embedUrl={artwork.embedUrl}
+            title={artwork.title}
+            provider={artwork.mediaProvider}
+            embedHeight={artwork.embedHeight}
+            autoPlay={artwork.mediaType === "video" || artwork.id === "local-mapa-sb19"}
+          />
+        </div>
+        {artwork.id === "ma-rosa" && artwork.imageUrl && (
+          <div className="flex flex-col rounded-[0.85rem] border border-white/10 bg-black/20 p-2 md:p-3">
+            <img
+              src={artwork.imageUrl}
+              alt="Ma' Rosa still image"
+              className="w-full rounded-[0.65rem] object-cover"
+              loading="lazy"
+            />
+            <p className="mt-3 px-2 text-center text-[11px] leading-relaxed text-slate-400">
+              Still from Ma’ Rosa (2016), showing the main character eating fish balls on a dimly lit street. The scene captures the film’s stark realism and turns an ordinary Filipino street-food moment into a visual symbol of poverty, survival, and everyday struggle.
+            </p>
+          </div>
+        )}
       </div>
     );
   }

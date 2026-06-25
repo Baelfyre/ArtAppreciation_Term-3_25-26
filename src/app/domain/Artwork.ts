@@ -10,7 +10,7 @@ export interface Artwork {
   title: string;
   creator: string;
   medium: string;
-  imageUrl: string;
+  imageUrl?: string;
   altText?: string;
   effect?:
     | "brush-stroke"
@@ -31,6 +31,12 @@ export interface Artwork {
   locationBasis?: string;
   location: Location;
   description: string;
+  /** Optional date when the artwork was created */
+  dateCreated?: string;
+  /** Optional short caption for the artwork */
+  caption?: string;
+  /** Optional credit line for the artwork */
+  creditLine?: string;
   advocacyConnection: string;
   elements: string;
   principles: string;
