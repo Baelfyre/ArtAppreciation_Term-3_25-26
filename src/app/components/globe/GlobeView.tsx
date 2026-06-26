@@ -176,7 +176,30 @@ export const GlobeView = ({
                 el.title = `${marker.label} placeholder marker`;
               } else {
                 el.classList.add("cursor-pointer");
+                el.setAttribute("role", "button");
+                el.setAttribute("tabindex", "0");
                 el.onclick = () => onSelectArtwork(marker.artwork as Artwork);
+                el.onkeydown = (event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onSelectArtwork(marker.artwork as Artwork);
+                  }
+                };
+
+                const hoverCard = document.createElement("div");
+                hoverCard.className = "globe-html-hover-card";
+
+                const title = document.createElement("h4");
+                title.className = "globe-html-hover-title";
+                title.textContent = marker.artwork.title;
+
+                const creator = document.createElement("p");
+                creator.className = "globe-html-hover-creator";
+                creator.textContent = marker.artwork.creator;
+
+                hoverCard.appendChild(title);
+                hoverCard.appendChild(creator);
+                el.appendChild(hoverCard);
               }
             }
 

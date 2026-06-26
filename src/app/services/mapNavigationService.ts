@@ -83,7 +83,7 @@ export const prepareInternationalGlobeMarkers = (
       id: artwork.id,
       lat: artwork.location.lat as number,
       lng: artwork.location.lng as number,
-      label: artwork.location.label,
+      label: artwork.location.country || artwork.location.label,
       color: isSelected ? "#f4c430" : getArtworkMarkerColor(artwork, index),
       size: isSelected ? 1.4 : 1,
       isOrigin: false,

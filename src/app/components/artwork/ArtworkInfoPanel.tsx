@@ -287,16 +287,19 @@ const LocationPreview = ({ artwork }: LocationPreviewProps) => {
   }
 
   return (
-    <div className="artwork-location-map-shell relative flex items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-[radial-gradient(circle_at_50%_42%,rgba(29,73,216,0.28),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(244,196,48,0.12),transparent_48%),rgba(255,255,255,0.04)]">
-      <div className="absolute h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_35%_28%,rgba(246,244,238,0.16),transparent_18%),linear-gradient(135deg,rgba(29,73,216,0.42),rgba(5,8,22,0.9)_58%,rgba(185,22,44,0.22))] shadow-[0_0_48px_rgba(29,73,216,0.22)]" />
-      <div className="absolute h-40 w-40 rounded-full border border-[#f4c430]/20" />
-      <div className="relative flex max-w-[13rem] flex-col items-center text-center">
-        <span className="glass-chip-warm mb-4 flex h-12 w-12 items-center justify-center rounded-full">
-          <MapPin className="h-5 w-5 text-[#f4c430]" />
+    <div className="artwork-location-map-shell relative isolate flex w-full flex-1 flex-col items-center justify-center overflow-hidden rounded-[0.85rem] bg-[radial-gradient(circle_at_50%_50%,rgba(29,73,216,0.1)_0%,transparent_70%)] py-6 [transform:translateZ(0)]">
+      {/* Decorative Circles */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 bg-[radial-gradient(circle_at_50%_50%,rgba(29,73,216,0.15)_0%,transparent_80%)] shadow-[0_0_20px_rgba(29,73,216,0.1)]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4c430]/10 bg-[#f4c430]/[0.02]" />
+
+      {/* Content */}
+      <div className="relative z-10 flex max-w-[14rem] flex-col items-center text-center">
+        <span className="glass-chip-warm mb-3 flex h-10 w-10 items-center justify-center rounded-full shadow-[0_0_12px_rgba(244,196,48,0.1)]">
+          <MapPin className="h-4 w-4 text-[#f4c430]" />
         </span>
-        <p className="text-sm font-medium text-white">{artwork.location.label}</p>
+        <p className="text-sm font-semibold tracking-wide text-white">{artwork.location.label}</p>
         {hasCoordinates && (
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-1.5 text-[11px] font-medium tracking-wider text-slate-400">
             {artwork.location.lat?.toFixed(2)}, {artwork.location.lng?.toFixed(2)}
           </p>
         )}

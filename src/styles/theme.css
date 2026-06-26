@@ -803,6 +803,7 @@ body::after {
   }
 
   .globe-html-marker {
+    position: relative;
     max-width: min(11rem, calc(100vw - 2rem));
   }
 
@@ -825,6 +826,7 @@ body::after {
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
+    font-family: var(--font-heading);
   }
 
   .globe-html-marker-label {
@@ -834,6 +836,64 @@ body::after {
     font-size: 0.6875rem;
     font-weight: 500;
     overflow-wrap: anywhere;
+    font-family: var(--font-body);
+  }
+
+  .globe-html-hover-card {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: max-content;
+    max-width: 15rem;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(5, 8, 22, 0.95);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(244, 196, 48, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 10;
+  }
+
+  .globe-html-hover-card::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
+  }
+
+  .globe-html-marker:hover .globe-html-hover-card,
+  .globe-html-marker:focus-within .globe-html-hover-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .globe-html-hover-title {
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+    white-space: normal;
+  }
+
+  .globe-html-hover-creator {
+    color: rgba(244, 196, 48, 0.9);
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    line-height: 1.35;
+    white-space: normal;
   }
 
   .local-map-fade {
@@ -1276,6 +1336,27 @@ body::after {
     -webkit-mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
     mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
     transition: filter 180ms ease, transform 180ms ease;
+  }
+
+  .globe-html-marker-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    display: block;
+    background: currentColor;
+    filter: drop-shadow(0 0 4px currentColor);
+    -webkit-mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
+    mask: url("/resources/Pin_loc.svg") center / contain no-repeat;
+    transition: filter 180ms ease, transform 180ms ease;
+  }
+
+  .globe-html-marker-icon.is-selected {
+    transform: scale(1.15) translateY(-2px);
+    filter: drop-shadow(0 0 8px currentColor) brightness(1.2);
+  }
+
+  .globe-html-marker-icon.is-origin {
+    width: 1.15rem;
+    height: 1.15rem;
   }
 
   @media (min-width: 768px) {
@@ -1766,6 +1847,22 @@ body::after {
       linear-gradient(145deg, rgba(15, 23, 48, 0.96), rgba(4, 8, 24, 0.98));
   }
 
+  .featured-preview-media-frame {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .featured-preview-media-frame .artwork-media-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
   .featured-artwork-preview-copy {
     position: relative;
     z-index: 4;
@@ -1788,6 +1885,10 @@ body::after {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.18;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .featured-artwork-preview-creator,
