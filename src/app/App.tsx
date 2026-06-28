@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
@@ -9,6 +9,9 @@ import { ArtworkSourcesSection } from "./components/ArtworkSourcesSection";
 import { GlobeModeToggle } from "./components/globe/GlobeModeToggle";
 import { GlobeView } from "./components/globe/GlobeView";
 import { PhilippinesMapView } from "./components/map/PhilippinesMapView";
+import { CircularVideoOverlay } from "./components/presentation/CircularVideoOverlay";
+import { VideoTrigger } from "./components/presentation/VideoTrigger";
+import { globePresentationVideos } from "./data/presentationVideos";
 import type { Artwork } from "./domain/Artwork";
 import { useArtworkSelection } from "./hooks/useArtworkSelection";
 import { useViewMode } from "./hooks/useViewMode";
@@ -35,6 +38,7 @@ console.error = (...args) => {
 export default function App() {
   const { mode, selectMode } = useViewMode("international");
   const { selectedArtwork, selectArtwork, clearSelection } = useArtworkSelection();
+  const [activePresentationVideoId, setActivePresentationVideoId] = useState<string | null>(null);
 
   const featuredArtworks = useMemo(() => artworkRepository.getFeatured(), []);
   const modeArtworks = useMemo(() => artworkRepository.getByMode(mode), [mode]);
@@ -56,12 +60,18 @@ export default function App() {
     return () => window.removeEventListener("hashchange", scrollToHash);
   }, []);
 
+  useEffect(() => {
+    setActivePresentationVideoId(null);
+  }, [mode, selectedArtwork?.id]);
+
   const handleModeChange = (nextMode: GlobeMode) => {
+    setActivePresentationVideoId(null);
     selectMode(nextMode);
     clearSelection();
   };
 
   const handleSelectArtwork = (artwork: Artwork) => {
+    setActivePresentationVideoId(null);
     selectMode(artwork.scope);
 
     if (artwork.isPlaceholder && artwork.scope === "international") {
@@ -125,13 +135,69 @@ export default function App() {
                   </div>
 
                   {mode === "international" && (
-                    <CurationPlaceholderPanel />
+                    <>
+                      <CurationPlaceholderPanel />
+                      <div className="globe-presentation-layer">
+                        <VideoTrigger
+                          label={globePresentationVideos.intro.label}
+                          ariaLabel={globePresentationVideos.intro.ariaLabel}
+                          title={globePresentationVideos.intro.label}
+                          variant="globe"
+                          active={activePresentationVideoId === globePresentationVideos.intro.id}
+                          className="globe-presentation-trigger globe-presentation-trigger--intro"
+                          onClick={() =>
+                            setActivePresentationVideoId((current) =>
+                              current === globePresentationVideos.intro.id
+                                ? null
+                                : globePresentationVideos.intro.id,
+                            )
+                          }
+                        />
+                        <CircularVideoOverlay
+                          isOpen={activePresentationVideoId === globePresentationVideos.intro.id}
+                          src={globePresentationVideos.intro.src}
+                          title={globePresentationVideos.intro.title}
+                          volume={globePresentationVideos.intro.volume}
+                          onClose={() => setActivePresentationVideoId(null)}
+                          className="globe-presentation-overlay globe-presentation-overlay--intro"
+                          playButtonLabel="Play intro video"
+                        />
+
+                        <VideoTrigger
+                          label={globePresentationVideos.outro.label}
+                          ariaLabel={globePresentationVideos.outro.ariaLabel}
+                          title={globePresentationVideos.outro.label}
+                          variant="globe"
+                          active={activePresentationVideoId === globePresentationVideos.outro.id}
+                          className="globe-presentation-trigger globe-presentation-trigger--outro"
+                          onClick={() =>
+                            setActivePresentationVideoId((current) =>
+                              current === globePresentationVideos.outro.id
+                                ? null
+                                : globePresentationVideos.outro.id,
+                            )
+                          }
+                        />
+                        <CircularVideoOverlay
+                          isOpen={activePresentationVideoId === globePresentationVideos.outro.id}
+                          src={globePresentationVideos.outro.src}
+                          title={globePresentationVideos.outro.title}
+                          volume={globePresentationVideos.outro.volume}
+                          onClose={() => setActivePresentationVideoId(null)}
+                          className="globe-presentation-overlay globe-presentation-overlay--outro"
+                          playButtonLabel="Play outro video"
+                        />
+                      </div>
+                    </>
                   )}
 
                   <div className="artwork-panel-layer pointer-events-none">
                     <ArtworkInfoPanel
                       artwork={selectedArtwork}
                       onClose={clearSelection}
+                      activePresentationVideoId={activePresentationVideoId}
+                      onOpenPresentationVideo={setActivePresentationVideoId}
+                      onClosePresentationVideo={() => setActivePresentationVideoId(null)}
                     />
                   </div>
                 </div>

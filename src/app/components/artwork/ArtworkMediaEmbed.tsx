@@ -1,5 +1,4 @@
-import { useRef, useState, type CSSProperties } from "react";
-import { VolumeX } from "lucide-react";
+import { useEffect, useRef, type CSSProperties } from "react";
 
 interface ArtworkMediaEmbedProps {
   embedUrl?: string;
@@ -10,11 +9,23 @@ interface ArtworkMediaEmbedProps {
 }
 
 const withEmbedParams = (embedUrl: string, autoPlay?: boolean) => {
-  if (!autoPlay || !embedUrl.includes("youtube.com/embed/")) return embedUrl;
+  if (!embedUrl.includes("youtube.com/embed/")) return embedUrl;
 
-  const separator = embedUrl.includes("?") ? "&" : "?";
+  const url = new URL(embedUrl);
   const origin = typeof window !== "undefined" ? window.location.origin : "";
-  return `${embedUrl}${separator}autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(origin)}`;
+  url.searchParams.set("playsinline", "1");
+  url.searchParams.set("rel", "0");
+  url.searchParams.set("enablejsapi", "1");
+
+  if (origin) {
+    url.searchParams.set("origin", origin);
+  }
+
+  if (autoPlay) {
+    url.searchParams.set("autoplay", "1");
+  }
+
+  return url.toString();
 };
 
 export const ArtworkMediaEmbed = ({
@@ -25,7 +36,6 @@ export const ArtworkMediaEmbed = ({
   autoPlay = false,
 }: ArtworkMediaEmbedProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
 
   if (!embedUrl) return null;
 
@@ -42,12 +52,34 @@ export const ArtworkMediaEmbed = ({
     ? "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
-  const handleUnmute = () => {
-    if (!iframeRef.current || !iframeRef.current.contentWindow) return;
-    setIsMuted(false);
-    iframeRef.current.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-    iframeRef.current.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[10]}', '*');
+  const sendYouTubeCommand = (func: string, args: unknown[] = []) => {
+    if (!iframeRef.current?.contentWindow) return;
+
+    iframeRef.current.contentWindow.postMessage(
+      JSON.stringify({
+        event: "command",
+        func,
+        args,
+      }),
+      "*",
+    );
   };
+
+  const applyYouTubeAudio = () => {
+    sendYouTubeCommand("setVolume", [5]);
+    sendYouTubeCommand("unMute");
+
+    if (autoPlay) {
+      sendYouTubeCommand("playVideo");
+    }
+  };
+
+  useEffect(() => {
+    if (!isYouTubeEmbed) return;
+
+    const timerId = window.setTimeout(applyYouTubeAudio, 900);
+    return () => window.clearTimeout(timerId);
+  }, [autoPlay, isYouTubeEmbed, resolvedEmbedUrl]);
 
   return (
     <div className="artwork-media-embed w-full overflow-hidden rounded-[1.15rem]">
@@ -65,21 +97,11 @@ export const ArtworkMediaEmbed = ({
           title={`${title} playable media`}
           loading={autoPlay ? "eager" : "lazy"}
           allow={iframeAllow}
+          onLoad={isYouTubeEmbed ? applyYouTubeAudio : undefined}
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
           className="h-full w-full border-0"
         />
-        {isYouTubeEmbed && autoPlay && isMuted && (
-          <button
-            type="button"
-            onClick={handleUnmute}
-            className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors hover:bg-black/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430]"
-            aria-label="Unmute video"
-          >
-            <VolumeX className="h-3.5 w-3.5" />
-            Unmute
-          </button>
-        )}
       </div>
     </div>
   );

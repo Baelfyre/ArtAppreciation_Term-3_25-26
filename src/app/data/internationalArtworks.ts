@@ -6,7 +6,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Forgotten Island",
     creator: "Joel Crawford and Januel P. Mercado / DreamWorks Animation",
-    medium: "Video",
+    medium: "Animated feature film, digital animation, fantasy adventure, voice performance, and cultural storytelling",
     altText: "Forgotten Island video thumbnail",
     mediaProvider: "youtube",
     mediaType: "video",
@@ -33,7 +33,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Ma’ Rosa",
     creator: "Brillante Mendoza",
-    medium: "Acrylic on canvas",
+    medium: "Live-action feature film, social realist cinema, acting performance, cinematography, and sound design",
     imageUrl: "/resources/International/MaRosa.webp",
     altText: "Ma’ Rosa artwork",
     location: {
@@ -61,7 +61,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Baston ni Kabunian, Bilang pero di Mabilang",
     creator: "Rodel Tapaya",
-    medium: "Acrylic on canvas",
+    medium: "Acrylic on canvas, contemporary painting, folklore-based visual art, and narrative painting",
     imageUrl: "/resources/International/Baston ni Kabunian, Bilang Pero di Mabilang (Cane of Kabunian, numbered but cannot be counted).jpg",
     altText: "Baston ni Kabunian artwork",
     location: {
@@ -86,7 +86,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Our Islands 11°16'58.4\"N 123°45'07.0\"E",
     creator: "Martha Atienza",
-    medium: "Photography",
+    medium: "Single-channel HD video installation, video art, underwater performance, and public media installation",
     imageUrl: "/resources/International/Our Islands.avif",
     altText: "Our Islands photographic view",
     location: {
@@ -111,7 +111,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Filipinas in Hong Kong",
     creator: "Pacita Abad",
-    medium: "Acrylic on stitched and padded canvas, trapunto painting",
+    medium: "Acrylic on stitched and padded canvas, trapunto painting, textile art, and mixed-media painting",
     imageUrl: "/resources/International/Filipinas in Hong Kong.png",
     altText: "Filipinas in Hong Kong artwork",
     location: {
@@ -136,7 +136,7 @@ export const internationalArtworks: Artwork[] = [
     scope: "international",
     title: "Here Lies Love",
     creator: "David Byrne and Fatboy Slim",
-    medium: "Immersive musical theater, disco-pop musical, performance art, choreography, stage design, projection design, costume design, lighting design, and historical storytelling",
+    medium: "Immersive musical theater, disco-pop musical, live performance, choreography, stage design, projection design, costume design, lighting design, and historical storytelling",
     altText: "Promotional or stage image for Here Lies Love, an immersive musical about Philippine political history and Imelda Marcos.",
     location: {
       label: "National Theatre / International staging of Here Lies Love",

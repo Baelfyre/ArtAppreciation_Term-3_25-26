@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, ExternalLink, Link as LinkIcon, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { findArtworkSource } from "../../data/artworkSources";
+import { getArtworkPresentationVideo } from "../../data/presentationVideos";
 import { formatArtworkLocation, getArtworkCollectionLabel } from "../../services/artworkRepository";
+import { CircularVideoOverlay } from "../presentation/CircularVideoOverlay";
+import { VideoTrigger } from "../presentation/VideoTrigger";
 import { AngCollageAssembly } from "./AngCollageAssembly";
 import { ArtworkMedia } from "./ArtworkMedia";
 import { ArtworkMediaEmbed } from "./ArtworkMediaEmbed";
@@ -13,14 +16,23 @@ import { ViloriaSplitCombine } from "./ViloriaSplitCombine";
 interface ArtworkInfoPanelProps {
   artwork: Artwork | null;
   onClose: () => void;
+  activePresentationVideoId: string | null;
+  onOpenPresentationVideo: (videoId: string) => void;
+  onClosePresentationVideo: () => void;
 }
 
-export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) => {
+export const ArtworkInfoPanel = ({
+  artwork,
+  onClose,
+  activePresentationVideoId,
+  onOpenPresentationVideo,
+  onClosePresentationVideo,
+}: ArtworkInfoPanelProps) => {
   useEffect(() => {
     if (!artwork) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && !activePresentationVideoId) {
         onClose();
       }
     };
@@ -33,7 +45,7 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [artwork, onClose]);
+  }, [activePresentationVideoId, artwork, onClose]);
 
   if (!artwork || (artwork.isPlaceholder && artwork.scope === "international")) return null;
 
@@ -41,6 +53,9 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
   const collectionLabel = getArtworkCollectionLabel(artwork);
   const hasPlayableMedia = Boolean(artwork.embedUrl) && (artwork.mediaType === "music" || artwork.mediaType === "video");
   const source = findArtworkSource(artwork.id);
+  
+  const reportVideo = getArtworkPresentationVideo(artwork.id);
+  const isReportVideoOpen = Boolean(reportVideo && activePresentationVideoId === reportVideo.id);
 
   return (
     <>
@@ -55,6 +70,27 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
       </button>
       <aside className="artwork-info-panel artwork-card--focused-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
+
+        {reportVideo && (
+          <div 
+            className="sticky top-0 z-50 h-0 w-full pointer-events-none overflow-visible" 
+            aria-hidden={!reportVideo.placeholder && !isReportVideoOpen}
+          >
+            <div className="pointer-events-auto absolute right-4 top-24 w-28 md:right-[clamp(32px,5vw,88px)] md:top-[clamp(120px,20vh,220px)] md:w-[clamp(8.125rem,11vw,11.25rem)]">
+              <CircularVideoOverlay
+                isOpen={reportVideo.placeholder ? true : isReportVideoOpen}
+                src={reportVideo.src}
+                title={reportVideo.title}
+                volume={reportVideo.volume}
+                onClose={reportVideo.placeholder ? undefined : onClosePresentationVideo}
+                className="mx-auto"
+                placeholderLabel={reportVideo.placeholderLabel}
+                playButtonLabel={`Play artwork video for ${artwork.title}`}
+                closeLabel={`Close artwork video for ${artwork.title}`}
+              />
+            </div>
+          </div>
+        )}
 
         <div className="artwork-panel-layout relative grid min-w-0 gap-3 p-3 pt-4 md:gap-4 md:p-4 md:pt-5 lg:p-5 lg:pt-5">
           <section className="artwork-panel-heading min-w-0 pr-12">
@@ -79,22 +115,51 @@ export const ArtworkInfoPanel = ({ artwork, onClose }: ArtworkInfoPanelProps) =>
 
           <section className="artwork-panel-section artwork-facts-section flex min-h-0 min-w-0 flex-col rounded-[1.15rem] p-3 md:rounded-[1.35rem] md:p-4">
             <div className="artwork-panel-section-heading mb-3 min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork details</p>
-              <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Context &amp; Composition</h3>
+              <div className="artwork-facts-heading-row">
+                <div className="artwork-facts-heading-copy min-w-0">
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-[#f4c430] md:text-[11px] md:tracking-[0.28em]">Artwork details</p>
+                  <h3 className="section-title break-words text-lg font-semibold text-white md:text-xl">Context &amp; Composition</h3>
+                </div>
+                {reportVideo && (
+                  <VideoTrigger
+                    label={reportVideo.label}
+                    ariaLabel={reportVideo.ariaLabel}
+                    title={reportVideo.placeholder ? reportVideo.placeholderLabel : "Play report clip"}
+                    variant="artwork"
+                    iconSrc="/resources/International/play.png"
+                    disabled={reportVideo.placeholder}
+                    active={isReportVideoOpen}
+                    className="artwork-report-trigger"
+                    onClick={
+                      reportVideo.placeholder
+                        ? undefined
+                        : () => {
+                            if (isReportVideoOpen) {
+                              onClosePresentationVideo();
+                              return;
+                            }
+                            onOpenPresentationVideo(reportVideo.id);
+                          }
+                    }
+                  />
+                )}
+              </div>
             </div>
 
-            <div className="grid gap-3">
-              <InfoRow icon={User} label="Creator" value={artwork.creator} />
-              <InfoRow icon={MapPin} label="Location" value={locationLabel} />
-              <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
-            </div>
+            <div className="artwork-facts-body">
+              <div className="grid gap-3">
+                <InfoRow icon={User} label="Creator" value={artwork.creator} />
+                <InfoRow icon={MapPin} label="Location" value={locationLabel} />
+                <InfoRow icon={Brush} label="Medium" value={artwork.medium} />
+              </div>
 
-            <div className="mt-4 space-y-4">
-              <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
-              <InfoBlock label="Principles" value={artwork.principles} />
-              {artwork.dateCreated && <InfoBlock label="Date Created" value={artwork.dateCreated} />}
-              {artwork.caption && <InfoBlock label="Caption" value={artwork.caption} />}
-              {artwork.creditLine && <InfoBlock label="Credit" value={artwork.creditLine} />}
+              <div className="mt-4 space-y-4">
+                <InfoBlock label="Elements" value={artwork.elements} icon={Sparkles} />
+                <InfoBlock label="Principles" value={artwork.principles} />
+                {artwork.dateCreated && <InfoBlock label="Date Created" value={artwork.dateCreated} />}
+                {artwork.caption && <InfoBlock label="Caption" value={artwork.caption} />}
+                {artwork.creditLine && <InfoBlock label="Credit" value={artwork.creditLine} />}
+              </div>
             </div>
           </section>
 
