@@ -47,13 +47,11 @@ export const artworkPresentationVideos: Record<string, PresentationVideoConfig> 
   },
   "baston-ni-kabunian": {
     id: "artwork-baston-ni-kabunian",
-    label: "Video too large",
-    title: "Baston ni Kabunian report video placeholder",
-    src: null,
+    label: "Report clip",
+    title: "Baston ni Kabunian report video",
+    src: "/resources/International/3-Baston-ni-Kabunian.mp4",
     volume: 1,
-    ariaLabel: "Artwork video placeholder for Baston ni Kabunian",
-    placeholder: true,
-    placeholderLabel: "Video too large (>25MiB)",
+    ariaLabel: "Play artwork video for Baston ni Kabunian",
   },
   "our-islands": {
     id: "artwork-our-islands",
