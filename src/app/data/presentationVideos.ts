@@ -63,13 +63,11 @@ export const artworkPresentationVideos: Record<string, PresentationVideoConfig> 
   },
   "filipinas-in-hong-kong": {
     id: "artwork-filipinas-in-hong-kong",
-    label: "Coming soon",
-    title: "Filipinas in Hong Kong report video placeholder",
-    src: null,
+    label: "Report clip",
+    title: "Filipinas in Hong Kong report video",
+    src: "/resources/International/5-Filipinas-in-Hong-Kong.mp4",
     volume: 1,
-    ariaLabel: "Artwork video placeholder for Filipinas in Hong Kong",
-    placeholder: true,
-    placeholderLabel: "Coming soon",
+    ariaLabel: "Play artwork video for Filipinas in Hong Kong",
   },
   "here-lies-love": {
     id: "artwork-here-lies-love",
