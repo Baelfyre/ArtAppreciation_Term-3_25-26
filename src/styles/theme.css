@@ -3908,6 +3908,10 @@ body::after {
   pointer-events: auto;
 }
 
+.globe-presentation-overlay:not(.is-open) {
+  pointer-events: none;
+}
+
 .globe-presentation-trigger--intro {
   top: clamp(4.9rem, 11svh, 7.25rem);
   right: clamp(1rem, 2.8vw, 2.25rem);
@@ -3967,7 +3971,7 @@ body::after {
   }
 
   .globe-presentation-trigger--intro {
-    top: clamp(5.5rem, 12svh, 6.7rem);
+    top: 10rem;
     right: 0.9rem;
   }
 
@@ -3984,6 +3988,23 @@ body::after {
   .globe-presentation-overlay--outro {
     left: 0.75rem;
     bottom: 3.15rem;
+  }
+
+  .globe-status-label {
+    top: 7.75rem;
+  }
+
+  .international-curation-placeholder {
+    bottom: 4.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .globe-status-label {
+    width: calc(100% - 25rem);
+    max-width: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
   }
 }
 
