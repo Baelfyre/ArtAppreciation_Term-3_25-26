@@ -108,7 +108,7 @@ export const ArtworkInfoPanel = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="pointer-events-none fixed inset-0"
+        className="artwork-modal-layer pointer-events-none fixed inset-0"
       >
         <button
           ref={closeButtonRef}
