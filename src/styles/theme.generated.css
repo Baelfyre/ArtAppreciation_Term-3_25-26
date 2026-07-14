@@ -2456,6 +2456,11 @@ body::after {
     animation: none;
   }
 
+  .featured-preview-panel,
+  .featured-preview-sample {
+    transition: none;
+  }
+
   .identity-travel-light {
     display: none;
   }
