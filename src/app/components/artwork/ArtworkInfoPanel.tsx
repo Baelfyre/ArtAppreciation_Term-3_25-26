@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Brush, Globe2, MapPin, Music2, Sparkles, User, X, ExternalLink, Link as LinkIcon, type LucideIcon } from "lucide-react";
 import type { Artwork } from "../../domain/Artwork";
 import { findArtworkSource } from "../../data/artworkSources";
@@ -28,12 +28,50 @@ export const ArtworkInfoPanel = ({
   onOpenPresentationVideo,
   onClosePresentationVideo,
 }: ArtworkInfoPanelProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const activePresentationVideoIdRef = useRef(activePresentationVideoId);
+  activePresentationVideoIdRef.current = activePresentationVideoId;
+
   useEffect(() => {
     if (!artwork) return;
 
+    const previouslyFocusedElement = document.activeElement as HTMLElement | null;
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    const getFocusableElements = () => {
+      const dialogElements = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+
+      return [...(dialogElements ?? [])].filter(
+        (element): element is HTMLElement =>
+          Boolean(element && element.getClientRects().length > 0 && element.getAttribute("aria-hidden") !== "true"),
+      );
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !activePresentationVideoId) {
+      if (event.key === "Escape" && !activePresentationVideoIdRef.current) {
         onClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusableElements = getFocusableElements();
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements.at(-1);
+      if (!firstElement || !lastElement) return;
+
+      if (!focusableElements.includes(document.activeElement as HTMLElement)) {
+        event.preventDefault();
+        firstElement.focus();
+      } else if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
@@ -42,10 +80,14 @@ export const ArtworkInfoPanel = ({
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
+      if (previouslyFocusedElement?.isConnected) {
+        previouslyFocusedElement.focus();
+      }
     };
-  }, [activePresentationVideoId, artwork, onClose]);
+  }, [artwork, onClose]);
 
   if (!artwork || (artwork.isPlaceholder && artwork.scope === "international")) return null;
 
@@ -56,19 +98,28 @@ export const ArtworkInfoPanel = ({
   
   const reportVideo = getArtworkPresentationVideo(artwork.id);
   const isReportVideoOpen = Boolean(reportVideo && activePresentationVideoId === reportVideo.id);
+  const titleId = `artwork-panel-title-${artwork.id}`;
 
   return (
     <>
-      <div className="artwork-modal-backdrop" onClick={onClose} />
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Close artwork panel"
-        className="artwork-panel-floating-close glass-chip rounded-full p-2.5 text-white shadow-lg transition-colors hover:bg-black/[0.35] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430]"
+      <div className="artwork-modal-backdrop" onClick={onClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="artwork-modal-layer pointer-events-none fixed inset-0"
       >
-        <X className="h-4 w-4" />
-      </button>
-      <aside className="artwork-info-panel artwork-card--focused-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
+        <button
+          ref={closeButtonRef}
+          type="button"
+          onClick={onClose}
+          aria-label="Close artwork panel"
+          className="artwork-panel-floating-close glass-chip rounded-full p-2.5 text-white shadow-lg transition-colors hover:bg-black/[0.35] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4c430]"
+        >
+          <X className="h-4 w-4" />
+        </button>
+        <aside className="artwork-info-panel artwork-card--focused-panel artwork-panel-slide glass-panel-strong curved-card-accent custom-scrollbar pointer-events-auto fixed overflow-x-hidden overflow-y-auto overscroll-contain shadow-2xl">
         <div className="pointer-events-none absolute inset-0 pattern-surface opacity-10" />
 
         {reportVideo && (
@@ -76,7 +127,7 @@ export const ArtworkInfoPanel = ({
             className="sticky top-0 z-50 h-0 w-full pointer-events-none overflow-visible" 
             aria-hidden={!reportVideo.placeholder && !isReportVideoOpen}
           >
-            <div className="pointer-events-auto absolute right-4 top-24 w-28 md:right-[clamp(32px,5vw,88px)] md:top-[clamp(120px,20vh,220px)] md:w-[clamp(8.125rem,11vw,11.25rem)]">
+            <div className="pointer-events-auto absolute right-4 top-24 w-[clamp(6.5625rem,36vw,9.375rem)] md:right-[clamp(32px,5vw,88px)] md:top-[clamp(120px,20vh,220px)] md:w-[clamp(8.125rem,11vw,11.25rem)]">
               <CircularVideoOverlay
                 isOpen={reportVideo.placeholder ? true : isReportVideoOpen}
                 src={reportVideo.src}
@@ -97,7 +148,7 @@ export const ArtworkInfoPanel = ({
             <span className="glass-chip-warm mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium capitalize text-white md:mb-4 md:px-3 md:text-xs">
               {collectionLabel}
             </span>
-            <h2 className="section-title break-words text-xl font-medium leading-tight text-white md:text-2xl">
+            <h2 id={titleId} className="section-title break-words text-xl font-medium leading-tight text-white md:text-2xl">
               {artwork.title}
             </h2>
           </section>
@@ -221,7 +272,8 @@ export const ArtworkInfoPanel = ({
             <LocationPreview artwork={artwork} />
           </section>
         </div>
-      </aside>
+        </aside>
+      </div>
     </>
   );
 };

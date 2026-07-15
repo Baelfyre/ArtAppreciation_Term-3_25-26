@@ -1,5 +1,10 @@
 .artwork-modal-backdrop {
   z-index: 120;
+  pointer-events: auto;
+}
+
+.artwork-modal-layer {
+  z-index: 130;
 }
 
 .artwork-info-panel {

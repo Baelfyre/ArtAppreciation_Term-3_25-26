@@ -20,8 +20,8 @@ export const ArtworkSourcesSection = () => (
         </div>
 
         <div className="source-list" role="list">
-        {artworkSources.map((source) => (
-          <div key={source.artworkId} className="source-list-row" role="listitem">
+        {artworkSources.map((source, sourceIndex) => (
+          <div key={`${source.artworkId}-${sourceIndex}`} className="source-list-row" role="listitem">
             <div className="min-w-0">
               <h3 className="text-sm font-semibold text-white">{source.title}</h3>
               <p className="mt-1 text-xs text-slate-400">{source.artist}</p>
